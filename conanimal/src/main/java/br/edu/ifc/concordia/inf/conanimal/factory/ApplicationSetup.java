@@ -15,12 +15,15 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 import javax.servlet.ServletContext;
 
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
 import org.jboss.logging.Logger;
 
 import br.com.caelum.vraptor.boilerplate.HibernateDAO;
 import br.com.caelum.vraptor.boilerplate.factory.SessionFactoryProducer;
 import br.com.caelum.vraptor.boilerplate.factory.SessionManager;
 import br.com.caelum.vraptor.boilerplate.util.CryptManager;
+import br.edu.ifc.concordia.inf.conanimal.model.User;
 import br.edu.ifc.concordia.inf.conanimal.properties.SystemConfigs;
 
 @ApplicationScoped
@@ -45,6 +48,19 @@ public class ApplicationSetup {
 
 		SessionManager mngr = new SessionManager(factoryProducer.getInstance());
 		HibernateDAO dao = new HibernateDAO(mngr);
+		
+		Criteria criteria = dao.newCriteria(User.class);
+		criteria.add(Restrictions.eq("email", "admin@admin"));
+		User user = (User) criteria.uniqueResult();
+		if (user == null){
+			user = new User();
+			user.setNome("Administrador Padrão");
+			user.setEmail("admin@admin");
+			user.setSenha(CryptManager.passwordHash("admin"));
+			user.setAcesso(10);
+			dao.persist(user);
+		}
+		
 		LOG.info("Overwriting SSL context to ignore invalid certificates...");
 		try {
 			SSLContext ctx = SSLContext.getInstance("TLS");

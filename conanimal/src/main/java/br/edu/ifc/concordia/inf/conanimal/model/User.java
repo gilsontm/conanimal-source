@@ -28,10 +28,18 @@ public class User implements Serializable {
 	private String rua;
 	private String complemento;
 	private String uf;
-	private String data_de_cadastro;
+	private String data_cadastro;
 	private Long contribuicao;
+	private String cpf;
+	private String rg;
+	private String profissao;
+	private String razao_social;
+	private String cnpj;
+	private String nome_representante;
+	private String cpf_representante;
+	private String rg_representante;
 	private Boolean autoriza_divulgar_nome;
-	private Boolean administrador;
+	private int acesso;
 	private Boolean ativo;
 	private Boolean empresa;
 	public Long getId() {
@@ -100,11 +108,59 @@ public class User implements Serializable {
 	public void setUf(String uf) {
 		this.uf = uf;
 	}
-	public String getData_de_cadastro() {
-		return data_de_cadastro;
+	public String getData_cadastro() {
+		return data_cadastro;
 	}
-	public void setData_de_cadastro(String data_de_cadastro) {
-		this.data_de_cadastro = data_de_cadastro;
+	public void setData_cadastro(String data_cadastro) {
+		this.data_cadastro = data_cadastro;
+	}
+	public String getCpf() {
+		return cpf;
+	}
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+	public String getRg() {
+		return rg;
+	}
+	public void setRg(String rg) {
+		this.rg = rg;
+	}
+	public String getProfissao() {
+		return profissao;
+	}
+	public void setProfissao(String profissao) {
+		this.profissao = profissao;
+	}
+	public String getRazao_social() {
+		return razao_social;
+	}
+	public void setRazao_social(String razao_social) {
+		this.razao_social = razao_social;
+	}
+	public String getCnpj() {
+		return cnpj;
+	}
+	public void setCnpj(String cnpj) {
+		this.cnpj = cnpj;
+	}
+	public String getNome_representante() {
+		return nome_representante;
+	}
+	public void setNome_representante(String nome_representante) {
+		this.nome_representante = nome_representante;
+	}
+	public String getCpf_representante() {
+		return cpf_representante;
+	}
+	public void setCpf_representante(String cpf_representante) {
+		this.cpf_representante = cpf_representante;
+	}
+	public String getRg_representante() {
+		return rg_representante;
+	}
+	public void setRg_representante(String rg_representante) {
+		this.rg_representante = rg_representante;
 	}
 	public Long getContribuicao() {
 		return contribuicao;
@@ -118,11 +174,11 @@ public class User implements Serializable {
 	public void setAutoriza_divulgar_nome(Boolean autoriza_divulgar_nome) {
 		this.autoriza_divulgar_nome = autoriza_divulgar_nome;
 	}
-	public Boolean getAdministrador() {
-		return administrador;
+	public int getAcesso() {
+		return acesso;
 	}
-	public void setAdministrador(Boolean administrador) {
-		this.administrador = administrador;
+	public void setAcesso(int acesso) {
+		this.acesso = acesso;
 	}
 	public Boolean getAtivo() {
 		return ativo;
