@@ -1,0 +1,35 @@
+html {
+    font-size: 1.1vw;
+}
+
+@include media-breakpoint-up(sm) {
+    html {
+        font-size: 1vw;
+    }
+}
+
+@include media-breakpoint-up(md) {
+    html {
+        font-size: 3vw;
+    }
+}
+
+@include media-breakpoint-up(lg) {
+    html {
+        font-size: 5vw;
+    }
+}
+
+html * {
+    color: #323436;
+}
+
+.standard-color-blue {
+    background-color: #324c5d !important;
+}
+
+.color-text{
+    color: #4b4d4f !important;
+}
+
+
