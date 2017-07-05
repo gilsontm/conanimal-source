@@ -25,6 +25,7 @@ import br.com.caelum.vraptor.boilerplate.factory.SessionManager;
 import br.com.caelum.vraptor.boilerplate.util.CryptManager;
 import br.edu.ifc.concordia.inf.conanimal.model.User;
 import br.edu.ifc.concordia.inf.conanimal.properties.SystemConfigs;
+import br.edu.ifc.concordia.inf.permission.UserRoles;
 
 @ApplicationScoped
 @Startup
@@ -57,7 +58,7 @@ public class ApplicationSetup {
 			user.setNome("Administrador Padrão");
 			user.setEmail("admin@admin");
 			user.setSenha(CryptManager.passwordHash("admin"));
-			user.setAcesso(10);
+			user.setAcesso(UserRoles.SYS_ADMIN.getAccessLevel());
 			dao.persist(user);
 		}
 		

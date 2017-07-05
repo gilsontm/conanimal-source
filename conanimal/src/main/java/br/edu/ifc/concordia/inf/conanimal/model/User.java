@@ -2,11 +2,14 @@ package br.edu.ifc.concordia.inf.conanimal.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import br.edu.ifc.concordia.inf.permission.UserRoles;
 
 @Entity(name="users")
 @Table(name="users")
@@ -21,6 +24,7 @@ public class User implements Serializable {
 	private String nome;
 	private String telefone;
 	private String celular;
+	@Column(unique=true)
 	private String email;
 	private String senha;
 	private String municipio;
@@ -39,7 +43,7 @@ public class User implements Serializable {
 	private String cpf_representante;
 	private String rg_representante;
 	private Boolean autoriza_divulgar_nome;
-	private int acesso;
+	private int acesso = UserRoles.NORMAL.getAccessLevel();
 	private Boolean ativo;
 	private Boolean empresa;
 	public Long getId() {
