@@ -28,7 +28,7 @@
         <!-- Entre/cadastre-se-->
         <div class="col-4 ">
             <nav class="nav float-right mr-5">
-                <a href="" class="text-white nav-link btn btn-danger m-1">Torne-se um sócio</a>
+                <a href="<c:url value='/register'/>" class="text-white nav-link btn btn-danger m-1">Torne-se um sócio</a>
                 <a href="<c:url value='/login'/>" class="text-white nav-link btn btn-danger m-1">Entre</a>
             </nav>
         </div>

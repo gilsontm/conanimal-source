@@ -39,5 +39,11 @@ public class UserController extends AbstractController {
 		}
 	}
 	
+	@Get(value="/register")
+	@NoCache
+	public void register() {
+		
+	}
+	
 	
 }

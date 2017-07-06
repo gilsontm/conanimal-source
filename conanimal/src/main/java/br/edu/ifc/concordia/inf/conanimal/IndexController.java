@@ -12,7 +12,6 @@ public class IndexController extends AbstractController {
 	
 	@Path(value="/", priority=Path.HIGHEST)
 	@NoCache
-	@Permission
 	public void index() {
 		
 	}
