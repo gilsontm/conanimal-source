@@ -55,10 +55,10 @@ public class ApplicationSetup {
 		User user = (User) criteria.uniqueResult();
 		if (user == null){
 			user = new User();
-			user.setNome("Administrador Padrão");
+			user.setName("Administrador Padrão");
 			user.setEmail("admin@admin");
-			user.setSenha(CryptManager.passwordHash("admin"));
-			user.setAcesso(UserRoles.SYS_ADMIN.getAccessLevel());
+			user.setPassword(CryptManager.passwordHash("admin"));
+			user.setAccess(UserRoles.SYS_ADMIN.getAccessLevel());
 			dao.persist(user);
 		}
 		

@@ -21,54 +21,53 @@ public class User implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	private String nome;
-	private String telefone;
-	private String celular;
+	private String name;
+	private String phone;
+	private String cell_phone;
 	@Column(unique=true)
 	private String email;
-	private String senha;
-	private String municipio;
-	private String bairro;
-	private String rua;
-	private String complemento;
+	private String password;
+	private String city;
+	private String neighborhood;
+	private String street;
+	private String complement;
 	private String uf;
-	private String data_cadastro;
-	private Long contribuicao;
+	private String register_date;
+	private Long payment;
 	private String cpf;
 	private String rg;
-	private String profissao;
-	private String razao_social;
+	private String profession;
+	private String company_name;
 	private String cnpj;
-	private String nome_representante;
-	private String cpf_representante;
-	private String rg_representante;
-	private Boolean autoriza_divulgar_nome;
-	private int acesso = UserRoles.NORMAL.getAccessLevel();
-	private Boolean ativo;
-	private Boolean empresa;
+	private String representative_name;
+	private Boolean name_publishing;
+	private int access = UserRoles.NORMAL.getAccessLevel();
+	private Boolean active = true;
+	private Boolean is_legal_person;
+	
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getNome() {
-		return nome;
+	public String getName() {
+		return name;
 	}
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setName(String name) {
+		this.name = name;
 	}
-	public String getTelefone() {
-		return telefone;
+	public String getPhone() {
+		return phone;
 	}
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
-	public String getCelular() {
-		return celular;
+	public String getCell_phone() {
+		return cell_phone;
 	}
-	public void setCelular(String celular) {
-		this.celular = celular;
+	public void setCell_phone(String cell_phone) {
+		this.cell_phone = cell_phone;
 	}
 	public String getEmail() {
 		return email;
@@ -76,35 +75,35 @@ public class User implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getSenha() {
-		return senha;
+	public String getPassword() {
+		return password;
 	}
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setPassword(String password) {
+		this.password = password;
 	}
-	public String getMunicipio() {
-		return municipio;
+	public String getCity() {
+		return city;
 	}
-	public void setMunicipio(String municipio) {
-		this.municipio = municipio;
+	public void setCity(String city) {
+		this.city = city;
 	}
-	public String getBairro() {
-		return bairro;
+	public String getNeighborhood() {
+		return neighborhood;
 	}
-	public void setBairro(String bairro) {
-		this.bairro = bairro;
+	public void setNeighborhood(String neighborhood) {
+		this.neighborhood = neighborhood;
 	}
-	public String getRua() {
-		return rua;
+	public String getStreet() {
+		return street;
 	}
-	public void setRua(String rua) {
-		this.rua = rua;
+	public void setStreet(String street) {
+		this.street = street;
 	}
-	public String getComplemento() {
-		return complemento;
+	public String getComplement() {
+		return complement;
 	}
-	public void setComplemento(String complemento) {
-		this.complemento = complemento;
+	public void setComplement(String complement) {
+		this.complement = complement;
 	}
 	public String getUf() {
 		return uf;
@@ -112,11 +111,17 @@ public class User implements Serializable {
 	public void setUf(String uf) {
 		this.uf = uf;
 	}
-	public String getData_cadastro() {
-		return data_cadastro;
+	public String getRegister_date() {
+		return register_date;
 	}
-	public void setData_cadastro(String data_cadastro) {
-		this.data_cadastro = data_cadastro;
+	public void setRegister_date(String register_date) {
+		this.register_date = register_date;
+	}
+	public Long getPayment() {
+		return payment;
+	}
+	public void setPayment(Long payment) {
+		this.payment = payment;
 	}
 	public String getCpf() {
 		return cpf;
@@ -130,17 +135,17 @@ public class User implements Serializable {
 	public void setRg(String rg) {
 		this.rg = rg;
 	}
-	public String getProfissao() {
-		return profissao;
+	public String getProfession() {
+		return profession;
 	}
-	public void setProfissao(String profissao) {
-		this.profissao = profissao;
+	public void setProfession(String profession) {
+		this.profession = profession;
 	}
-	public String getRazao_social() {
-		return razao_social;
+	public String getCompany_name() {
+		return company_name;
 	}
-	public void setRazao_social(String razao_social) {
-		this.razao_social = razao_social;
+	public void setCompany_name(String company_name) {
+		this.company_name = company_name;
 	}
 	public String getCnpj() {
 		return cnpj;
@@ -148,52 +153,37 @@ public class User implements Serializable {
 	public void setCnpj(String cnpj) {
 		this.cnpj = cnpj;
 	}
-	public String getNome_representante() {
-		return nome_representante;
+	public String getRepresentative_name() {
+		return representative_name;
 	}
-	public void setNome_representante(String nome_representante) {
-		this.nome_representante = nome_representante;
+	public void setRepresentative_name(String representative_name) {
+		this.representative_name = representative_name;
 	}
-	public String getCpf_representante() {
-		return cpf_representante;
+	public Boolean getName_publishing() {
+		return name_publishing;
 	}
-	public void setCpf_representante(String cpf_representante) {
-		this.cpf_representante = cpf_representante;
+	public void setName_publishing(Boolean name_publishing) {
+		this.name_publishing = name_publishing;
 	}
-	public String getRg_representante() {
-		return rg_representante;
+	public int getAccess() {
+		return access;
 	}
-	public void setRg_representante(String rg_representante) {
-		this.rg_representante = rg_representante;
+	public void setAccess(int access) {
+		this.access = access;
 	}
-	public Long getContribuicao() {
-		return contribuicao;
+	public Boolean getActive() {
+		return active;
 	}
-	public void setContribuicao(Long contribuicao) {
-		this.contribuicao = contribuicao;
+	public void setActive(Boolean active) {
+		this.active = active;
 	}
-	public Boolean getAutoriza_divulgar_nome() {
-		return autoriza_divulgar_nome;
+	public Boolean getIs_legal_person() {
+		return is_legal_person;
 	}
-	public void setAutoriza_divulgar_nome(Boolean autoriza_divulgar_nome) {
-		this.autoriza_divulgar_nome = autoriza_divulgar_nome;
+	public void setIs_legal_person(Boolean is_legal_person) {
+		this.is_legal_person = is_legal_person;
 	}
-	public int getAcesso() {
-		return acesso;
-	}
-	public void setAcesso(int acesso) {
-		this.acesso = acesso;
-	}
-	public Boolean getAtivo() {
-		return ativo;
-	}
-	public void setAtivo(Boolean ativo) {
-		this.ativo = ativo;
-	}
-	public Boolean getEmpresa() {
-		return empresa;
-	}
-	public void setEmpresa(Boolean empresa) {
-		this.empresa = empresa;
-	}
+	
+	
+	
 }

@@ -5,5 +5,6 @@
 <script src="<c:url value='js/tether.min.js'/>"> </script>
 <script src="<c:url value='bootstrap/js/bootstrap.min.js'/>"></script>
 
+
 </body>
 </html>

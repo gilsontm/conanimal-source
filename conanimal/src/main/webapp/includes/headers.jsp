@@ -24,29 +24,36 @@
                 <a href="<c:url value='/'/>" class="text-white nav-link border-top-0 border-bottom-0 border-right-0 table-bordered"> Animais para adoção </a>
             </nav>
         </div>
-
-        <!-- Entre/cadastre-se-->
-        <div class="col-4 ">
-            <nav class="nav float-right mr-5">
-                <a href="<c:url value='/register'/>" class="text-white nav-link btn btn-danger m-1">Torne-se um sócio</a>
-                <a href="<c:url value='/login'/>" class="text-white nav-link btn btn-danger m-1">Entre</a>
-            </nav>
-        </div>
-
-        <!-- Perfil de usuário -->
-        <div class="col-4 d-none">
-            <div class="btn-group float-right mr-5">
-                <button type="button" class="btn btn-danger dropdown-toggle px-3 m-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Olá, Gilson
-                </button>
-                <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="perfil-usuario.html">Perfil</a>
-                    <a class="dropdown-item" href="painel-admin.html">Painel de administrador</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Sair</a>
-                </div>
-            </div>
-        </div>
+		
+		<c:choose>
+			<c:when test="${not empty user and not empty adminAccessLevel}">
+				<!-- Perfil de usuário -->
+				<div class="col-4">
+		            <div class="btn-group float-right mr-5">
+		                <button type="button" class="btn btn-danger dropdown-toggle px-3 m-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		                    Olá, ${user.getName()}
+		                </button>
+		                <div class="dropdown-menu dropdown-menu-right">
+		                    <a class="dropdown-item" href="<c:url value='/profile'/>">Perfil</a>
+		                    <c:if test="${user.getAccess() >= adminAccessLevel}">
+		                    	<a class="dropdown-item" href="#">Painel de administrador</a>
+		                    </c:if>
+		                    <div class="dropdown-divider"></div>
+		                    <a class="dropdown-item" href="<c:url value='/logout'/>">Sair</a>
+		                </div>
+		            </div>
+	        	</div>
+			</c:when>
+			<c:otherwise>
+				<!-- Entre/cadastre-se-->
+				<div class="col-4 ">
+		            <nav class="nav float-right mr-5">
+		                <a href="<c:url value='/register'/>" class="text-white nav-link btn btn-danger m-1">Torne-se um sócio</a>
+		                <a href="<c:url value='/login'/>" class="text-white nav-link btn btn-danger m-1">Entre</a>
+		            </nav>
+        		</div>
+			</c:otherwise>
+		</c:choose>
     </div>
 
 <!-- 
