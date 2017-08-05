@@ -4,6 +4,15 @@
 <c:import url="/includes/headers.jsp"/>
 
 	<div class="container-fluid my-5">
+		<c:if test="${not empty errorMessage}">
+	        <div class="row">
+	        	<div class="col-6 offset-3">
+	        		<div class="alert alert-danger w-100 text-center">
+						${errorMessage}
+					</div>
+	        	</div>
+	     	</div>
+		</c:if>
         <div class="row mb-0">
             <div class="col-4 offset-4">
                 <ul class="nav nav-tabs" role="tablist">
@@ -21,11 +30,6 @@
                 <div class="tab-pane fade show active" id="login_tab">
                     <div class="card standard-color-blue p-5 rounded">
                         <form method="POST" action="<c:url value='/login'/>">
-                        	<c:if test="${not empty errorMessage}">
-								<div class="alert alert-danger">
-									${errorMessage}
-								</div>
-							</c:if>
                             <input type="email" name="email" id="login_email_input" class="form-control my-2" placeholder="Email">
                             <input type="password" name="password" id="login_password_input" class="form-control my-2" placeholder="Senha">
                             <button type="submit" id="login_submit_input" class="btn btn-block rounded btn-danger mt-3"> Entrar </button>

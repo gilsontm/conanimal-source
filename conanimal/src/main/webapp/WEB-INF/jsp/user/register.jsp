@@ -6,9 +6,13 @@
 <div class="container-fluid my-5">
         <!-- Menu pessoa física/jurídica -->
         <c:if test="${not empty errorMessage}">
-			<div class="alert alert-danger">
-				${errorMessage}
-			</div>
+	        <div class="row">
+	        	<div class="col-6 offset-3">
+	        		<div class="alert alert-danger w-100 text-center">
+						${errorMessage}
+					</div>
+	        	</div>
+	        </div>
 		</c:if>
         <div class="row">
             <ul class="nav nav-tabs col-4 offset-4" role="tablist">
@@ -45,7 +49,7 @@
                             <div class="form-group">
                                 <label for="p_password_input" class="text-white"> Senha </label>
                                 <input type="password" id="p_password_input" name="password" class="form-control" placeholder="Senha" aria-describedby="p_password_description">
-                                <small id="p_password_description" class="text-white"> Digite apenas de números e letras (mínimo: 8 caracteres) </small>
+                                <small id="p_password_description" class="text-white"> Digite apenas números e letras (mínimo: 8 caracteres) </small>
                             </div>
                             <div class="form-group">
                                 <label for="p_confirm_password_input" class="text-white"> Confirmação de senha </label>
@@ -148,7 +152,7 @@
                             <div class="form-group">
                                 <label for="c_password_input" class="text-white"> Senha </label>
                                 <input type="password" id="c_password_input" name="password" class="form-control" placeholder="Senha" aria-describedby="c_password_description">
-                                <small id="c_password_description" class="text-white"> Digite apenas de números e letras (mínimo: 8 caracteres) </small>
+                                <small id="c_password_description" class="text-white"> Digite apenas números e letras (mínimo: 8 caracteres) </small>
                             </div>
                             <div class="form-group">
                                 <label for="c_confirm_password_input" class="text-white"> Confirmação de senha </label>
