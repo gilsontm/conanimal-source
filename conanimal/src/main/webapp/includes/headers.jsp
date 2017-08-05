@@ -36,7 +36,7 @@
 		                <div class="dropdown-menu dropdown-menu-right">
 		                    <a class="dropdown-item" href="<c:url value='/profile'/>">Perfil</a>
 		                    <c:if test="${user.getAccess() >= adminAccessLevel}">
-		                    	<a class="dropdown-item" href="#">Painel de administrador</a>
+		                    	<a class="dropdown-item" href="<c:url value='/adminPanel'/>">Painel de administrador</a>
 		                    </c:if>
 		                    <div class="dropdown-divider"></div>
 		                    <a class="dropdown-item" href="<c:url value='/logout'/>">Sair</a>

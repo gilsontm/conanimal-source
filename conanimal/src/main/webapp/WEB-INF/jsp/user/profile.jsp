@@ -120,7 +120,7 @@
                                 </div>
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input type="checkbox" id="name_publishing_checkbox" name="name_publishing" class="form-check-input" checked="${user.getName_publishing()}">
+                                        <input type="checkbox" id="name_publishing_checkbox" name="name_publishing" class="form-check-input" ${user.getName_publishing() ? 'checked' : ''}>
                                         Autorizo a divulgação do meu nome no quadro associativo.
                                     </label>
                                 </div>
@@ -182,39 +182,44 @@
 								</div>
 							</c:if>
 							<div class="px-4 px-3 w-100">
-								<button type="submit" id="deactivation_modal_button" data-toggle="modal" data-target="#deactivation_modal" class="btn btn-block btn-danger w-100"> Desativar conta </button>
+								<button type="button" id="deactivation_modal_button" data-toggle="modal" data-target="#deactivation_modal" 
+								class="btn btn-block btn-danger w-100" ${user.getAccess() == systemAdminAccessLevel ? 'disabled' : ''}>
+									Desativar conta 
+								</button>
 							</div>
-                        </div>
-                        
-                        <div id="deactivation_modal" class="modal fade">
-							<div class="modal-dialog" role="document">
-								<div class="modal-content">
-							      	<div class="modal-header">
-							        	<h5 class="modal-title">Desativar minha conta </h5>
-							        	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							         		<span aria-hidden="true">&times;</span>
-							        	</button>
-							      	</div>
-							      	<form method="POST" action="<c:url value='/deactivateAccount'/>">
-								      	<div class="modal-body">
-								        	<p class="px-2"><strong>Atenção:</strong> ao desativar sua conta, você não poderá mais acessá-la.</p>
-								        	<hr>
-			                                <div class="form-group px-2">
-			                                	<input type="password" id="deactivation_password_input" name="password" class="form-control" placeholder="Digite sua senha">
-			                                </div>
-								      	</div>
-								      	<div class="modal-footer">
-								        	<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-								        	<button type="submit" id="deactivation_submit_button" class="btn btn-danger"> Desativar conta </button>
-								    	</div>
-							    	</form>
-							    </div>
-							</div>
-						</div>
+                        </div>					
                     </div>
                 </div>
             </div>
         </div>
     </div>
     
+    <c:if test="${user.getAccess() != systemAdminAccessLevel}">
+	    <div id="deactivation_modal" class="modal fade">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+			      	<div class="modal-header">
+			        	<h5 class="modal-title">Desativar minha conta </h5>
+			        	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			         		<span aria-hidden="true">&times;</span>
+			        	</button>
+			      	</div>
+			      	<form method="POST" action="<c:url value='/deactivateAccount'/>">
+				      	<div class="modal-body">
+				        	<p class="px-2"><strong>Atenção:</strong> ao desativar sua conta, você não poderá mais acessá-la.</p>
+				        	<hr>
+	                              <div class="form-group px-2">
+	                              	<input type="password" id="deactivation_password_input" name="password" class="form-control" placeholder="Digite sua senha">
+	                              </div>
+				      	</div>
+				      	<div class="modal-footer">
+				        	<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+				        	<button type="submit" id="deactivation_submit_button" class="btn btn-danger"> Desativar conta </button>
+				    	</div>
+			    	</form>
+			    </div>
+			</div>
+		</div>
+	</c:if>
+
 <c:import url="/includes/footers.jsp"/>

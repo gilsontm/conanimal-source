@@ -1,5 +1,7 @@
 package br.edu.ifc.concordia.inf.conanimal.business;
 
+import java.util.List;
+
 import javax.enterprise.context.RequestScoped;
 
 import org.hibernate.Criteria;
@@ -8,6 +10,7 @@ import org.hibernate.criterion.Restrictions;
 import br.com.caelum.vraptor.boilerplate.HibernateBusiness;
 import br.com.caelum.vraptor.boilerplate.util.CryptManager;
 import br.edu.ifc.concordia.inf.conanimal.model.User;
+import br.edu.ifc.concordia.inf.permission.UserRoles;
 
 @RequestScoped
 public class UserBS extends HibernateBusiness {
@@ -96,9 +99,26 @@ public class UserBS extends HibernateBusiness {
 		return user;
 	}
 	
-	public void deactivate(User user) {
-		user.setActive(false);
+	public User toggleUserActiveStatus(User user) {
+		user.setActive(!user.getActive());
 		this.dao.update(user);
+		return user;
 	}
+	
+	public List<User> listAllUsers(){
+		Criteria criteria = this.dao.newCriteria(User.class);
+		return this.dao.findByCriteria(criteria, User.class);
+	}
+	
+	public User toggleUserAccessLevel(User user) {
+		if (user.getAccess() == UserRoles.ADMIN.getAccessLevel()) {
+			user.setAccess(UserRoles.NORMAL.getAccessLevel());
+		} else {
+			user.setAccess(UserRoles.ADMIN.getAccessLevel());
+		}
+		this.dao.update(user);
+		return user;
+	}
+	
 	
 }

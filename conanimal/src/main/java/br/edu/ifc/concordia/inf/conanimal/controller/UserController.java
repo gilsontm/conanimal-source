@@ -1,5 +1,7 @@
 package br.edu.ifc.concordia.inf.conanimal.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import br.com.caelum.vraptor.Controller;
@@ -95,6 +97,7 @@ public class UserController extends AbstractController {
 	public void profile(int formNumber, String status, String message) {
 		this.result.include("user", this.userSession.getUser());
 		this.result.include("adminAccessLevel", UserRoles.ADMIN.getAccessLevel());
+		this.result.include("systemAdminAccessLevel", UserRoles.SYS_ADMIN.getAccessLevel());
 		this.result.include("formNumber", formNumber);
 		this.result.include("status", status);
 		this.result.include("message", message);
@@ -108,9 +111,9 @@ public class UserController extends AbstractController {
 			String neighborhood, String street, String complement, Long payment, Boolean name_publishing,
 			String company_name, String cnpj, String representative_name){
 		if (password != null) {
-			User user = this.bs.login(this.userSession.getUser().getEmail(), password);
-			if (user != null) {
-				User updated_user = this.bs.update(user, name, password, profession, rg, cpf, phone, cell_phone,
+			User logged_user = this.bs.login(this.userSession.getUser().getEmail(), password);
+			if (logged_user != null) {
+				User updated_user = this.bs.update(logged_user, name, password, profession, rg, cpf, phone, cell_phone,
 						city, uf, neighborhood, street, complement, payment, name_publishing, company_name,
 						cnpj, representative_name);
 				this.userSession.login(updated_user);
@@ -128,10 +131,10 @@ public class UserController extends AbstractController {
 	@NoCache
 	public void changePassword(String password, String new_password, String confirm_new_password) {
 		if (password != null) {
-			User user = this.bs.login(this.userSession.getUser().getEmail(), password);
-			if (user != null) {
+			User logged_user = this.bs.login(this.userSession.getUser().getEmail(), password);
+			if (logged_user != null) {
 				if (new_password != null && new_password.equals(confirm_new_password)) {
-					User updated_user = this.bs.changePassword(user, new_password);
+					User updated_user = this.bs.changePassword(logged_user, new_password);
 					this.userSession.login(updated_user);
 					this.result.redirectTo(this).profile(2, "success", "Sua senha foi alterada com sucesso.");
 				} else {
@@ -148,20 +151,116 @@ public class UserController extends AbstractController {
 	@Post(value="/deactivateAccount")
 	@Permission
 	@NoCache
-	public void deactivate(String password) {
+	public void deactivateOwnAccount(String password) {
 		if (password != null) {
-			User user = this.bs.login(this.userSession.getUser().getEmail(), password);
-			if (user != null) {
-				this.bs.deactivate(user);
+			User logged_user = this.bs.login(this.userSession.getUser().getEmail(), password);
+			if (logged_user == null) {
+				this.result.redirectTo(this).profile(3, "danger", "Senha incorreta. Tente novamente.");
+			} else if (logged_user.getAccess() == UserRoles.SYS_ADMIN.getAccessLevel()) {
+				this.result.redirectTo(this).profile(3, "danger", "Você não tem permissão para alterar o status deste usuário.");
+			} else {
+				this.bs.toggleUserActiveStatus(logged_user);
 				this.userSession.logout();
 				this.result.redirectTo(this).login("Sua conta foi desativada.");
-			} else {
-				this.result.redirectTo(this).profile(3, "danger", "Senha incorreta. Tente novamente.");
 			}
 		} else {
 			this.result.redirectTo(this).profile(3, "danger", "Senha inválida. Tente novamente.");
 		}
 	}
+	
+	@Get(value="/adminPanel")
+	@NoCache
+	@Permission(UserRoles.ADMIN)
+	public void adminPanel() {
+		List<User> users = this.bs.listAllUsers();
+		this.result.include("users", users);
+		this.result.include("user", this.userSession.getUser());
+		this.result.include("adminAccessLevel", UserRoles.ADMIN.getAccessLevel());
+	}
+	
+	@Get(value="/viewUser{id}")
+	@NoCache
+	@Permission(UserRoles.ADMIN)
+	public void viewUserProfile(Long id, String status, String message) {
+		
+		if (id == null) {
+			this.result.notFound();
+		} else {
+			User current_user = this.bs.exists(id, User.class);
+			if (current_user == null) {
+				this.result.notFound();
+			} else {
+				this.result.include("currentUser", current_user);
+				this.result.include("user", this.userSession.getUser());
+				this.result.include("adminAccessLevel", UserRoles.ADMIN.getAccessLevel());
+				this.result.include("systemAdminAccessLevel", UserRoles.SYS_ADMIN.getAccessLevel());
+				if (!GeneralUtils.isEmpty(status)) {
+					this.result.include("status", status);
+				}
+				if (!GeneralUtils.isEmpty(message)) {
+					this.result.include("message", message);
+				}
+				
+			}
+		}
+	}
+	
+	@Post(value="/toggleUserAccess{id}")
+	@NoCache
+	@Permission(UserRoles.ADMIN)
+	public void toggleUserAccess(Long id, String password) {
+		if (password != null) {
+			User logged_user = this.bs.login(this.userSession.getUser().getEmail(), password);
+			if (logged_user == null) {
+				this.result.redirectTo(this).viewUserProfile(id, "danger", "Senha incorreta. Tente novamente.");
+			} else {
+				if (id == null) {
+					this.result.notFound();
+				} else {
+					User user = this.bs.exists(id, User.class);
+					if (user == null) {
+						this.result.notFound();
+					} else if (user.getAccess() == UserRoles.SYS_ADMIN.getAccessLevel()) {
+						this.result.redirectTo(this).viewUserProfile(id, "danger", "Você não tem permissão para alterar o nível de acesso deste usuário.");
+					} else {
+						this.bs.toggleUserAccessLevel(user);
+						this.result.redirectTo(this).viewUserProfile(id, "success", "Nível de acesso modificado com sucesso.");
+					}
+				}
+			}
+		} else {
+			this.result.redirectTo(this).viewUserProfile(id, "danger", "Senha inválida. Tente novamente");
+		}
+	}
+	
+	@Post(value="/toggleUserStatus{id}")
+	@NoCache
+	@Permission(UserRoles.ADMIN)
+	public void toggleUserStatus(Long id, String password) {
+		if (password != null) {
+			User logged_user = this.bs.login(this.userSession.getUser().getEmail(), password);
+			if (logged_user == null) {
+				this.result.redirectTo(this).viewUserProfile(id, "danger", "Senha incorreta. Tente novamente.");
+			} else {
+				if (id == null) {
+					this.result.notFound();
+				} else {
+					User user = this.bs.exists(id, User.class);
+					if (user == null) {
+						this.result.notFound();
+					} else if (user.getAccess() == UserRoles.SYS_ADMIN.getAccessLevel()) {
+						this.result.redirectTo(this).viewUserProfile(id, "danger", "Você não tem permissão para alterar o status deste usuário.");
+					} else {
+						this.bs.toggleUserActiveStatus(user);
+						this.result.redirectTo(this).viewUserProfile(id, "success", "O status deste usuário foi alterado.");
+					}
+				}
+			}
+		} else {
+			this.result.redirectTo(this).viewUserProfile(id, "danger", "Senha inválida. Tente novamente");
+		}
+	}
+	
 }
 
 
