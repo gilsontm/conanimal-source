@@ -1,3 +1,19 @@
+/*$custom-file-text: (
+  placeholder: (
+    en: "Selecionar arquivo..."
+  ),
+  button-label: (
+    en: "Procurar"
+  )
+);*/
+.custom-file-control:lang(pt)::after {
+  content: "Selecionar arquivo..." !important;
+}
+
+.custom-file-control:lang(pt)::before {
+  content: "Procurar" !important;
+}
+
 html {
     font-size: 1.1vw;
 }
@@ -32,4 +48,8 @@ html * {
     color: #4b4d4f !important;
 }
 
+/* support custom file inputs */
+.custom-file-control:after {
+    content: attr(data-content) !important;
+}
 

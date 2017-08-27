@@ -40,7 +40,10 @@
                                 <div class="form-group row">
                                     <label for="animals_primary_image_input" class="col-3 col-form-label"> Imagem 1* </label>
                                     <div class="col-9">
-                                        <input type="file" id="animals_primary_image_input" class="form-control-file">
+								       	<label class="custom-file">
+										    <input type="file" class="custom-file-input" >
+										    <span class="custom-file-control" data-content="Choose file..."></span>
+										</label>
                                     </div>
                                 </div>
                                 <div class="form-group row">
