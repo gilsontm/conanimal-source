@@ -25,23 +25,28 @@
                         <div class="my-5">
                             <h3> Cadastrar novo animal para adoção </h3>
                             <hr>
-                            <form>
+                            <c:if test="${formNumber == 1}">
+                            	<div class="alert alert-${status}">
+                            		${message}
+                            	</div>
+                            </c:if>
+                            <form method="POST" action="<c:url value='/registerAnimal'/>">
                                 <div class="form-group row">
                                     <label for="animals_title_input" class="col-3 col-form-label"> Título* </label>
                                     <div class="col-9">
-                                        <input type="text" id="animals_title_input" class="form-control" maxlength="50" placeholder="Título do animal para adoção">
+                                        <input type="text" id="animals_title_input" name="title" class="form-control" maxlength="50" placeholder="Título do animal para adoção">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="animals_description_input"> Descrição* </label>
-                                    <textarea id="animals_description_input" class="form-control" rows="5" maxlength="500" aria-describedby="animals_description_description"> </textarea>
+                                    <textarea id="animals_description_input" name="description" class="form-control" rows="5" maxlength="500" aria-describedby="animals_description_description"> </textarea>
                                     <small id="animals_description_description"> Limite de 500 caracteres.</small>
                                 </div>
                                 <div class="form-group row">
                                     <label for="animals_primary_image_input" class="col-3 col-form-label"> Imagem 1* </label>
                                     <div class="col-9">
 								       	<label class="custom-file">
-										    <input type="file" class="custom-file-input" >
+										    <input type="file" class="custom-file-input" name="image_1">
 										    <span class="custom-file-control" data-content="Choose file..."></span>
 										</label>
                                     </div>

@@ -47,7 +47,6 @@ public class UserController extends AbstractController {
 		} else {
 			this.result.redirectTo(this).login("Email e/ou senha inválido(s).");
 		}
-		
 	}
 	
 	@Get(value="/logout")
@@ -171,11 +170,14 @@ public class UserController extends AbstractController {
 	@Get(value="/adminPanel")
 	@NoCache
 	@Permission(UserRoles.ADMIN)
-	public void adminPanel() {
+	public void adminPanel(int formNumber, String status, String message) {
 		List<User> users = this.bs.listAllUsers();
 		this.result.include("users", users);
 		this.result.include("user", this.userSession.getUser());
 		this.result.include("adminAccessLevel", UserRoles.ADMIN.getAccessLevel());
+		this.result.include("formNumber", formNumber);
+		this.result.include("status", status);
+		this.result.include("message", message);
 	}
 	
 	@Get(value="/viewUser{id}")
