@@ -1,5 +1,7 @@
 package br.edu.ifc.concordia.inf.conanimal.business;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
@@ -47,6 +49,9 @@ public class UserBS extends HibernateBusiness {
 			user.setComplement(complement);
 			user.setPayment(payment);
 			user.setName_publishing(name_publishing);
+			Date date = new Date();
+			SimpleDateFormat date_format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+			user.setRegister_date(date_format.format(date));
 			
 			if (form_type.equals("private_person")) {
 				user.setIs_legal_person(false);

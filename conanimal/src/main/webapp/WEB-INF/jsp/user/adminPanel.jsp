@@ -446,7 +446,7 @@
                             </form>
                         </div>
                         <!-- Alterar slogan -->
-                        <div class="my-5">
+                        <div class="mt-5">
                             <h3> Alterar slogan da página principal </h3>
                             <hr>
                             <form>
@@ -503,7 +503,7 @@
                             <div class="collapse" id="disabled_user_collapse">
                                 <ul class="list-group">
                                     <c:forEach items="${users}" var="eachUser">
-                                		<c:if test="${!eachUser.getActive()}"> 
+                                		<c:if test="${not eachUser.getActive()}"> 
                                 			<a href="<c:url value='/viewUser${eachUser.getId()}'/>" class="list-group-item list-group-item-action d-flex justify-content-between">
                                 				${eachUser.getName()}
                                 				<span class="badge badge-danger">${eachUser.getIs_legal_person() ? "Pessoa Jurídica" : "Pessoa Física"}</span>
@@ -522,9 +522,13 @@
                             </a>
                             <div class="collapse" id="animals_to_be_adopted_collapse">
                                 <ul class="list-group">
-                                    <a href="visualizar-animal-para-adocao.html" class="list-group-item list-group-item-action"> Título do animal </a>
-                                    <a href="visualizar-animal-para-adocao.html" class="list-group-item list-group-item-action"> Título do animal </a>
-                                    <a href="visualizar-animal-para-adocao.html" class="list-group-item list-group-item-action"> Título do animal </a>
+                                	<c:forEach items="${animals}" var="eachAnimal">
+                                		<c:if test="${not eachAnimal.getAdopted() and not eachAnimal.getHidden()}">
+                                			<a href="<c:url value='/viewAnimal${eachAnimal.getId()}'/>" class="list-group-item list-group-item-action d-flex justify-content-between">
+                               					${eachAnimal.getTitle()}                       			
+                               				</a>
+                                		</c:if>
+                                	</c:forEach>
                                 </ul>
                             </div>
                             <a class="btn btn-block standard-color-blue text-white my-1" href="#adopted_animals_collapse" data-toggle="collapse" aria-expanded="false" aria-controls="adopted_animals_collapse">
@@ -532,9 +536,13 @@
                             </a>
                             <div class="collapse" id="adopted_animals_collapse">
                                 <ul class="list-group">
-                                    <a href="visualizar-animal-para-adocao.html" class="list-group-item list-group-item-action"> Título do animal </a>
-                                    <a href="visualizar-animal-para-adocao.html" class="list-group-item list-group-item-action"> Título do animal </a>
-                                    <a href="visualizar-animal-para-adocao.html" class="list-group-item list-group-item-action"> Título do animal </a>
+                                    <c:forEach items="${animals}" var="eachAnimal">
+                               			<c:if test="${eachAnimal.getAdopted()}">
+                                			<a href="<c:url value='/viewAnimal${eachAnimal.getId()}'/>" class="list-group-item list-group-item-action d-flex justify-content-between">
+                               					${eachAnimal.getTitle()}                       			
+                               				</a>
+                                		</c:if>
+                                	</c:forEach>
                                 </ul>
                             </div>
                             <a class="btn btn-block standard-color-blue text-white my-1" href="#hidden_animals_collapse" data-toggle="collapse" aria-expanded="false" aria-controls="hidden_animals_collapse">
@@ -542,9 +550,13 @@
                             </a>
                             <div class="collapse" id="hidden_animals_collapse">
                                 <ul class="list-group">
-                                    <a href="visualizar-animal-para-adocao.html" class="list-group-item list-group-item-action"> Título do animal </a>
-                                    <a href="visualizar-animal-para-adocao.html" class="list-group-item list-group-item-action"> Título do animal </a>
-                                    <a href="visualizar-animal-para-adocao.html" class="list-group-item list-group-item-action"> Título do animal </a>
+                                	<c:forEach items="${animals}" var="eachAnimal">
+                               			<c:if test="${eachAnimal.getHidden()}">
+                                			<a href="<c:url value='/viewAnimal${eachAnimal.getId()}'/>" class="list-group-item list-group-item-action d-flex justify-content-between">
+                               					${eachAnimal.getTitle()}                       			
+                               				</a>
+                                		</c:if>
+                                	</c:forEach>
                                 </ul>
                             </div>
                         </div>
@@ -574,7 +586,7 @@
                             </div>
                         </div>
                         <!-- Lista de prestações de contas -->
-                        <div class="my-5">
+                        <div class="mt-5">
                             <h3> Lista de prestações de contas </h3>
                             <hr>
                             <a class="btn btn-block standard-color-blue text-white my-1" href="#accountability_collapse" data-toggle="collapse" aria-expanded="false" aria-controls="accountability_collapse">

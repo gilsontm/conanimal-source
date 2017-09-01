@@ -11,7 +11,9 @@ import br.com.caelum.vraptor.boilerplate.NoCache;
 import br.com.caelum.vraptor.boilerplate.util.GeneralUtils;
 import br.edu.ifc.concordia.inf.conanimal.IndexController;
 import br.edu.ifc.concordia.inf.conanimal.abstractions.AbstractController;
+import br.edu.ifc.concordia.inf.conanimal.business.AnimalBS;
 import br.edu.ifc.concordia.inf.conanimal.business.UserBS;
+import br.edu.ifc.concordia.inf.conanimal.model.Animal;
 import br.edu.ifc.concordia.inf.conanimal.model.User;
 import br.edu.ifc.concordia.inf.permission.Permission;
 import br.edu.ifc.concordia.inf.permission.UserRoles;
@@ -20,6 +22,7 @@ import br.edu.ifc.concordia.inf.permission.UserRoles;
 public class UserController extends AbstractController {
 	
 	@Inject private UserBS bs;
+	@Inject private AnimalBS animal_bs;
 	
 	@Get(value="/login")
 	@NoCache
@@ -172,7 +175,9 @@ public class UserController extends AbstractController {
 	@Permission(UserRoles.ADMIN)
 	public void adminPanel(int formNumber, String status, String message) {
 		List<User> users = this.bs.listAllUsers();
+		List<Animal> animals = animal_bs.listAllAnimals();
 		this.result.include("users", users);
+		this.result.include("animals", animals);
 		this.result.include("user", this.userSession.getUser());
 		this.result.include("adminAccessLevel", UserRoles.ADMIN.getAccessLevel());
 		this.result.include("formNumber", formNumber);
@@ -184,7 +189,6 @@ public class UserController extends AbstractController {
 	@NoCache
 	@Permission(UserRoles.ADMIN)
 	public void viewUserProfile(Long id, String status, String message) {
-		
 		if (id == null) {
 			this.result.notFound();
 		} else {
@@ -202,7 +206,6 @@ public class UserController extends AbstractController {
 				if (!GeneralUtils.isEmpty(message)) {
 					this.result.include("message", message);
 				}
-				
 			}
 		}
 	}

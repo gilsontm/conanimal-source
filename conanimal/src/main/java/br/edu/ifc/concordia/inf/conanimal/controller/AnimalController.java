@@ -3,19 +3,26 @@ package br.edu.ifc.concordia.inf.conanimal.controller;
 import javax.inject.Inject;
 
 import br.com.caelum.vraptor.Controller;
+import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.boilerplate.NoCache;
 import br.edu.ifc.concordia.inf.conanimal.abstractions.AbstractController;
 import br.edu.ifc.concordia.inf.conanimal.business.AnimalBS;
+import br.edu.ifc.concordia.inf.conanimal.business.UserBS;
 import br.edu.ifc.concordia.inf.conanimal.model.Animal;
+import br.edu.ifc.concordia.inf.conanimal.model.User;
+import br.edu.ifc.concordia.inf.permission.Permission;
+import br.edu.ifc.concordia.inf.permission.UserRoles;
 
 @Controller
 public class AnimalController extends AbstractController {
 	
 	@Inject private AnimalBS bs;
+	@Inject private UserBS user_bs;
 	
 	@Post(value="/registerAnimal")
 	@NoCache
+	@Permission(UserRoles.ADMIN)
 	public void registerAnimal(String title, String description) {
 		if ((title != null && !title.isEmpty()) && (description != null && !description.isEmpty()))  {
 			Animal animal = this.bs.registerAnimal(this.userSession.getUser().getId(), title, description);
@@ -27,5 +34,51 @@ public class AnimalController extends AbstractController {
 		} else {
 			this.result.redirectTo(UserController.class).adminPanel(1, "danger", "Alguns campos não foram preenchidos corretamente.");
 		}
+	}
+	
+	@Get(value="/viewAnimal{id}")
+	@NoCache
+	public void viewAnimal(Long id, String status, String message) {
+		if (id == null) {
+			this.result.notFound();
+		} else {
+			Animal current_animal = this.bs.exists(id, Animal.class);
+			if (current_animal == null) {
+				this.result.notFound();
+			} else {
+				this.result.include("currentAnimal", current_animal);
+				this.result.include("currentAnimal_user", user_bs.exists(current_animal.getUser_id(), User.class));
+				this.result.include("user", this.userSession.getUser());
+				this.result.include("adminAccessLevel", UserRoles.ADMIN.getAccessLevel());
+				if (status != null && !status.isEmpty()) {
+					this.result.include("status", status);
+				}
+				if (message != null && !message.isEmpty()) {
+					this.result.include("message", message);
+				}
+			}
+		}
+	}
+	
+	@Post(value="/viewAnimal{id}")
+	@NoCache
+	@Permission(UserRoles.ADMIN)
+	public void updateAnimal(Long id, String title, String description, Boolean adopted, Boolean hidden) {
+		if (id == null) {
+			this.result.notFound();
+		} else {
+			Animal animal = this.bs.exists(id, Animal.class);
+			if (animal == null) {
+				this.result.notFound();
+			} else {
+				Animal updated_animal = this.bs.updateAnimal(animal, title, description, adopted, hidden);
+				if (updated_animal == null) {
+					this.result.forwardTo(this).viewAnimal(animal.getId(), "danger", "Houve um erro e as informações não foram atualizadas. Tente novamente.");
+				} else {
+					this.result.forwardTo(this).viewAnimal(updated_animal.getId(), "success", "As informações foram atualizadas com sucesso.");
+				}
+			}
+		}
+		
 	}
 }

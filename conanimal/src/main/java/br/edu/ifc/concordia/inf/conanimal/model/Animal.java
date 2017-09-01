@@ -23,6 +23,8 @@ public class Animal implements Serializable{
 	private String register_date;
 	private String main_image;
 	private String description;
+	private Boolean adopted;
+	private Boolean hidden;
 	
 	public Long getId() {
 		return id;
@@ -59,6 +61,18 @@ public class Animal implements Serializable{
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	public Boolean getAdopted() {
+		return adopted;
+	}
+	public void setAdopted(Boolean adopted) {
+		this.adopted = adopted;
+	}
+	public Boolean getHidden() {
+		return hidden;
+	}
+	public void setHidden(Boolean hidden) {
+		this.hidden = hidden;
 	}
 	
 }

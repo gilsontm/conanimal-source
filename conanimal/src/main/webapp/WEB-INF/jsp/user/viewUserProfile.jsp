@@ -31,7 +31,7 @@
                                     <input type="email" id="email_input" name="email" class="form-control" value="${currentUser.getEmail()}" disabled>
                                 </div>
                             </div>
-                            <c:if test="${!currentUser.getIs_legal_person()}"> 
+                            <c:if test="${not currentUser.getIs_legal_person()}"> 
                              <div class="form-group row">
                                  <label for="profession_input" class="col-3 col-form-label"> Profissão </label>
                                  <div class="col-9">
@@ -57,6 +57,12 @@
                                 <label for="cpf_input" class="col-3 col-form-label"> ${currentUser.getIs_legal_person() ? "CPF do representante" : "CPF"} </label>
                                 <div class="col-9">
                                     <input type="tel" id="cpf_input" name="cpf" class="form-control" value="${currentUser.getCpf()}" disabled>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="phone_input" class="col-3 col-form-label"> Data de cadastro </label>
+                                <div class="col-9">
+                                    <input type="text" id="register_date_input" name="register_date" class="form-control" value="${currentUser.getRegister_date()}" disabled>
                                 </div>
                             </div>
                             <div class="form-group row">

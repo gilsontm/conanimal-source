@@ -11,7 +11,7 @@
                 <div class="row w-100">
                     <!-- Formulário para atualização de informações -->
                     <div class="col-6">
-                        <div class="my-5">
+                        <div class="mt-5">
                             <h3> Alterar informações gerais </h3>
                             <hr>
                             <c:if test="${formNumber == 1}">
@@ -40,7 +40,7 @@
                                         <input type="email" id="email_input" name="email" class="form-control" value="${user.getEmail()}" disabled>
                                     </div>
                                 </div>
-                                <c:if test="${!user.getIs_legal_person()}"> 
+                                <c:if test="${not user.getIs_legal_person()}"> 
 	                                <div class="form-group row">
 	                                    <label for="profession_input" class="col-3 col-form-label"> Profissão </label>
 	                                    <div class="col-9">
@@ -173,7 +173,7 @@
                             </form>
                         </div>
 
-                        <div class="my-5">
+                        <div class="mt-5">
                             <h3> Desativar minha conta </h3>
                             <hr>
 							<c:if test="${formNumber == 3}">
