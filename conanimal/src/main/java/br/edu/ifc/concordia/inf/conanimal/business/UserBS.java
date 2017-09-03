@@ -24,7 +24,7 @@ public class UserBS extends HibernateBusiness {
 		return (User) criteria.uniqueResult();
 	}
 			
-	public User register(String form_type, String name, String email, String password, 
+	public User register(String form_type, String user_name, String email, String password, 
 			String profession, String rg, String cpf, String phone, String cell_phone, 
 			String city, String uf, String neighborhood, String street, String complement, 
 			Long payment, Boolean name_publishing, String company_name, String cnpj, 
@@ -35,7 +35,7 @@ public class UserBS extends HibernateBusiness {
 		
 		if (criteria.uniqueResult() == null) {
 			User user = new User();
-			user.setName(name);
+			user.setName(user_name);
 			user.setPassword(CryptManager.passwordHash(password));
 			user.setEmail(email);
 			user.setRg(rg);
@@ -69,12 +69,12 @@ public class UserBS extends HibernateBusiness {
 		return null;
 	}
 	
-	public User update(User user, String name, String password, String profession,
+	public User update(User user, String user_name, String password, String profession,
 			String rg, String cpf, String phone, String cell_phone, String city, String uf, 
 			String neighborhood, String street, String complement, Long payment, Boolean name_publishing,
 			String company_name, String cnpj, String representative_name) {
 		
-		user.setName(name);
+		user.setName(user_name);
 		user.setRg(rg);
 		user.setPhone(phone);
 		user.setCell_phone(cell_phone);

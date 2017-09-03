@@ -6,43 +6,44 @@
 	<div class="container my-5">
         <div class="jumbotron jumbotron-fluid pt-4">
             <div class="container-fluid w-100">
-                <h1 class="display-4 px-4 mt-0"> Visualização de animal cadastrado </h1>
-                <hr>
-                <div class="w-100 row">
+           		<h1 class="display-4 px-4 mt-0"> ${not empty user and user.getAccess() >= adminAccessLevel ? "Visualização de animal cadastrado" : "Animal para adoção" }</h1>
+               	<hr>
+                <div class="row px-4">
                     <div class="col-6">
                         <div class="mt-5">
-                        	<h5> Informações sobre o animal </h5>
+                        	<h3> ${not empty user and user.getAccess() >= adminAccessLevel ? "Informações sobre o animal" : currentAnimal.getTitle()}</h3>
                         	<hr>
                         	<c:if test="${not empty status and not empty message}">
 	                        	<div class="alert alert-${status}">
 	                        		${message}
 	                        	</div>
 	                        </c:if>
-                            <form method="POST" action="<c:url value='/viewAnimal${currentAnimal.getId()}'/>" class="w-100 px-4 py-3">
-                                <div class="form-group row">
-                                    <label for="animals_title_input" class="col-3 col-form-label"> Título* </label>
-                                    <div class="col-9">
-                                        <input type="text" id="animals_title_input" name="title" class="form-control" value="${currentAnimal.getTitle()}" ${empty user ? "disabled" : ""}>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="animals_description_input"> Descrição* </label>
-                                    <textarea id="animals_description_input" name="description" class="form-control" rows="5" maxlength="500" aria-describedby="animals_description_description" ${empty user ? "disabled" : ""}> ${currentAnimal.getDescription()}</textarea>    
-                                    <small id="animals_description_description"> Limite de 500 caracteres.</small>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="animals_user_input" class="col-3 col-form-label"> <a href="<c:url value='/viewUser${currentAnimal.getUser_id()}'/> "> Usuário* </a> </label>
-                                    <div class="col-9">
-                                        <input type="text" id="animals_user_input" class="form-control" value="${currentAnimal_user.getName()}" disabled>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="animals_date_input" class="col-3 col-form-label"> Data* </label>
-                                    <div class="col-9">
-                                        <input type="text" id="animals_date_input" class="form-control" value="${currentAnimal.getRegister_date()}" disabled>
-                                    </div>
-                                </div>
-                                <c:if test="${not empty user}">
+                        	<c:if test="${not empty user and user.getAccess() >= adminAccessLevel}">
+	                            <form method="POST" action="<c:url value='/viewAnimal${currentAnimal.getId()}'/>" class="w-100 px-4 py-3">
+	                                <div class="form-group row">
+	                                    <label for="animals_title_input" class="col-3 col-form-label"> Título* </label>
+	                                    <div class="col-9">
+	                                        <input type="text" id="animals_title_input" name="title" class="form-control" value="${currentAnimal.getTitle()}" ${empty user ? "disabled" : ""}>
+	                                    </div>
+	                                </div>
+	                                <div class="form-group">
+	                                    <label for="animals_description_input"> Descrição* </label>
+	                                    <textarea id="animals_description_input" name="description" class="form-control" rows="5" maxlength="500" aria-describedby="animals_description_description" ${empty user ? "disabled" : ""}> ${currentAnimal.getDescription()}</textarea>    
+	                                    <small id="animals_description_description"> Limite de 500 caracteres.</small>
+	                                </div>
+                                
+	                                <div class="form-group row">
+	                                    <label for="animals_user_input" class="col-3 col-form-label"> <a href="<c:url value='/viewUser${currentAnimal.getUser_id()}'/> "> Usuário* </a> </label>
+	                                    <div class="col-9">
+	                                        <input type="text" id="animals_user_input" class="form-control" value="${currentAnimal_user.getName()}" disabled>
+	                                    </div>
+	                                </div>
+	                                <div class="form-group row">
+	                                    <label for="animals_date_input" class="col-3 col-form-label"> Data* </label>
+	                                    <div class="col-9">
+	                                        <input type="text" id="animals_date_input" class="form-control" value="${currentAnimal.getRegister_date()}" disabled>
+	                                    </div>
+	                                </div>
 	                                <div class="form-group row">
 	                                    <label for="animals_primary_image_input" class="col-3 col-form-label"> Imagem 1* </label>
 	                                    <div class="col-9">
@@ -83,18 +84,22 @@
 	                                    </div>
 	                                </div>
 	                                <button type="submit" id="accountability_submit_input" class="btn btn-block btn-danger mt-4"> Atualizar informações </button>
-	                        	</c:if>
-                            </form>
+                            	</form>
+                            </c:if>
+                            <c:if test="${empty user or user.getAccess() < adminAccessLevel}">
+                            	<p class="text-justify"> ${currentAnimal.getDescription()} </p>
+                            </c:if>
+                            
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="my-5">
-                            <h5> Imagem principal </h5>
+                            <h3> Imagem principal </h3>
                             <hr>
                             <img src="images/a.jpg" class="img-thumbnail mx-1 w-50">
                         </div>
                         <div class="my-5">
-                            <h5> Imagens secundárias </h5>
+                            <h3> Imagens secundárias </h3>
                             <hr>
                             <div class="row">
                                 <div class="col-4">

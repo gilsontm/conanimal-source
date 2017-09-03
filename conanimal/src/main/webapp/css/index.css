@@ -40,6 +40,18 @@ html * {
     color: #323436;
 }
 
+a {
+	color: #2A5DB0;
+}
+
+a.nav-link {
+	color: #323436;
+}
+
+a.nav-link:hover {
+	color: #3234B0;
+}
+
 .standard-color-blue {
     background-color: #324c5d !important;
 }

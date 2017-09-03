@@ -8,7 +8,7 @@
 	        <div class="container-fluid w-100">
 	            <h1 class="display-4 px-4 mt-0"> Visualizar informações de um usuário </h1>
 	            <hr>
-				<div class="row w-100">
+				<div class="row px-4">
                 	<div class="col-6">
                         <form class="w-100 px-4 py-3">
                             <div class="form-group row">

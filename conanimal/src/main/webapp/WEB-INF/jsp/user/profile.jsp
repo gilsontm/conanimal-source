@@ -8,7 +8,7 @@
             <div class="container-fluid w-100">
                 <h1 class="display-4 px-4 mt-0"> Painel de Usuário </h1>
                 <hr>
-                <div class="row w-100">
+                <div class="row px-4">
                     <!-- Formulário para atualização de informações -->
                     <div class="col-6">
                         <div class="mt-5">
@@ -23,7 +23,7 @@
                                 <div class="form-group row">
                                     <label for="name_input" class="col-3 col-form-label">${user.getIs_legal_person() ? "Nome da empresa" : "Nome"}</label>
                                     <div class="col-9">
-                                        <input type="text" id="name_input" name="name" class="form-control" value="${user.getName()}">
+                                        <input type="text" id="name_input" name="user_name" class="form-control" value="${user.getName()}">
                                     </div>
                                 </div>
                                 <c:if test="${user.getIs_legal_person()}"> 
@@ -140,7 +140,7 @@
 
                     </div>
                     <!-- Formulário para alteração de senha -->
-                    <div class="col-6">
+                    <div class="col-6 px-4">
                         <div class="my-5">
                             <h3> Alterar senha </h3>
                             <hr>

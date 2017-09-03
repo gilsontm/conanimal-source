@@ -69,7 +69,7 @@ public class UserController extends AbstractController {
 	
 	@Post(value="/register")
 	@NoCache
-	public void register(String form_type, String name, String email, String password, 
+	public void register(String form_type, String user_name, String email, String password, 
 			String confirm_password, String profession, String rg, String cpf, String phone, 
 			String cell_phone, String city, String uf, String neighborhood, String street, 
 			String complement, Long payment, Boolean name_publishing, String company_name, 
@@ -77,7 +77,7 @@ public class UserController extends AbstractController {
 		
 		if ((email != null && !email.isEmpty()) && (password != null && !password.isEmpty())){
 			if (password.equals(confirm_password)) {
-				User user = this.bs.register(form_type, name, email, password, profession, rg, cpf,
+				User user = this.bs.register(form_type, user_name, email, password, profession, rg, cpf,
 						phone, cell_phone, city, uf, neighborhood, street, complement, payment, 
 						name_publishing, company_name, cnpj, representative_name);
 				if (user == null) {
@@ -108,14 +108,14 @@ public class UserController extends AbstractController {
 	@Post(value="/profile")
 	@Permission
 	@NoCache
-	public void updateProfile(String name, String password, String profession,
+	public void updateProfile(String user_name, String password, String profession,
 			String rg, String cpf, String phone, String cell_phone, String city, String uf, 
 			String neighborhood, String street, String complement, Long payment, Boolean name_publishing,
 			String company_name, String cnpj, String representative_name){
 		if (password != null) {
 			User logged_user = this.bs.login(this.userSession.getUser().getEmail(), password);
 			if (logged_user != null) {
-				User updated_user = this.bs.update(logged_user, name, password, profession, rg, cpf, phone, cell_phone,
+				User updated_user = this.bs.update(logged_user, user_name, password, profession, rg, cpf, phone, cell_phone,
 						city, uf, neighborhood, street, complement, payment, name_publishing, company_name,
 						cnpj, representative_name);
 				this.userSession.login(updated_user);

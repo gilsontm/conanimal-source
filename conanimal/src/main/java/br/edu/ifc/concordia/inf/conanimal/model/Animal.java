@@ -23,8 +23,8 @@ public class Animal implements Serializable{
 	private String register_date;
 	private String main_image;
 	private String description;
-	private Boolean adopted;
-	private Boolean hidden;
+	private Boolean adopted = false;
+	private Boolean hidden = false;
 	
 	public Long getId() {
 		return id;

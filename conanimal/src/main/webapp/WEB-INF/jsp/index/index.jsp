@@ -28,6 +28,28 @@
                     <h4 class="text-white my-0"> Animais para adoção </h4>
                 </div>
             </div>
+            
+            <c:forEach items="${animals}" var="eachAnimal">
+            	<c:if test="${not eachAnimal.getAdopted() and not eachAnimal.getHidden()}">
+		            <div class="card border-top-0">
+		               <div class="card-block row">
+		                   <div class="col-3">
+		                       <img src="" class="img-thumbnail mx-1">
+		                   </div>
+		
+		                   <div class="m-0 pt-1 col-9">
+		                       <h6 class=""> ${eachAnimal.getTitle()} </h6>
+		                       <hr>
+		                       <p class="text-justify"> ${eachAnimal.getDescription()} </p>
+		                       <p class="float-right p-0 m-0"> Cadastrado em: ${eachAnimal.getRegister_date()} </p>
+		                       <br>
+		                       <a class="float-right" href="<c:url value='/viewAnimal${eachAnimal.getId()}'/>"> Mais informações </a>
+		                       
+		                   </div>
+		               </div>
+		           </div>
+		   		</c:if>
+           </c:forEach>
  		</div>
  	</div>
  	
