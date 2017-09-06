@@ -1,16 +1,24 @@
 package br.edu.ifc.concordia.inf.conanimal.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 import javax.inject.Inject;
+
+import org.apache.poi.util.IOUtils;
 
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.boilerplate.NoCache;
+import br.com.caelum.vraptor.observer.upload.UploadedFile;
 import br.edu.ifc.concordia.inf.conanimal.abstractions.AbstractController;
 import br.edu.ifc.concordia.inf.conanimal.business.AnimalBS;
 import br.edu.ifc.concordia.inf.conanimal.business.UserBS;
 import br.edu.ifc.concordia.inf.conanimal.model.Animal;
 import br.edu.ifc.concordia.inf.conanimal.model.User;
+import br.edu.ifc.concordia.inf.conanimal.properties.SystemConfigs;
 import br.edu.ifc.concordia.inf.permission.Permission;
 import br.edu.ifc.concordia.inf.permission.UserRoles;
 
@@ -23,7 +31,13 @@ public class AnimalController extends AbstractController {
 	@Post(value="/registerAnimal")
 	@NoCache
 	@Permission(UserRoles.ADMIN)
-	public void registerAnimal(String title, String description) {
+	public void registerAnimal(String title, String description, UploadedFile image1) throws IOException {
+		String image1FileName = "animal-id-1"+image1.getFileName();
+		File imagem1File = new File(SystemConfigs.getConfig("sys.imagedir"), image1FileName);
+		FileOutputStream out = new FileOutputStream(imagem1File, false);
+		IOUtils.copy(image1.getFile(), out);
+		out.close();
+		
 		if ((title != null && !title.isEmpty()) && (description != null && !description.isEmpty()))  {
 			Animal animal = this.bs.registerAnimal(this.userSession.getUser().getId(), title, description);
 			if (animal == null) {

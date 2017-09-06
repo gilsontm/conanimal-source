@@ -30,7 +30,7 @@
                             		${message}
                             	</div>
                             </c:if>
-                            <form method="POST" action="<c:url value='/registerAnimal'/>">
+                            <form method="POST" action="<c:url value='/registerAnimal'/>" enctype="multipart/form-data">
                                 <div class="form-group row">
                                     <label for="animals_title_input" class="col-3 col-form-label"> Título* </label>
                                     <div class="col-9">
@@ -46,7 +46,7 @@
                                     <label for="animals_primary_image_input" class="col-3 col-form-label"> Imagem 1* </label>
                                     <div class="col-9">
 								       	<label class="custom-file">
-										    <input type="file" class="custom-file-input" name="image_1">
+										    <input type="file" class="custom-file-input" name="image1">
 										    <span class="custom-file-control" data-content="Choose file..."></span>
 										</label>
                                     </div>
