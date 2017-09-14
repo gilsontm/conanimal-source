@@ -10,13 +10,14 @@ import org.hibernate.Criteria;
 
 import br.com.caelum.vraptor.boilerplate.HibernateBusiness;
 import br.edu.ifc.concordia.inf.conanimal.model.Animal;
+import br.edu.ifc.concordia.inf.conanimal.model.User;
 
 @RequestScoped
 public class AnimalBS extends HibernateBusiness {
 	
-	public Animal registerAnimal(Long user_id, String title, String description) {
+	public Animal registerAnimal(User user, String title, String description) {
 		Animal animal = new Animal();
-		animal.setUser_id(user_id);
+		animal.setUser(user);
 		animal.setTitle(title);
 		animal.setDescription(description);
 		Date date = new Date();

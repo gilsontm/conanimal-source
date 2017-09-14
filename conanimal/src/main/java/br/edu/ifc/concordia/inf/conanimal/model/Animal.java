@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity(name="animals")
@@ -18,10 +19,13 @@ public class Animal implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	private Long user_id;
+	@ManyToOne
+	private User user;
+	
 	private String title;
 	private String register_date;
 	private String main_image;
+	private String mainImageContentType;
 	private String description;
 	private Boolean adopted = false;
 	private Boolean hidden = false;
@@ -32,12 +36,7 @@ public class Animal implements Serializable{
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Long getUser_id() {
-		return user_id;
-	}
-	public void setUser_id(Long user_id) {
-		this.user_id = user_id;
-	}
+	
 	public String getTitle() {
 		return title;
 	}
@@ -73,6 +72,18 @@ public class Animal implements Serializable{
 	}
 	public void setHidden(Boolean hidden) {
 		this.hidden = hidden;
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	public String getMainImageContentType() {
+		return mainImageContentType;
+	}
+	public void setMainImageContentType(String mainImageContentType) {
+		this.mainImageContentType = mainImageContentType;
 	}
 	
 }

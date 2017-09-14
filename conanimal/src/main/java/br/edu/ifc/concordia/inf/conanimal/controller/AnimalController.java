@@ -1,10 +1,12 @@
 package br.edu.ifc.concordia.inf.conanimal.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.poi.util.IOUtils;
 
@@ -12,7 +14,9 @@ import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.boilerplate.NoCache;
+import br.com.caelum.vraptor.boilerplate.util.GeneralUtils;
 import br.com.caelum.vraptor.observer.upload.UploadedFile;
+import br.com.caelum.vraptor.view.Results;
 import br.edu.ifc.concordia.inf.conanimal.abstractions.AbstractController;
 import br.edu.ifc.concordia.inf.conanimal.business.AnimalBS;
 import br.edu.ifc.concordia.inf.conanimal.business.UserBS;
@@ -27,6 +31,7 @@ public class AnimalController extends AbstractController {
 	
 	@Inject private AnimalBS bs;
 	@Inject private UserBS user_bs;
+	@Inject private HttpServletResponse response;
 	
 	@Post(value="/registerAnimal")
 	@NoCache
@@ -38,8 +43,11 @@ public class AnimalController extends AbstractController {
 		IOUtils.copy(image1.getFile(), out);
 		out.close();
 		
-		if ((title != null && !title.isEmpty()) && (description != null && !description.isEmpty()))  {
-			Animal animal = this.bs.registerAnimal(this.userSession.getUser().getId(), title, description);
+		if (!GeneralUtils.isEmpty(title) && !GeneralUtils.isEmpty(description))  {
+			Animal animal = this.bs.registerAnimal(this.userSession.getUser(), title, description);
+			animal.setMain_image(imagem1File.getAbsolutePath());
+			animal.setMainImageContentType(image1.getContentType());
+			this.bs.persist(animal);
 			if (animal == null) {
 				this.result.redirectTo(UserController.class).adminPanel(1, "danger", "Houve um erro durante o registro. Tente novamente.");
 			} else {
@@ -47,6 +55,28 @@ public class AnimalController extends AbstractController {
 			}
 		} else {
 			this.result.redirectTo(UserController.class).adminPanel(1, "danger", "Alguns campos não foram preenchidos corretamente.");
+		}
+	}
+	
+	@Get(value="/animal/{id}/image")
+	@NoCache
+	public void getAnimalImage(Long id) {
+		try {
+			Animal animal = this.bs.exists(id, Animal.class);
+			if (animal == null) {
+				this.result.notFound();
+			} else {
+				File file = new File(animal.getMain_image());
+				FileInputStream in = new FileInputStream(file);
+				this.response.setContentType(animal.getMainImageContentType());
+				IOUtils.copy(in, this.response.getOutputStream());
+				this.response.getOutputStream().close();
+				in.close();
+				this.result.nothing();
+			}
+		} catch (Throwable ex) {
+			LOGGER.error(ex);
+			this.result.use(Results.status()).badRequest(ex.getMessage());
 		}
 	}
 	
