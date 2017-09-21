@@ -44,10 +44,7 @@ public class AnimalController extends AbstractController {
 		out.close();
 		
 		if (!GeneralUtils.isEmpty(title) && !GeneralUtils.isEmpty(description))  {
-			Animal animal = this.bs.registerAnimal(this.userSession.getUser(), title, description);
-			animal.setMain_image(imagem1File.getAbsolutePath());
-			animal.setMainImageContentType(image1.getContentType());
-			this.bs.persist(animal);
+			Animal animal = this.bs.registerAnimal(this.userSession.getUser(), title, description, imagem1File.getAbsolutePath(), image1.getContentType());
 			if (animal == null) {
 				this.result.redirectTo(UserController.class).adminPanel(1, "danger", "Houve um erro durante o registro. Tente novamente.");
 			} else {
@@ -91,9 +88,10 @@ public class AnimalController extends AbstractController {
 				this.result.notFound();
 			} else {
 				this.result.include("currentAnimal", current_animal);
-				this.result.include("currentAnimal_user", user_bs.exists(current_animal.getUser_id(), User.class));
+				this.result.include("currentAnimal_user", current_animal.getUser());
 				this.result.include("user", this.userSession.getUser());
 				this.result.include("adminAccessLevel", UserRoles.ADMIN.getAccessLevel());
+								
 				if (status != null && !status.isEmpty()) {
 					this.result.include("status", status);
 				}

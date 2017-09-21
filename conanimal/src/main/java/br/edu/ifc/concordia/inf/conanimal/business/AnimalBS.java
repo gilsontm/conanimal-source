@@ -15,11 +15,13 @@ import br.edu.ifc.concordia.inf.conanimal.model.User;
 @RequestScoped
 public class AnimalBS extends HibernateBusiness {
 	
-	public Animal registerAnimal(User user, String title, String description) {
+	public Animal registerAnimal(User user, String title, String description, String mainImage, String mainImageContentType) {
 		Animal animal = new Animal();
 		animal.setUser(user);
 		animal.setTitle(title);
 		animal.setDescription(description);
+		animal.setMain_image(mainImage);
+		animal.setMainImageContentType(mainImageContentType);
 		Date date = new Date();
 		SimpleDateFormat date_format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		animal.setRegister_date(date_format.format(date));

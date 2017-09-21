@@ -3,7 +3,7 @@
 
 <c:import url="/includes/headers.jsp"/>
 
-    <div class="container my-5">
+    <div class="container w-75 my-5">
         <div class="jumbotron jumbotron-fluid pt-4">
             <div class="container-fluid w-100">
                 <h1 class="display-4 px-4 mt-0"> Painel de Administrador </h1>
@@ -47,26 +47,35 @@
                                     <div class="col-9">
 								       	<label class="custom-file">
 										    <input type="file" class="custom-file-input" name="image1">
-										    <span class="custom-file-control" data-content="Choose file..."></span>
+										    <span class="custom-file-control" data-content="Selecionar arquivo..."></span>
 										</label>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="animals_image_2_input" class="col-3 col-form-label"> Imagem 2 </label>
                                     <div class="col-9">
-                                        <input type="file" id="animals_image_2_input" class="form-control-file">
+								       	<label class="custom-file">
+										    <input type="file" class="custom-file-input" name="image2">
+										    <span class="custom-file-control" data-content="Selecionar arquivo..."></span>
+										</label>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="animals_image_3_input" class="col-3 col-form-label"> Imagem 3 </label>
                                     <div class="col-9">
-                                        <input type="file" id="animals_image_3_input" class="form-control-file">
+								       	<label class="custom-file">
+										    <input type="file" class="custom-file-input" name="image3">
+										    <span class="custom-file-control" data-content="Selecionar arquivo..."></span>
+										</label>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="animals_image_4_input" class="col-3 col-form-label"> Imagem 4 </label>
                                     <div class="col-9">
-                                        <input type="file" id="animals_image_4_input" class="form-control-file">
+								       	<label class="custom-file">
+										    <input type="file" class="custom-file-input" name="image4">
+										    <span class="custom-file-control" data-content="Selecionar arquivo..."></span>
+										</label>
                                     </div>
                                 </div>
                                 <button type="submit" id="animals_submit_button" class="btn btn-block btn-danger mt-4"> Cadastrar animal para adoção </button>
@@ -91,19 +100,28 @@
                                 <div class="form-group row">
                                     <label for="news_image_1_input" class="col-3 col-form-label"> Imagem 1 </label>
                                     <div class="col-9">
-                                        <input type="file" id="news_image_1_input" class="form-control-file">
+                                        <label class="custom-file">
+										    <input type="file" class="custom-file-input" name="image1">
+										    <span class="custom-file-control" data-content="Selecionar arquivo..."></span>
+										</label>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="news_image_2_input" class="col-3 col-form-label"> Imagem 2 </label>
                                     <div class="col-9">
-                                        <input type="file" id="news_image_2_input" class="form-control-file">
+                                        <label class="custom-file">
+										    <input type="file" class="custom-file-input" name="image2">
+										    <span class="custom-file-control" data-content="Selecionar arquivo..."></span>
+										</label>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="news_image_3_input" class="col-3 col-form-label"> Imagem 3 </label>
                                     <div class="col-9">
-                                        <input type="file" id="news_image_3_input" class="form-control-file">
+                                        <label class="custom-file">
+										    <input type="file" class="custom-file-input" name="image3">
+										    <span class="custom-file-control" data-content="Selecionar arquivo..."></span>
+										</label>
                                     </div>
                                 </div>
                                 <button type="submit" id="news_submit_button" class="btn btn-block btn-danger mt-4"> Cadastrar notícia </button>
@@ -123,97 +141,145 @@
                                 <div class="form-group row">
                                     <label for="account_file_1_input" class="col-3 col-form-label"> Arquivo 1* </label>
                                     <div class="col-9">
-                                        <input type="file" id="account_file_1_input" class="form-control-file">
+                                        <label class="custom-file">
+										    <input type="file" class="custom-file-input" name="">
+										    <span class="custom-file-control" data-content="Selecionar arquivo..."></span>
+										</label>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="account_file_2_input" class="col-3 col-form-label"> Arquivo 2 </label>
                                     <div class="col-9">
-                                        <input type="file" id="account_file_2_input" class="form-control-file">
+                                        <label class="custom-file">
+										    <input type="file" class="custom-file-input" name="">
+										    <span class="custom-file-control" data-content="Selecionar arquivo..."></span>
+										</label>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="account_file_3_input" class="col-3 col-form-label"> Arquivo 3 </label>
                                     <div class="col-9">
-                                        <input type="file" id="account_file_3_input" class="form-control-file">
+                                        <label class="custom-file">
+										    <input type="file" class="custom-file-input" name="">
+										    <span class="custom-file-control" data-content="Selecionar arquivo..."></span>
+										</label>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="account_file_4_input" class="col-3 col-form-label"> Arquivo 4 </label>
                                     <div class="col-9">
-                                        <input type="file" id="account_file_4_input" class="form-control-file">
+                                        <label class="custom-file">
+										    <input type="file" class="custom-file-input" name="">
+										    <span class="custom-file-control" data-content="Selecionar arquivo..."></span>
+										</label>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="account_file_5_input" class="col-3 col-form-label"> Arquivo 5 </label>
                                     <div class="col-9">
-                                        <input type="file" id="account_file_5_input" class="form-control-file">
+                                        <label class="custom-file">
+										    <input type="file" class="custom-file-input" name="">
+										    <span class="custom-file-control" data-content="Selecionar arquivo..."></span>
+										</label>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="account_file_6_input" class="col-3 col-form-label"> Arquivo 6 </label>
                                     <div class="col-9">
-                                        <input type="file" id="account_file_6_input" class="form-control-file">
+                                        <label class="custom-file">
+										    <input type="file" class="custom-file-input" name="">
+										    <span class="custom-file-control" data-content="Selecionar arquivo..."></span>
+										</label>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="account_file_7_input" class="col-3 col-form-label"> Arquivo 7 </label>
                                     <div class="col-9">
-                                        <input type="file" id="account_file_7_input" class="form-control-file">
+                                        <label class="custom-file">
+										    <input type="file" class="custom-file-input" name="">
+										    <span class="custom-file-control" data-content="Selecionar arquivo..."></span>
+										</label>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="account_file_8_input" class="col-3 col-form-label"> Arquivo 8 </label>
                                     <div class="col-9">
-                                        <input type="file" id="account_file_8_input" class="form-control-file">
+                                        <label class="custom-file">
+										    <input type="file" class="custom-file-input" name="">
+										    <span class="custom-file-control" data-content="Selecionar arquivo..."></span>
+										</label>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="account_file_9_input" class="col-3 col-form-label"> Arquivo 9 </label>
                                     <div class="col-9">
-                                        <input type="file" id="account_file_9_input" class="form-control-file">
+                                        <label class="custom-file">
+										    <input type="file" class="custom-file-input" name="">
+										    <span class="custom-file-control" data-content="Selecionar arquivo..."></span>
+										</label>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="account_file_10_input" class="col-3 col-form-label"> Arquivo 10 </label>
                                     <div class="col-9">
-                                        <input type="file" id="account_file_10_input" class="form-control-file">
+                                        <label class="custom-file">
+										    <input type="file" class="custom-file-input" name="">
+										    <span class="custom-file-control" data-content="Selecionar arquivo..."></span>
+										</label>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="account_file_11_input" class="col-3 col-form-label"> Arquivo 11 </label>
                                     <div class="col-9">
-                                        <input type="file" id="account_file_11_input" class="form-control-file">
+                                        <label class="custom-file">
+										    <input type="file" class="custom-file-input" name="">
+										    <span class="custom-file-control" data-content="Selecionar arquivo..."></span>
+										</label>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="account_file_12_input" class="col-3 col-form-label"> Arquivo 12 </label>
                                     <div class="col-9">
-                                        <input type="file" id="account_file_12_input" class="form-control-file">
+                                        <label class="custom-file">
+										    <input type="file" class="custom-file-input" name="">
+										    <span class="custom-file-control" data-content="Selecionar arquivo..."></span>
+										</label>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="account_file_13_input" class="col-3 col-form-label"> Arquivo 13 </label>
                                     <div class="col-9">
-                                        <input type="file" id="account_file_13_input" class="form-control-file">
+                                        <label class="custom-file">
+										    <input type="file" class="custom-file-input" name="">
+										    <span class="custom-file-control" data-content="Selecionar arquivo..."></span>
+										</label>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="account_file_14_input" class="col-3 col-form-label"> Arquivo 14 </label>
                                     <div class="col-9">
-                                        <input type="file" id="account_file_14_input" class="form-control-file">
+                                        <label class="custom-file">
+										    <input type="file" class="custom-file-input" name="">
+										    <span class="custom-file-control" data-content="Selecionar arquivo..."></span>
+										</label>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="account_file_15_input" class="col-3 col-form-label"> Arquivo 15 </label>
                                     <div class="col-9">
-                                        <input type="file" id="account_file_15_input" class="form-control-file">
+                                        <label class="custom-file">
+										    <input type="file" class="custom-file-input" name="">
+										    <span class="custom-file-control" data-content="Selecionar arquivo..."></span>
+										</label>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="account_file_16_input" class="col-3 col-form-label"> Arquivo 16 </label>
                                     <div class="col-9">
-                                        <input type="file" id="account_file_16_input" class="form-control-file">
+                                        <label class="custom-file">
+										    <input type="file" class="custom-file-input" name="">
+										    <span class="custom-file-control" data-content="Selecionar arquivo..."></span>
+										</label>
                                     </div>
                                 </div>
 
@@ -261,7 +327,10 @@
                                 <div class="form-group row">
                                     <label for="partner_image_input" class="col-form-label col-3"> Logomarca* </label>
                                     <div class="col-9">
-                                        <input type="file" id="partner_image_input" class="form-control-file">
+                                        <label class="custom-file">
+										    <input type="file" class="custom-file-input" name="">
+										    <span class="custom-file-control" data-content="Selecionar arquivo..."></span>
+										</label>
                                     </div>
                                 </div>
                                 <button type="submit" id="partner_submit_button" class="btn btn-block btn-danger mt-4"> Cadastrar parceiro e atualizar informações </button>
@@ -358,7 +427,10 @@
                                 <div class="form-group row">
                                     <label for="main_image_input" class="col-form-label col-3"> Imagem* </label>
                                     <div class="col-9">
-                                        <input type="file" id="main_image_input" class="form-control-file">
+                                        <label class="custom-file">
+										    <input type="file" class="custom-file-input" name="">
+										    <span class="custom-file-control" data-content="Selecionar arquivo..."></span>
+										</label>
                                     </div>
                                 </div>
                                 <button type="submit" id="main_image_submit_button" class="btn btn-block btn-danger mt-4"> Cadastrar imagem e atualizar informações </button>
@@ -405,7 +477,10 @@
                                 <div class="form-group row">
                                     <label for="statute_file_input" class="col-form-label col-3"> Arquivo PDF* </label>
                                     <div class="col-9">
-                                        <input type="file" id="statute_file_input" class="form-control-file">
+                                        <label class="custom-file">
+										    <input type="file" class="custom-file-input" name="">
+										    <span class="custom-file-control" data-content="Selecionar arquivo..."></span>
+										</label>
                                     </div>
                                 </div>
                                 <button type="submit" id="statute_file_submit_button" class="btn btn-block btn-danger mt-4"> Adicionar arquivo e atualizar informações </button>
@@ -439,7 +514,10 @@
                                 <div class="form-group row">
                                     <label for="legislation_file_input" class="col-form-label col-3"> Arquivo PDF* </label>
                                     <div class="col-9">
-                                        <input type="file" id="legislation_file_input" class="form-control-file">
+                                        <label class="custom-file">
+										    <input type="file" class="custom-file-input" name="">
+										    <span class="custom-file-control" data-content="Selecionar arquivo..."></span>
+										</label>
                                     </div>
                                 </div>
                                 <button type="submit" id="legislation_file_submit_button" class="btn btn-block btn-danger mt-4"> Adicionar arquivo e atualizar informações </button>

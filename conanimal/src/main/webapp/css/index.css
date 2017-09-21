@@ -1,38 +1,38 @@
-/*$custom-file-text: (
-  placeholder: (
-    en: "Selecionar arquivo..."
-  ),
-  button-label: (
-    en: "Procurar"
-  )
-);*/
 .custom-file-control:lang(pt)::after {
-  content: "Selecionar arquivo..." !important;
+  content: attr(data-content) !important;
+  
 }
 
 .custom-file-control:lang(pt)::before {
   content: "Procurar" !important;
 }
 
+.custom-file-control.selected:lang(pt)::after {
+  content: "" !important;
+}
+ .custom-file {
+ 	overflow: hidden;
+ }
+
 html {
-    font-size: 1.1vw;
+    font-size: 1.15vw;
 }
 
 @include media-breakpoint-up(sm) {
     html {
-        font-size: 1vw;
+        font-size: 1vw !important;
     }
 }
 
 @include media-breakpoint-up(md) {
     html {
-        font-size: 3vw;
+        font-size: 3vw !important;
     }
 }
 
 @include media-breakpoint-up(lg) {
     html {
-        font-size: 5vw;
+        font-size: 5vw !important;
     }
 }
 
@@ -60,8 +60,4 @@ a.nav-link:hover {
     color: #4b4d4f !important;
 }
 
-/* support custom file inputs */
-.custom-file-control:after {
-    content: attr(data-content) !important;
-}
 

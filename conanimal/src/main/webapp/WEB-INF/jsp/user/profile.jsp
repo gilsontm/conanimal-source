@@ -3,7 +3,7 @@
 
 <c:import url="/includes/headers.jsp"/>
 
-	<div class="container my-5">
+	<div class="container w-75 my-5">
         <div class="jumbotron jumbotron-fluid pt-4">
             <div class="container-fluid w-100">
                 <h1 class="display-4 px-4 mt-0"> Painel de Usuário </h1>
@@ -140,7 +140,7 @@
 
                     </div>
                     <!-- Formulário para alteração de senha -->
-                    <div class="col-6 px-4">
+                    <div class="col-6">
                         <div class="my-5">
                             <h3> Alterar senha </h3>
                             <hr>

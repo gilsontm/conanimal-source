@@ -23,10 +23,8 @@
 	<!-- Animais para adoção -->
     <div class="col-6 px-0">
         <div class="px-3 pb-4 pt-0 mx-4 mb-5">
-            <div class="card">
-                <div class="card-header standard-color-blue">
-                    <h4 class="text-white my-0"> Animais para adoção </h4>
-                </div>
+            <div class="p-3 rounded-top standard-color-blue">
+                <h4 class="text-white my-0"> Animais para adoção </h4>
             </div>
             
             <c:forEach items="${animals}" var="eachAnimal">
@@ -34,7 +32,7 @@
 		            <div class="card border-top-0">
 		               <div class="card-block row">
 		                   <div class="col-3">
-		                       <img src="" class="img-thumbnail mx-1">
+		                       <img src="<c:url value='/animal/${eachAnimal.getId()}/image'/>" class="img-thumbnail mx-1">
 		                   </div>
 		
 		                   <div class="m-0 pt-1 col-9">
@@ -55,10 +53,10 @@
  	
  	<div class="col-2 px-0">
 	    <!-- Notícias recentes -->
+	    <div class="p-3 rounded-top standard-color-blue">
+	    	<h4 class="my-0 text-white"> Notícias recentes </h4>
+	    </div>
 	    <div class="card">
-	        <div class="card-header standard-color-blue">
-	            <h4 class="card-title my-0 text-white"> Notícias recentes </h4>
-	        </div>
 	        <div class="card-block mx-1 my-2">
 	            <span class="badge badge-danger">03/03/17</span> <br>
 	            <a href="#">Macarronada e galeto </a>
@@ -79,11 +77,11 @@
 	
 	
 		<!-- Informações para contato -->
-	  	<div class="px-0 my-5 card">
-	    	<div class="card-header standard-color-blue">
-	           	<h4 class="card-title my-0 text-white"> Contatos úteis </h4>
-	       	</div>
-	       	<div class="card-block mx-1 my-2">
+		<div class="p-3 rounded-top standard-color-blue mt-5 mb-0">
+	    	<h4 class="my-0 text-white"> Contatos úteis </h4>
+	    </div>
+	  	<div class="px-0 mb-5 card">
+	   	       	<div class="card-block mx-1 my-2">
 	         	<p><span class="badge badge-warning">Email</span> <br> conanimal@gmail.com </p>
 	         	<hr class="my-0">
 	         	<p><span class="badge badge-warning">Link</span> <br> www.uipa.org.br </p>

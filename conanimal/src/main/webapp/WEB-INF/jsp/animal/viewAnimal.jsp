@@ -3,7 +3,7 @@
 
 <c:import url="/includes/headers.jsp"/>
 
-	<div class="container my-5">
+	<div class="container w-75 my-5">
         <div class="jumbotron jumbotron-fluid pt-4">
             <div class="container-fluid w-100">
            		<h1 class="display-4 px-4 mt-0"> ${not empty user and user.getAccess() >= adminAccessLevel ? "Visualização de animal cadastrado" : "Animal para adoção" }</h1>
@@ -33,7 +33,7 @@
 	                                </div>
                                 
 	                                <div class="form-group row">
-	                                    <label for="animals_user_input" class="col-3 col-form-label"> <a href="<c:url value='/viewUser${currentAnimal.getUser_id()}'/> "> Usuário* </a> </label>
+	                                    <label for="animals_user_input" class="col-3 col-form-label"> <a href="<c:url value='/viewUser${currentAnimal.getUser().getId()}'/> "> Usuário* </a> </label>
 	                                    <div class="col-9">
 	                                        <input type="text" id="animals_user_input" class="form-control" value="${currentAnimal_user.getName()}" disabled>
 	                                    </div>
@@ -47,25 +47,37 @@
 	                                <div class="form-group row">
 	                                    <label for="animals_primary_image_input" class="col-3 col-form-label"> Imagem 1* </label>
 	                                    <div class="col-9">
-	                                        <input type="file" id="animals_primary_image_input" class="form-control-file">
+	                                        <label class="custom-file">
+										    <input type="file" class="custom-file-input" name="image1">
+										    <span class="custom-file-control" data-content="Selecionar arquivo..."></span>
+										</label>
 	                                    </div>
 	                                </div>
 	                                <div class="form-group row">
 	                                    <label for="animals_image_2_input" class="col-3 col-form-label"> Imagem 2 </label>
 	                                    <div class="col-9">
-	                                        <input type="file" id="animals_image_2_input" class="form-control-file">
+	                                        <label class="custom-file">
+										    <input type="file" class="custom-file-input" name="image2">
+										    <span class="custom-file-control" data-content="Selecionar arquivo..."></span>
+										</label>
 	                                    </div>
 	                                </div>
 	                                <div class="form-group row">
 	                                    <label for="animals_image_3_input" class="col-3 col-form-label"> Imagem 3 </label>
 	                                    <div class="col-9">
-	                                        <input type="file" id="animals_image_3_input" class="form-control-file">
+	                                        <label class="custom-file">
+										    <input type="file" class="custom-file-input" name="image3">
+										    <span class="custom-file-control" data-content="Selecionar arquivo..."></span>
+										</label>
 	                                    </div>
 	                                </div>
 	                                <div class="form-group row">
 	                                    <label for="animals_image_4_input" class="col-3 col-form-label"> Imagem 4 </label>
 	                                    <div class="col-9">
-	                                        <input type="file" id="animals_image_4_input" class="form-control-file">
+	                                        <label class="custom-file">
+										    <input type="file" class="custom-file-input" name="image4">
+										    <span class="custom-file-control" data-content="Selecionar arquivo..."></span>
+										</label>
 	                                    </div>
 	                                </div>
 	                                <hr>
@@ -96,20 +108,20 @@
                         <div class="my-5">
                             <h3> Imagem principal </h3>
                             <hr>
-                            <img src="images/a.jpg" class="img-thumbnail mx-1 w-50">
+                            <img src="<c:url value='/animal/${currentAnimal.getId()}/image'/>" class="img-thumbnail mx-1 w-50">
                         </div>
                         <div class="my-5">
                             <h3> Imagens secundárias </h3>
                             <hr>
                             <div class="row">
                                 <div class="col-4">
-                                    <img src="images/a.jpg" class="img-thumbnail mx-1">
+                                    <img src="<c:url value='/animal/${currentAnimal.getId()}/image'/>" class="img-thumbnail mx-1">
                                 </div>
                                 <div class="col-4">
-                                    <img src="images/a.jpg" class="img-thumbnail mx-1">
+                                    <img src="<c:url value='/animal/${currentAnimal.getId()}/image'/>" class="img-thumbnail mx-1">
                                 </div>
                                 <div class="col-4">
-                                    <img src="images/a.jpg" class="img-thumbnail mx-1">
+                                    <img src="<c:url value='/animal/${currentAnimal.getId()}/image'/>" class="img-thumbnail mx-1">
                                 </div>
                             </div>
                         </div>
