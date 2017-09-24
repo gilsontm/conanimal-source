@@ -23,8 +23,8 @@ public class Animal implements Serializable{
 	private User user;
 	
 	private String title;
-	private String register_date;
-	private String main_image;
+	private String registerDate;
+	private String mainImage;
 	private String mainImageContentType;
 	private String description;
 	private Boolean adopted = false;
@@ -36,24 +36,35 @@ public class Animal implements Serializable{
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
 	public String getTitle() {
 		return title;
 	}
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getRegister_date() {
-		return register_date;
+	public String getRegisterDate() {
+		return registerDate;
 	}
-	public void setRegister_date(String register_date) {
-		this.register_date = register_date;
+	public void setRegisterDate(String registerDate) {
+		this.registerDate = registerDate;
 	}
-	public String getMain_image() {
-		return main_image;
+	public String getMainImage() {
+		return mainImage;
 	}
-	public void setMain_image(String main_image) {
-		this.main_image = main_image;
+	public void setMainImage(String mainImage) {
+		this.mainImage = mainImage;
+	}
+	public String getMainImageContentType() {
+		return mainImageContentType;
+	}
+	public void setMainImageContentType(String mainImageContentType) {
+		this.mainImageContentType = mainImageContentType;
 	}
 	public String getDescription() {
 		return description;
@@ -72,18 +83,6 @@ public class Animal implements Serializable{
 	}
 	public void setHidden(Boolean hidden) {
 		this.hidden = hidden;
-	}
-	public User getUser() {
-		return user;
-	}
-	public void setUser(User user) {
-		this.user = user;
-	}
-	public String getMainImageContentType() {
-		return mainImageContentType;
-	}
-	public void setMainImageContentType(String mainImageContentType) {
-		this.mainImageContentType = mainImageContentType;
 	}
 	
 }

@@ -20,11 +20,11 @@ public class AnimalBS extends HibernateBusiness {
 		animal.setUser(user);
 		animal.setTitle(title);
 		animal.setDescription(description);
-		animal.setMain_image(mainImage);
+		animal.setMainImage(mainImage);
 		animal.setMainImageContentType(mainImageContentType);
 		Date date = new Date();
 		SimpleDateFormat date_format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-		animal.setRegister_date(date_format.format(date));
+		animal.setRegisterDate(date_format.format(date));
 		this.dao.persist(animal);
 		return animal;
 	}

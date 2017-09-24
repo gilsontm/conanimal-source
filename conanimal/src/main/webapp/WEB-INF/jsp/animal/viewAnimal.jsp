@@ -108,20 +108,20 @@
                         <div class="my-5">
                             <h3> Imagem principal </h3>
                             <hr>
-                            <img src="<c:url value='/animal/${currentAnimal.getId()}/image'/>" class="img-thumbnail mx-1 w-50">
+                            <img src="<c:url value='/animal/${currentAnimal.getId()}/image'/>" class="img-thumbnail w-50 mx-1" alt="">
                         </div>
                         <div class="my-5">
                             <h3> Imagens secundárias </h3>
                             <hr>
                             <div class="row">
                                 <div class="col-4">
-                                    <img src="<c:url value='/animal/${currentAnimal.getId()}/image'/>" class="img-thumbnail mx-1">
+                                    <img src="<c:url value='/animal/${currentAnimal.getId()}/image'/>" class="img-thumbnail mx-1" alt="">
                                 </div>
                                 <div class="col-4">
-                                    <img src="<c:url value='/animal/${currentAnimal.getId()}/image'/>" class="img-thumbnail mx-1">
+                                    <img src="<c:url value='/animal/${currentAnimal.getId()}/image'/>" class="img-thumbnail mx-1" alt="">
                                 </div>
                                 <div class="col-4">
-                                    <img src="<c:url value='/animal/${currentAnimal.getId()}/image'/>" class="img-thumbnail mx-1">
+                                    <img src="<c:url value='/animal/${currentAnimal.getId()}/image'/>" class="img-thumbnail mx-1" alt="">
                                 </div>
                             </div>
                         </div>

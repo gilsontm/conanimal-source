@@ -63,7 +63,7 @@ public class AnimalController extends AbstractController {
 			if (animal == null) {
 				this.result.notFound();
 			} else {
-				File file = new File(animal.getMain_image());
+				File file = new File(animal.getMainImage());
 				FileInputStream in = new FileInputStream(file);
 				this.response.setContentType(animal.getMainImageContentType());
 				IOUtils.copy(in, this.response.getOutputStream());

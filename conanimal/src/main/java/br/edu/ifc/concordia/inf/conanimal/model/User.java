@@ -23,7 +23,7 @@ public class User implements Serializable {
 	
 	private String name;
 	private String phone;
-	private String cell_phone;
+	private String cellPhone;
 	@Column(unique=true)
 	private String email;
 	private String password;
@@ -32,19 +32,18 @@ public class User implements Serializable {
 	private String street;
 	private String complement;
 	private String uf;
-	private String register_date;
+	private String registerDate;
 	private Long payment;
 	private String cpf;
 	private String rg;
 	private String profession;
-	private String company_name;
+	private String companyName;
 	private String cnpj;
-	private String representative_name;
-	private Boolean name_publishing;
+	private String representativeName;
+	private Boolean namePublishing;
 	private int access = UserRoles.NORMAL.getAccessLevel();
 	private Boolean active = true;
-	private Boolean is_legal_person;
-	
+	private Boolean isLegalPerson;
 	public Long getId() {
 		return id;
 	}
@@ -63,11 +62,11 @@ public class User implements Serializable {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public String getCell_phone() {
-		return cell_phone;
+	public String getCellPhone() {
+		return cellPhone;
 	}
-	public void setCell_phone(String cell_phone) {
-		this.cell_phone = cell_phone;
+	public void setCellPhone(String cellPhone) {
+		this.cellPhone = cellPhone;
 	}
 	public String getEmail() {
 		return email;
@@ -111,11 +110,11 @@ public class User implements Serializable {
 	public void setUf(String uf) {
 		this.uf = uf;
 	}
-	public String getRegister_date() {
-		return register_date;
+	public String getRegisterDate() {
+		return registerDate;
 	}
-	public void setRegister_date(String register_date) {
-		this.register_date = register_date;
+	public void setRegisterDate(String registerDate) {
+		this.registerDate = registerDate;
 	}
 	public Long getPayment() {
 		return payment;
@@ -141,11 +140,11 @@ public class User implements Serializable {
 	public void setProfession(String profession) {
 		this.profession = profession;
 	}
-	public String getCompany_name() {
-		return company_name;
+	public String getCompanyName() {
+		return companyName;
 	}
-	public void setCompany_name(String company_name) {
-		this.company_name = company_name;
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
 	}
 	public String getCnpj() {
 		return cnpj;
@@ -153,17 +152,17 @@ public class User implements Serializable {
 	public void setCnpj(String cnpj) {
 		this.cnpj = cnpj;
 	}
-	public String getRepresentative_name() {
-		return representative_name;
+	public String getRepresentativeName() {
+		return representativeName;
 	}
-	public void setRepresentative_name(String representative_name) {
-		this.representative_name = representative_name;
+	public void setRepresentativeName(String representativeName) {
+		this.representativeName = representativeName;
 	}
-	public Boolean getName_publishing() {
-		return name_publishing;
+	public Boolean getNamePublishing() {
+		return namePublishing;
 	}
-	public void setName_publishing(Boolean name_publishing) {
-		this.name_publishing = name_publishing;
+	public void setNamePublishing(Boolean namePublishing) {
+		this.namePublishing = namePublishing;
 	}
 	public int getAccess() {
 		return access;
@@ -177,13 +176,10 @@ public class User implements Serializable {
 	public void setActive(Boolean active) {
 		this.active = active;
 	}
-	public Boolean getIs_legal_person() {
-		return is_legal_person;
+	public Boolean getIsLegalPerson() {
+		return isLegalPerson;
 	}
-	public void setIs_legal_person(Boolean is_legal_person) {
-		this.is_legal_person = is_legal_person;
+	public void setIsLegalPerson(Boolean isLegalPerson) {
+		this.isLegalPerson = isLegalPerson;
 	}
-	
-	
-	
 }

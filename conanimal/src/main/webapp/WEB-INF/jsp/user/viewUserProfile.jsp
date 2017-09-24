@@ -12,16 +12,16 @@
                 	<div class="col-6">
                         <form class="w-100 px-4 py-3">
                             <div class="form-group row">
-                                <label for="name_input" class="col-3 col-form-label">${currentUser.getIs_legal_person() ? "Nome da empresa" : "Nome"}</label>
+                                <label for="name_input" class="col-3 col-form-label">${currentUser.getIsLegalPerson() ? "Nome da empresa" : "Nome"}</label>
                                 <div class="col-9">
                                     <input type="text" id="name_input" name="name" class="form-control" value="${currentUser.getName()}" disabled>
                                 </div>
                             </div>
-                            <c:if test="${currentUser.getIs_legal_person()}"> 
+                            <c:if test="${currentUser.getIsLegalPerson()}"> 
                              <div class="form-group row">
                                  <label for="company_name_input" class="col-3 col-form-label"> Razão social </label>
                                  <div class="col-9">
-                                     <input type="text" id="company_name_input" name="company_name" class="form-control" value="${currentUser.getCompany_name()}" disabled>
+                                     <input type="text" id="company_name_input" name="company_name" class="form-control" value="${currentUser.getCompanyName()}" disabled>
                                  </div>
                              </div>
                             </c:if>
@@ -31,7 +31,7 @@
                                     <input type="email" id="email_input" name="email" class="form-control" value="${currentUser.getEmail()}" disabled>
                                 </div>
                             </div>
-                            <c:if test="${not currentUser.getIs_legal_person()}"> 
+                            <c:if test="${not currentUser.getIsLegalPerson()}"> 
                              <div class="form-group row">
                                  <label for="profession_input" class="col-3 col-form-label"> Profissão </label>
                                  <div class="col-9">
@@ -39,22 +39,22 @@
                                  </div>
                              </div>
                             </c:if>
-                            <c:if test="${currentUser.getIs_legal_person()}"> 
+                            <c:if test="${currentUser.getIsLegalPerson()}"> 
                              <div class="form-group row">
                                  <label for="representative_name_input" class="col-3 col-form-label"> Nome do representante </label>
                                  <div class="col-9">
-                                     <input type="text" id="representative_name_input" name="representative_name" class="form-control" value="${currentUser.getRepresentative_name()}" disabled>
+                                     <input type="text" id="representative_name_input" name="representative_name" class="form-control" value="${currentUser.getRepresentativeName()}" disabled>
                                  </div>
                              </div>
                             </c:if>
                             <div class="form-group row">
-                                <label for="rg_input" class="col-3 col-form-label"> ${currentUser.getIs_legal_person() ? "RG do representante" : "RG"} </label>
+                                <label for="rg_input" class="col-3 col-form-label"> ${currentUser.getIsLegalPerson() ? "RG do representante" : "RG"} </label>
                                 <div class="col-9">
                                     <input type="tel" id="rg_input" name="rg" class="form-control" value="${currentUser.getRg()}" disabled>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="cpf_input" class="col-3 col-form-label"> ${currentUser.getIs_legal_person() ? "CPF do representante" : "CPF"} </label>
+                                <label for="cpf_input" class="col-3 col-form-label"> ${currentUser.getIsLegalPerson() ? "CPF do representante" : "CPF"} </label>
                                 <div class="col-9">
                                     <input type="tel" id="cpf_input" name="cpf" class="form-control" value="${currentUser.getCpf()}" disabled>
                                 </div>
@@ -62,7 +62,7 @@
                             <div class="form-group row">
                                 <label for="phone_input" class="col-3 col-form-label"> Data de cadastro </label>
                                 <div class="col-9">
-                                    <input type="text" id="register_date_input" name="register_date" class="form-control" value="${currentUser.getRegister_date()}" disabled>
+                                    <input type="text" id="register_date_input" name="register_date" class="form-control" value="${currentUser.getRegisterDate()}" disabled>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -74,7 +74,7 @@
                             <div class="form-group row">
                                 <label for="cell_phone_input" class="col-3 col-form-label"> Celular </label>
                                 <div class="col-9">
-                                    <input type="tel" id="cell_phone_input" name="cell_phone" class="form-control" value="${currentUser.getCell_phone()}" disabled>
+                                    <input type="tel" id="cell_phone_input" name="cell_phone" class="form-control" value="${currentUser.getCellPhone()}" disabled>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -117,7 +117,7 @@
                             </div>
                             <div class="form-check">
                                 <label class="form-check-label">
-                                    <input type="checkbox" id="name_publishing_checkbox" name="name_publishing" class="form-check-input" ${currentUser.getName_publishing() ? 'checked' : ''}  disabled>
+                                    <input type="checkbox" id="name_publishing_checkbox" name="name_publishing" class="form-check-input" ${currentUser.getNamePublishing() ? 'checked' : ''}  disabled>
                                     Autorizo a divulgação do meu nome no quadro associativo.
                                 </label>
                             </div>

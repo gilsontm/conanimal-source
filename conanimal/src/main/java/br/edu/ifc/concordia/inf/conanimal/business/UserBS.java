@@ -40,7 +40,7 @@ public class UserBS extends HibernateBusiness {
 			user.setEmail(email);
 			user.setRg(rg);
 			user.setPhone(phone);
-			user.setCell_phone(cell_phone);
+			user.setCellPhone(cell_phone);
 			user.setCpf(cpf);
 			user.setUf(uf);
 			user.setCity(city);
@@ -48,19 +48,19 @@ public class UserBS extends HibernateBusiness {
 			user.setStreet(street);
 			user.setComplement(complement);
 			user.setPayment(payment);
-			user.setName_publishing(name_publishing);
+			user.setNamePublishing(name_publishing);
 			Date date = new Date();
 			SimpleDateFormat date_format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-			user.setRegister_date(date_format.format(date));
+			user.setRegisterDate(date_format.format(date));
 			
 			if (form_type.equals("private_person")) {
-				user.setIs_legal_person(false);
+				user.setIsLegalPerson(false);
 				user.setProfession(profession);
 			} else {
-				user.setIs_legal_person(true);
-				user.setRepresentative_name(representative_name);
+				user.setIsLegalPerson(true);
+				user.setRepresentativeName(representative_name);
 				user.setCnpj(cnpj);
-				user.setCompany_name(company_name);
+				user.setCompanyName(company_name);
 			}
 			
 			this.dao.persist(user);
@@ -77,7 +77,7 @@ public class UserBS extends HibernateBusiness {
 		user.setName(user_name);
 		user.setRg(rg);
 		user.setPhone(phone);
-		user.setCell_phone(cell_phone);
+		user.setCellPhone(cell_phone);
 		user.setCpf(cpf);
 		user.setUf(uf);
 		user.setCity(city);
@@ -85,12 +85,12 @@ public class UserBS extends HibernateBusiness {
 		user.setStreet(street);
 		user.setComplement(complement);
 		user.setPayment(payment);
-		user.setName_publishing(name_publishing);
+		user.setNamePublishing(name_publishing);
 		
-		if (user.getIs_legal_person()) {
-			user.setRepresentative_name(representative_name);
+		if (user.getIsLegalPerson()) {
+			user.setRepresentativeName(representative_name);
 			user.setCnpj(cnpj);
-			user.setCompany_name(company_name);
+			user.setCompanyName(company_name);
 		} else {
 			user.setProfession(profession);
 		}

@@ -553,7 +553,7 @@
                                 		<c:if test="${eachUser.getAccess() >= adminAccessLevel}"> 
                                 			<a href="<c:url value='/viewUser${eachUser.getId()}'/>" class="list-group-item list-group-item-action d-flex justify-content-between">
                                 				${eachUser.getName()}
-                                				<span class="badge badge-danger">${eachUser.getIs_legal_person() ? "Pessoa Jurídica" : "Pessoa Física"}</span>
+                                				<span class="badge badge-danger">${eachUser.getIsLegalPerson() ? "Pessoa Jurídica" : "Pessoa Física"}</span>
                                 			</a>
                                 		</c:if>
                                 	</c:forEach>
@@ -569,7 +569,7 @@
                                 		<c:if test="${eachUser.getActive()}"> 
                                 			<a href="<c:url value='/viewUser${eachUser.getId()}'/>" class="list-group-item list-group-item-action d-flex justify-content-between">
                                 				${eachUser.getName()}
-                                				<span class="badge badge-danger">${eachUser.getIs_legal_person() ? "Pessoa Jurídica" : "Pessoa Física"}</span>
+                                				<span class="badge badge-danger">${eachUser.getIsLegalPerson() ? "Pessoa Jurídica" : "Pessoa Física"}</span>
                                 			</a>
                                 		</c:if>
                                 	</c:forEach>
@@ -584,7 +584,7 @@
                                 		<c:if test="${not eachUser.getActive()}"> 
                                 			<a href="<c:url value='/viewUser${eachUser.getId()}'/>" class="list-group-item list-group-item-action d-flex justify-content-between">
                                 				${eachUser.getName()}
-                                				<span class="badge badge-danger">${eachUser.getIs_legal_person() ? "Pessoa Jurídica" : "Pessoa Física"}</span>
+                                				<span class="badge badge-danger">${eachUser.getIsLegalPerson() ? "Pessoa Jurídica" : "Pessoa Física"}</span>
                                 			</a>
                                 		</c:if>
                                 	</c:forEach>
