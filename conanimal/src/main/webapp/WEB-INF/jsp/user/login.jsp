@@ -2,17 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:import url="/includes/headers.jsp"/>
-
+					
 	<div class="container-fluid my-5">
-		<c:if test="${not empty errorMessage}">
-	        <div class="row">
-	        	<div class="col-6 offset-3">
-	        		<div class="alert alert-danger w-100 text-center">
-						${errorMessage}
-					</div>
-	        	</div>
-	     	</div>
-		</c:if>
         <div class="row mb-0">
             <div class="col-4 offset-4">
                 <ul class="nav nav-tabs" role="tablist">
@@ -29,6 +20,14 @@
             <div class="col-4 offset-4 tab-content">
                 <div class="tab-pane fade show active" id="login_tab">
                     <div class="card standard-color-blue p-5 rounded">
+                    	<c:if test="${not empty errorMessage}">
+							<div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+								${errorMessage}
+							</div>
+						</c:if>
                         <form method="POST" action="<c:url value='/login'/>">
                             <input type="email" name="email" id="login_email_input" class="form-control my-2" placeholder="Email">
                             <input type="password" name="password" id="login_password_input" class="form-control my-2" placeholder="Senha">

@@ -33,7 +33,7 @@
 						<div class="card-block row">
 							<div class="col-3">
 								<div class="img-wrapper border-0">
-									<img src="<c:url value='/animal/${eachAnimal.getId()}/image'/>" class="img-fluid w-100" alt="">
+									<img src="<c:url value='/animal/${eachAnimal.getId()}/image'/>" class="img-fluid" alt="">
 								</div>
 		                   </div>
 		

@@ -17,25 +17,29 @@
 
 html {
     font-size: 1.15vw;
-    overflow-wrap: break-word;
+    /*overflow-wrap: break-word;*/
 }
 
 @include media-breakpoint-up(sm) {
     html {
-        font-size: 1vw !important;
+        font-size: 0.1vw !important;
     }
 }
 
 @include media-breakpoint-up(md) {
     html {
-        font-size: 3vw !important;
+        font-size: 0.1vw !important;
     }
 }
 
 @include media-breakpoint-up(lg) {
     html {
-        font-size: 5vw !important;
+        font-size: 3vw !important;
     }
+}
+
+.smaller-font {
+	font-size: 1.5vw !important;
 }
 
 html * {

@@ -15,17 +15,22 @@ import br.edu.ifc.concordia.inf.conanimal.model.User;
 @RequestScoped
 public class AnimalBS extends HibernateBusiness {
 	
-	public Animal registerAnimal(User user, String title, String description, String mainImage, String mainImageContentType) {
+	public Animal registerAnimal(User user, String title, String description) {
 		Animal animal = new Animal();
 		animal.setUser(user);
 		animal.setTitle(title);
 		animal.setDescription(description);
-		animal.setMainImage(mainImage);
-		animal.setMainImageContentType(mainImageContentType);
 		Date date = new Date();
 		SimpleDateFormat date_format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		animal.setRegisterDate(date_format.format(date));
 		this.dao.persist(animal);
+		return animal;
+	}
+	
+	public Animal setAnimalImage(Animal animal, String mainImage, String mainImageContentType) {
+		animal.setMainImage(mainImage);
+		animal.setMainImageContentType(mainImageContentType);
+		this.dao.update(animal);
 		return animal;
 	}
 	

@@ -3,10 +3,12 @@
 
 <div class="container m-auto mb-5 row">
     <!-- Logo e slogan -->
-    <div class="col-3 mx-0 text-center pt-5">
-        <img src="<c:url value='images/logo.png'/>" class="w-75 mx-auto mb-auto mt-2" alt="">
-        <hr>
-        <h4 class="font-weight-bold"> Porque o seu melhor amigo merece muito carinho! </h4>
+    <div class="col-3 mx-0 text-center d-flex align-items-center h-100">
+    	<div class="pt-2">
+    		<img src="<c:url value='images/logo.png'/>" class="w-75 mx-auto mb-auto mt-2" alt="">
+	        <hr>
+	        <h4 class="font-weight-bold"> Porque o seu melhor amigo merece muito carinho! </h4>
+    	</div>
     </div>
 
     <!-- Carousel (imagens passando) -->

@@ -96,7 +96,7 @@ public class UserController extends AbstractController {
 	@Get(value="/profile")
 	@Permission
 	@NoCache
-	public void profile(int formNumber, String status, String message) {
+	public void profile(Integer formNumber, String status, String message) {
 		this.result.include("user", this.userSession.getUser());
 		this.result.include("adminAccessLevel", UserRoles.ADMIN.getAccessLevel());
 		this.result.include("systemAdminAccessLevel", UserRoles.SYS_ADMIN.getAccessLevel());
@@ -173,7 +173,7 @@ public class UserController extends AbstractController {
 	@Get(value="/adminPanel")
 	@NoCache
 	@Permission(UserRoles.ADMIN)
-	public void adminPanel(int formNumber, String status, String message) {
+	public void adminPanel(Integer formNumber, String status, String message) {
 		List<User> users = this.bs.listAllUsers();
 		List<Animal> animals = animal_bs.listAllAnimals();
 		this.result.include("users", users);
