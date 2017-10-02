@@ -5,7 +5,6 @@ import java.io.FileInputStream;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.poi.util.IOUtils;
 
@@ -14,28 +13,28 @@ import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.boilerplate.NoCache;
 import br.com.caelum.vraptor.view.Results;
 import br.edu.ifc.concordia.inf.conanimal.abstractions.AbstractController;
-import br.edu.ifc.concordia.inf.conanimal.business.AnimalBS;
-import br.edu.ifc.concordia.inf.conanimal.business.ImageAnimalBS;
-import br.edu.ifc.concordia.inf.conanimal.model.Animal;
+import br.edu.ifc.concordia.inf.conanimal.business.ImageNewsBS;
+import br.edu.ifc.concordia.inf.conanimal.business.NewsBS;
 import br.edu.ifc.concordia.inf.conanimal.model.ImageAnimal;
+import br.edu.ifc.concordia.inf.conanimal.model.ImageNews;
+import br.edu.ifc.concordia.inf.conanimal.model.News;
 
 @Controller
-public class ImageAnimalController extends AbstractController {
+public class ImageNewsController extends AbstractController {
 	
-	@Inject private ImageAnimalBS bs;
-	@Inject private AnimalBS animal_bs;
-	@Inject private HttpServletResponse response;
+	@Inject ImageNewsBS bs;
+	@Inject NewsBS news_bs;
 	
-	@Get(value="/animal/{id}/imageAnimal/{number}")
+	@Get(value="/news/{id}/imageNews/{number}")
 	@NoCache
-	public void getImageAnimal(Long id, Integer number) {
+	public void getNewsImage(Long id, Integer number) {
 		if ((0 < number) && (number < 4)) { 
 			try {
-				Animal animal = this.animal_bs.exists(id, Animal.class);
-				if (animal == null) {
+				News news = this.news_bs.exists(id, News.class);
+				if (news == null) {
 					this.result.notFound();
 				} else {
-					List<ImageAnimal> images_list = this.bs.listImagesFromAnimal(animal);
+					List<ImageNews> images_list = this.bs.listImagesFromNews(news);
 					if(images_list.size() >= number) {
 						File file = new File(images_list.get(number - 1).getImagePath());
 						FileInputStream in = new FileInputStream(file);

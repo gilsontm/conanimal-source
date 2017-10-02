@@ -45,6 +45,8 @@
   		<mapping class="br.edu.ifc.concordia.inf.conanimal.model.User"/>
   		<mapping class="br.edu.ifc.concordia.inf.conanimal.model.Animal"/>
   		<mapping class="br.edu.ifc.concordia.inf.conanimal.model.ImageAnimal"/>
+  		<mapping class="br.edu.ifc.concordia.inf.conanimal.model.News"/>
+  		<mapping class="br.edu.ifc.concordia.inf.conanimal.model.ImageNews"/>
   		
 	</session-factory>
 </hibernate-configuration>

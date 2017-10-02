@@ -20,6 +20,8 @@ public class AnimalBS extends HibernateBusiness {
 		animal.setUser(user);
 		animal.setTitle(title);
 		animal.setDescription(description);
+		animal.setAdopted(false);
+		animal.setHidden(false);
 		Date date = new Date();
 		SimpleDateFormat date_format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		animal.setRegisterDate(date_format.format(date));

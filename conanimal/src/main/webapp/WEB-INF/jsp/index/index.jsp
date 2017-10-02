@@ -6,19 +6,7 @@
 	
 <div class="row w-100 mt-5 mx-0 mb-0 p-0">
 	<!-- Menu lateral -->
-	<div class="col-2 offset-1 px-0">
-	    <div class="card px-0 border-top-0 border-bottom-0 border-right-0">
-	        <nav class="nav flex-column text-white my-3">
-	            <h6><a class="nav-link my-0 py-1" href="<c:url value='/'/>"> Home</a></h6>
-	            <h6><a class="nav-link my-0 py-1" href="<c:url value='/'/>"> Animais para adoção</a></h6>
-	            <h6><a class="nav-link my-0 py-1" href="<c:url value='/'/>"> Notícias </a></h6>
-	            <h6><a class="nav-link my-0 py-1" href="<c:url value='/'/>"> Estatuto </a></h6>
-	            <h6><a class="nav-link my-0 py-1" href="<c:url value='/'/>"> Legislação </a></h6>
-	            <h6><a class="nav-link my-0 py-1" href="<c:url value='/'/>"> Prestação de contas </a></h6>
-	            <h6><a class="nav-link my-0 py-1" href="<c:url value='/'/>"> Quero ajudar </a></h6>
-	        </nav>
-	    </div>
-	</div>
+	<c:import url="/includes/side-menu.jsp"/>
 	
 	<!-- Animais para adoção -->
     <div class="col-6 px-0">
@@ -38,13 +26,12 @@
 		                   </div>
 		
 		                   <div class="m-0 pt-1 col-9">
-		                       <h6 class=""> ${eachAnimal.getTitle()} </h6>
+		                       <h6> ${eachAnimal.getTitle()} </h6>
 		                       <hr>
 		                       <p class="text-justify"> ${eachAnimal.getDescription()} </p>
 		                       <p class="float-right p-0 m-0"> Cadastrado em: ${eachAnimal.getRegisterDate()} </p>
 		                       <br>
 		                       <a class="float-right" href="<c:url value='/viewAnimal${eachAnimal.getId()}'/>"> Mais informações </a>
-		                       
 		                   </div>
 		               </div>
 		           </div>

@@ -32,7 +32,6 @@ import br.edu.ifc.concordia.inf.permission.UserRoles;
 public class AnimalController extends AbstractController {
 	
 	@Inject private AnimalBS bs;
-	@Inject private UserBS user_bs;
 	@Inject private ImageAnimalBS image_animal_bs;
 	@Inject private HttpServletResponse response;
 	
@@ -41,10 +40,10 @@ public class AnimalController extends AbstractController {
 	@Permission(UserRoles.ADMIN)
 	public void registerAnimal(String title, String description, UploadedFile image1, UploadedFile image2, UploadedFile image3, UploadedFile image4) throws IOException {
 		if (!GeneralUtils.isEmpty(title) && !GeneralUtils.isEmpty(description) && (image1 != null))  {
-			if (description.length() > 255) {
-				this.result.redirectTo(UserController.class).adminPanel(1, "danger", "A descrição não pode exceder 255 caracteres.");
-			} else if (title.length() > 50) {
+			if (title.length() > 50) {
 				this.result.redirectTo(UserController.class).adminPanel(1, "danger", "O título não pode exceder 50 caracteres.");
+			} else if (description.length() > 255) {
+				this.result.redirectTo(UserController.class).adminPanel(1, "danger", "A descrição não pode exceder 255 caracteres.");
 			} else {
 				Animal animal = this.bs.registerAnimal(this.userSession.getUser(), title, description);
 				if (animal == null) {
@@ -63,7 +62,7 @@ public class AnimalController extends AbstractController {
 						FileOutputStream out2 = new FileOutputStream(image2File, false);
 						IOUtils.copy(image2.getFile(), out2);
 						out2.close();
-						ImageAnimal imageAnimal2 = this.image_animal_bs.registerImageAnimal(animal, image2File.getAbsolutePath(), image2.getContentType());
+						this.image_animal_bs.registerImageAnimal(animal, image2File.getAbsolutePath(), image2.getContentType());
 					}
 					if (image3 != null) {
 						String image3FileName = "animal-" + animal.getId() + "-image3" + image3.getFileName();
@@ -71,7 +70,7 @@ public class AnimalController extends AbstractController {
 						FileOutputStream out3 = new FileOutputStream(image3File, false);
 						IOUtils.copy(image3.getFile(), out3);
 						out3.close();
-						ImageAnimal imageAnimal3 = this.image_animal_bs.registerImageAnimal(animal, image3File.getAbsolutePath(), image3.getContentType());
+						this.image_animal_bs.registerImageAnimal(animal, image3File.getAbsolutePath(), image3.getContentType());
 					}
 					if (image4 != null) {
 						String image4FileName = "animal-" + animal.getId() + "-image4" + image4.getFileName();
@@ -79,7 +78,7 @@ public class AnimalController extends AbstractController {
 						FileOutputStream out4 = new FileOutputStream(image4File, false);
 						IOUtils.copy(image4.getFile(), out4);
 						out4.close();
-						ImageAnimal imageAnimal4 = this.image_animal_bs.registerImageAnimal(animal, image4File.getAbsolutePath(), image4.getContentType());
+						this.image_animal_bs.registerImageAnimal(animal, image4File.getAbsolutePath(), image4.getContentType());
 					}
 					
 					this.result.redirectTo(UserController.class).adminPanel(1, "success", "Animal cadastrado com sucesso.");
@@ -123,7 +122,6 @@ public class AnimalController extends AbstractController {
 				this.result.notFound();
 			} else {
 				this.result.include("currentAnimal", current_animal);
-				this.result.include("currentAnimalUser", current_animal.getUser());
 				this.result.include("user", this.userSession.getUser());
 				this.result.include("adminAccessLevel", UserRoles.ADMIN.getAccessLevel());
 				this.result.include("numberSecondaryImages", this.image_animal_bs.listImagesFromAnimal(current_animal).size());
@@ -146,6 +144,10 @@ public class AnimalController extends AbstractController {
 	public void updateAnimal(Long id, String title, String description, Boolean adopted, Boolean hidden) {
 		if (id == null) {
 			this.result.notFound();
+		} else if (title.length() > 50) {
+			this.result.redirectTo(UserController.class).adminPanel(1, "danger", "O título não pode exceder 50 caracteres.");
+		} else if (description.length() > 255) {
+			this.result.redirectTo(UserController.class).adminPanel(1, "danger", "A descrição não pode exceder 255 caracteres.");
 		} else {
 			Animal animal = this.bs.exists(id, Animal.class);
 			if (animal == null) {
@@ -211,7 +213,7 @@ public class AnimalController extends AbstractController {
 						FileOutputStream out2 = new FileOutputStream(image2File, false);
 						IOUtils.copy(image2.getFile(), out2);
 						out2.close();
-						ImageAnimal imageAnimal2 = this.image_animal_bs.registerImageAnimal(animal, image2File.getAbsolutePath(), image2.getContentType());
+						this.image_animal_bs.registerImageAnimal(animal, image2File.getAbsolutePath(), image2.getContentType());
 					}
 					if (image3 != null) {
 						if (listSecondaryImages.size() >= 2) {
@@ -222,7 +224,7 @@ public class AnimalController extends AbstractController {
 						FileOutputStream out3 = new FileOutputStream(image3File, false);
 						IOUtils.copy(image3.getFile(), out3);
 						out3.close();
-						ImageAnimal imageAnimal3 = this.image_animal_bs.registerImageAnimal(animal, image3File.getAbsolutePath(), image3.getContentType());
+						this.image_animal_bs.registerImageAnimal(animal, image3File.getAbsolutePath(), image3.getContentType());
 					}
 					if (image4 != null) {
 						if (listSecondaryImages.size() >= 3) {
@@ -233,7 +235,7 @@ public class AnimalController extends AbstractController {
 						FileOutputStream out4 = new FileOutputStream(image4File, false);
 						IOUtils.copy(image4.getFile(), out4);
 						out4.close();
-						ImageAnimal imageAnimal4 = this.image_animal_bs.registerImageAnimal(animal, image4File.getAbsolutePath(), image4.getContentType());
+						this.image_animal_bs.registerImageAnimal(animal, image4File.getAbsolutePath(), image4.getContentType());
 					}
 					this.result.forwardTo(this).viewAnimal(id, 3, "success", "As informações foram atualizadas com sucesso.");
 				}

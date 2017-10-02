@@ -37,7 +37,7 @@
                                 <div class="form-group row">
                                     <label for="animals_user_input" class="col-3 col-form-label"> <a href="<c:url value='/viewUser${currentAnimal.getUser().getId()}'/> "> Usuário* </a> </label>
                                     <div class="col-9">
-                                        <input type="text" id="animals_user_input" class="form-control" value="${currentAnimalUser.getName()}" disabled>
+                                        <input type="text" id="animals_user_input" class="form-control" value="${currentAnimal.getUser().getName()}" disabled>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -61,7 +61,7 @@
                                         </label>
                                     </div>
                                 </div>
-                                <button type="submit" id="accountability_submit_input" class="btn btn-block btn-danger mt-4"> Atualizar informações </button>
+                                <button type="submit" id="animals_submit_input" class="btn btn-block btn-danger mt-4"> Atualizar informações </button>
                            	</form>
 						</c:if>
                         <c:if test="${empty user or user.getAccess() < adminAccessLevel}">
@@ -70,9 +70,6 @@
                   	</div>
 				</div>
                 <div class="col-6">
-                	<c:if test="${empty user or user.getAccess() < adminAccessLevel}">
-                   		<p class="float-right"> Cadastrado em: ${currentAnimal.getRegisterDate()} </p>
-                   	</c:if>
                     <div class="${not empty user and user.getAccess() >= adminAccessLevel ? 'my-5' : 'mt-5'}">
                     	<c:if test="${not empty user and user.getAccess() >= adminAccessLevel}">
                     		<h3> Imagem principal <button type="button" class="btn btn-sm btn-danger float-right" data-toggle="modal" data-target="#update-main-image-modal">Alterar</button></h3>
@@ -94,6 +91,9 @@
 		                        	${message}
 		                        </div>
 	                    	</c:if>
+	                    	<c:if test="${numberSecondaryImages == 0}">
+                   				<p> Não há outras imagens disponíveis. </p>
+                   			</c:if>
                     	</c:if>
                     	<c:if test="${empty user or user.getAccess() < adminAccessLevel}">
                     		<hr>
@@ -107,6 +107,9 @@
                         	</c:forEach>
                         </div>
                     </div>
+                    <c:if test="${empty user or user.getAccess() < adminAccessLevel}">
+                   		<p class="float-right mb-5"> Cadastrado em: ${currentAnimal.getRegisterDate()} </p>
+                   	</c:if>
            		</div>
             </div>
         </div>
@@ -156,10 +159,10 @@
 		    	<div class="modal-body">
 		    		<div class="row pl-5"> 
 		    			<div class="col-9 form-group row d-flex align-items-center">
-		    				<label for="animals_primary_image_input" class="col-4 col-form-label"> Imagem 2 </label>
+		    				<label for="animals_image2_input" class="col-4 col-form-label"> Imagem 2 </label>
 	                   		<div class="col-8">
 								<label class="custom-file w-100">
-								    <input type="file" class="custom-file-input" name="image2">
+								    <input type="file" id="animals_image2_input"class="custom-file-input" name="image2">
 									<span class="custom-file-control" data-content="Selecionar arquivo..."></span>
 								</label>
 							</div>
@@ -173,10 +176,10 @@
 		    		<hr>
 		    		<div class="row pl-5"> 
 		    			<div class="col-9 form-group row d-flex align-items-center">
-		    				<label for="animals_primary_image_input" class="col-4 col-form-label"> Imagem 3 </label>
+		    				<label for="animals_image3_input" class="col-4 col-form-label"> Imagem 3 </label>
 	                   		<div class="col-8">
 								<label class="custom-file w-100">
-								    <input type="file" class="custom-file-input" name="image3">
+								    <input type="file" id="animals_image3_input" class="custom-file-input" name="image3">
 									<span class="custom-file-control" data-content="Selecionar arquivo..."></span>
 								</label>
 							</div>
@@ -190,10 +193,10 @@
 		    		<hr>
 		    		<div class="row pl-5"> 
 		    			<div class="col-9 form-group row d-flex align-items-center">
-		    				<label for="animals_primary_image_input" class="col-4 col-form-label"> Imagem 4 </label>
+		    				<label for="animals_image4_input" class="col-4 col-form-label"> Imagem 4 </label>
 	                   		<div class="col-8">
 								<label class="custom-file w-100">
-								    <input type="file" class="custom-file-input" name="image4">
+								    <input type="file" id="animals_image4_input" class="custom-file-input" name="image4">
 									<span class="custom-file-control" data-content="Selecionar arquivo..."></span>
 								</label>
 							</div>

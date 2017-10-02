@@ -14,13 +14,12 @@ import br.edu.ifc.concordia.inf.conanimal.model.ImageAnimal;
 @RequestScoped
 public class ImageAnimalBS extends HibernateBusiness{
 	
-	public ImageAnimal registerImageAnimal(Animal animal, String imagePath, String imageContentType) {
+	public void registerImageAnimal(Animal animal, String imagePath, String imageContentType) {
 		ImageAnimal imageAnimal = new ImageAnimal();
 		imageAnimal.setAnimal(animal);
 		imageAnimal.setImagePath(imagePath);
 		imageAnimal.setImageContentType(imageContentType);
 		this.dao.persist(imageAnimal);
-		return imageAnimal;
 	}
 	
 	public List<ImageAnimal> listImagesFromAnimal(Animal animal){
