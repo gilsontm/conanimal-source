@@ -9,11 +9,11 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-@Entity(name="news")
-@Table(name="news")
-public class News implements Serializable{
+@Entity(name="partners")
+@Table(name="partners")
+public class Partner implements Serializable {
 	
-	private static final long serialVersionUID = 1L;
+private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -22,9 +22,9 @@ public class News implements Serializable{
 	@ManyToOne
 	private User user;
 	
-	private String title;
-	private String registerDate;
-	private String description;
+	private String name;
+	private String imagePath;
+	private String imageContentType;
 	private Boolean hidden = false;
 	
 	public Long getId() {
@@ -39,23 +39,23 @@ public class News implements Serializable{
 	public void setUser(User user) {
 		this.user = user;
 	}
-	public String getTitle() {
-		return title;
+	public String getName() {
+		return name;
 	}
-	public void setTitle(String title) {
-		this.title = title;
+	public void setName(String name) {
+		this.name = name;
 	}
-	public String getRegisterDate() {
-		return registerDate;
+	public String getImagePath() {
+		return imagePath;
 	}
-	public void setRegisterDate(String registerDate) {
-		this.registerDate = registerDate;
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
 	}
-	public String getDescription() {
-		return description;
+	public String getImageContentType() {
+		return imageContentType;
 	}
-	public void setDescription(String description) {
-		this.description = description;
+	public void setImageContentType(String imageContentType) {
+		this.imageContentType = imageContentType;
 	}
 	public Boolean getHidden() {
 		return hidden;
@@ -63,6 +63,4 @@ public class News implements Serializable{
 	public void setHidden(Boolean hidden) {
 		this.hidden = hidden;
 	}
-	
-	
 }

@@ -295,50 +295,46 @@
                         <div class="my-5">
                             <h3> Alterar seção de parceiros da ONG </h3>
                             <hr>
-
+							<c:if test="${formNumber == 4}">
+                            	<div class="alert alert-${status}">
+                            		${message}
+                            	</div>
+                            </c:if>
                             <!-- Lista de parceiros cadastrados -->
                             <ul class="list-group mt-0 mb-4">
                                 <li class="list-group-item standard-color-blue text-white"> Parceiros cadastrados</li>
-                                <li class="list-group-item d-flex justify-content-between">
-                                    Nome do parceiro
-                                    <button type="button" class="close" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between">
-                                    Nome do parceiro
-                                    <button type="button" class="close" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between">
-                                    Nome do parceiro
-                                    <button type="button" class="close" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </li>
+                                <c:forEach items="${partners}" var="eachPartner">
+                                	<c:if test="${!eachPartner.getHidden()}">
+                                		<li class="list-group-item d-flex justify-content-between">
+		                                    ${eachPartner.getName()}
+		                                    <button type="button" class="btn btn-sm btn-danger hide-partner-button" data-toggle="modal" data-target="#hide-partner-modal" data-id="${eachPartner.getId()}" data-name="${eachPartner.getName()}">
+		                                        Remover
+		                                    </button>
+		                                </li>
+                                	</c:if>
+                                </c:forEach>
                             </ul>
 
                             <!-- Formulário para cadastrar novo parceiro -->
                             <h5> Cadastrar novo parceiro </h5>
                             <hr>
-                            <form>
+                            <form method="POST" action="<c:url value='/registerPartner'/>" enctype="multipart/form-data">
                                 <div class="form-group row">
                                     <label for="partner_name_input" class="col-3 col-form-label"> Nome* </label>
                                     <div class="col-9">
-                                        <input type="text" id="partner_name_input" class="form-control" placeholder="Digite o nome do parceiro">
+                                        <input type="text" id="partner_name_input" name="name" class="form-control" placeholder="Digite o nome do parceiro">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="partner_image_input" class="col-form-label col-3"> Logomarca* </label>
                                     <div class="col-9">
                                         <label class="custom-file">
-										    <input type="file" class="custom-file-input" name="">
+										    <input type="file" class="custom-file-input" name="image">
 										    <span class="custom-file-control" data-content="Selecionar arquivo..."></span>
 										</label>
                                     </div>
                                 </div>
-                                <button type="submit" id="partner_submit_button" class="btn btn-block btn-danger mt-4"> Cadastrar parceiro e atualizar informações </button>
+                                <button type="submit" id="partner_submit_button" class="btn btn-block btn-danger mt-4"> Cadastrar parceiro </button>
                             </form>
                         </div>
                         <!-- Formulário para alterar informações de contatos úteis -->
@@ -706,5 +702,31 @@
             </div>
         </div>
     </div>
+    
+<div class="modal fade" id="hide-partner-modal" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				 <h5 class="modal-title"> Desvilcular parceiro </h5>
+				 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				   	<span aria-hidden="true">&times;</span>
+				 </button>
+			</div>
+			
+			<div id="hide-partner-set"> <!-- to be fixed -->
+				<c:set var="url" value="/hidePartner"/>
+			</div>
+			<form id="hide-partner-form" method="POST" action="<c:url value='${url}'/>">
+				<div class="modal-body">
+			  		<p>Tem certeza que deseja desvincular o parceiro <strong id="partner-name-field"> </strong>? </p>
+			    </div>
+				<div class="modal-footer">
+				  	<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+				  	<button type="submit" class="btn btn-danger">Save changes</button>
+				</div>
+			</form>  
+		</div>
+	</div>
+</div>
 
 <c:import url="/includes/footers.jsp"/>

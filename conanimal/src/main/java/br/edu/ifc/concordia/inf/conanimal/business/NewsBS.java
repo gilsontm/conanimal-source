@@ -7,6 +7,7 @@ import java.util.List;
 import javax.enterprise.context.RequestScoped;
 
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
 
 import br.com.caelum.vraptor.boilerplate.HibernateBusiness;
 import br.edu.ifc.concordia.inf.conanimal.model.News;
@@ -38,6 +39,12 @@ public class NewsBS extends HibernateBusiness {
 	
 	public List<News> listAllNews(){
 		Criteria criteria = this.dao.newCriteria(News.class);
+		return this.dao.findByCriteria(criteria, News.class);
+	}
+	
+	public List<News> listNotHiddenNews() {
+		Criteria criteria = this.dao.newCriteria(News.class);
+		criteria.add(Restrictions.eq("hidden", false));
 		return this.dao.findByCriteria(criteria, News.class);
 	}
 }

@@ -13,9 +13,11 @@ import br.edu.ifc.concordia.inf.conanimal.IndexController;
 import br.edu.ifc.concordia.inf.conanimal.abstractions.AbstractController;
 import br.edu.ifc.concordia.inf.conanimal.business.AnimalBS;
 import br.edu.ifc.concordia.inf.conanimal.business.NewsBS;
+import br.edu.ifc.concordia.inf.conanimal.business.PartnerBS;
 import br.edu.ifc.concordia.inf.conanimal.business.UserBS;
 import br.edu.ifc.concordia.inf.conanimal.model.Animal;
 import br.edu.ifc.concordia.inf.conanimal.model.News;
+import br.edu.ifc.concordia.inf.conanimal.model.Partner;
 import br.edu.ifc.concordia.inf.conanimal.model.User;
 import br.edu.ifc.concordia.inf.permission.Permission;
 import br.edu.ifc.concordia.inf.permission.UserRoles;
@@ -26,6 +28,7 @@ public class UserController extends AbstractController {
 	@Inject private UserBS bs;
 	@Inject private AnimalBS animal_bs;
 	@Inject private NewsBS news_bs;
+	@Inject private PartnerBS partner_bs;
 	
 	@Get(value="/login")
 	@NoCache
@@ -180,9 +183,11 @@ public class UserController extends AbstractController {
 		List<User> users = this.bs.listAllUsers();
 		List<Animal> animals = animal_bs.listAllAnimals();
 		List<News> news = news_bs.listAllNews();
+		List<Partner> partners = partner_bs.listAllPartners();
 		this.result.include("users", users);
 		this.result.include("animals", animals);
 		this.result.include("news", news);
+		this.result.include("partners", partners);
 		this.result.include("user", this.userSession.getUser());
 		this.result.include("adminAccessLevel", UserRoles.ADMIN.getAccessLevel());
 		this.result.include("formNumber", formNumber);

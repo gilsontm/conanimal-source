@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 
 <c:import url="/includes/headers.jsp"/>
 <c:import url="/includes/main-header.jsp"/>
@@ -47,20 +48,22 @@
 	    </div>
 	    <div class="card">
 	        <div class="card-block mx-0 my-2">
-	            <span class="badge badge-danger">03/03/17</span> <br>
-	            <a href="#">Macarronada e galeto </a>
-	            <hr class="my-2">
-	            <span class="badge badge-danger">18/02/17</span> <br>
-	            <a href="#">Feira de adoção </a>
-	            <hr class="my-2">
-	            <span class="badge badge-danger">05/02/17</span> <br>
-	            <a href="#">Arrecadação de ração </a>
-	            <hr class="my-2">
-	            <span class="badge badge-danger">22/01/17</span> <br>
-	            <a href="#">Bingo e mateada </a>
-	            <hr class="my-2">
-	            <span class="badge badge-danger">22/01/17</span> <br>
-	            <a href="#">Sorteio da rifa </a>
+	        	<c:forEach var="i" begin="0" end="4"> 
+	        		<c:if test="${news.size() > i}">
+	        			<span class="badge badge-danger">${fn:substring(news.get(i).getRegisterDate(),0, 10)}</span> <br>
+	            		<a href="<c:url value='/viewNews${news.get(i).getId()}'/>">
+	            			<c:choose>
+		            			<c:when test="${news.get(i).getTitle().length() > 22}"> 
+		            				${fn:substring(news.get(i).getTitle(), 0, 21)} ...
+		            			</c:when>
+		            			<c:otherwise>
+		            				${news.get(i).getTitle()}
+		            			</c:otherwise>
+	            			</c:choose>
+	            		</a>
+	            		<hr class="my-2">	
+	        		</c:if>
+	        	</c:forEach>
 	      	</div>
     	</div>
 	
