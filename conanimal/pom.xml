@@ -33,6 +33,7 @@
 		<dbConfigFile>hibernate.cfg.xml</dbConfigFile>
 		<propertiesfile>dev.properties</propertiesfile>
 		<imageDirectory>C:\Temp</imageDirectory>
+		<fileDirectory>C:\Temp</fileDirectory>
 	</properties>
 
 	<profiles>
@@ -130,7 +131,6 @@
 			<artifactId>commons-io</artifactId>
 			<version>2.5</version>
 		</dependency>
-
 	</dependencies>
 
 </project>

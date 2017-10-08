@@ -145,9 +145,9 @@ public class AnimalController extends AbstractController {
 		if (id == null) {
 			this.result.notFound();
 		} else if (title.length() > 50) {
-			this.result.redirectTo(UserController.class).adminPanel(1, "danger", "O título não pode exceder 50 caracteres.");
+			this.result.redirectTo(this).viewAnimal(id, 1, "danger", "O título não pode exceder 50 caracteres.");
 		} else if (description.length() > 255) {
-			this.result.redirectTo(UserController.class).adminPanel(1, "danger", "A descrição não pode exceder 255 caracteres.");
+			this.result.redirectTo(this).viewAnimal(id, 1, "danger", "A descrição não pode exceder 255 caracteres.");
 		} else {
 			Animal animal = this.bs.exists(id, Animal.class);
 			if (animal == null) {
@@ -155,9 +155,9 @@ public class AnimalController extends AbstractController {
 			} else {
 				Animal updated_animal = this.bs.updateAnimal(animal, title, description, adopted, hidden);
 				if (updated_animal == null) {
-					this.result.forwardTo(this).viewAnimal(animal.getId(), 1, "danger", "Houve um erro e as informações não foram atualizadas. Tente novamente.");
+					this.result.redirectTo(this).viewAnimal(animal.getId(), 1, "danger", "Houve um erro e as informações não foram atualizadas. Tente novamente.");
 				} else {
-					this.result.forwardTo(this).viewAnimal(updated_animal.getId(), 1, "success", "As informações foram atualizadas com sucesso.");
+					this.result.redirectTo(this).viewAnimal(updated_animal.getId(), 1, "success", "As informações foram atualizadas com sucesso.");
 				}
 			}
 		}
@@ -175,7 +175,7 @@ public class AnimalController extends AbstractController {
 				this.result.notFound();
 			} else {
 				if (image == null) {
-					this.result.forwardTo(this).viewAnimal(id, 2, "danger", "O arquivo não foi selecionado. Tente novamente.");
+					this.result.redirectTo(this).viewAnimal(id, 2, "danger", "O arquivo não foi selecionado. Tente novamente.");
 				} else {
 					String imageFileName = "animal-" + animal.getId() + "-main-image" + image.getFileName();
 					File imageFile = new File(SystemConfigs.getConfig("sys.imagedir"), imageFileName);
@@ -183,7 +183,7 @@ public class AnimalController extends AbstractController {
 					IOUtils.copy(image.getFile(), out);
 					out.close();
 					this.bs.setAnimalImage(animal, imageFile.getAbsolutePath(), image.getContentType());
-					this.result.forwardTo(this).viewAnimal(id, 2, "success", "Imagem atualizada com sucesso.");
+					this.result.redirectTo(this).viewAnimal(id, 2, "success", "Imagem atualizada com sucesso.");
 				}
 			}
 		}
@@ -201,7 +201,7 @@ public class AnimalController extends AbstractController {
 				this.result.notFound();
 			} else {
 				if (image2 == null && image3 == null && image4 == null) {
-					this.result.forwardTo(this).viewAnimal(id, 3, "danger", "Nenhum arquivo foi selecionado. Tente novamente.");
+					this.result.redirectTo(this).viewAnimal(id, 3, "danger", "Nenhum arquivo foi selecionado. Tente novamente.");
 				} else {
 					List<ImageAnimal> listSecondaryImages = this.image_animal_bs.listImagesFromAnimal(animal);
 					if (image2 != null) {
@@ -237,7 +237,7 @@ public class AnimalController extends AbstractController {
 						out4.close();
 						this.image_animal_bs.registerImageAnimal(animal, image4File.getAbsolutePath(), image4.getContentType());
 					}
-					this.result.forwardTo(this).viewAnimal(id, 3, "success", "As informações foram atualizadas com sucesso.");
+					this.result.redirectTo(this).viewAnimal(id, 3, "success", "As informações foram atualizadas com sucesso.");
 				}
 				
 			}

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.enterprise.context.RequestScoped;
 
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
 
 import br.com.caelum.vraptor.boilerplate.HibernateBusiness;
 import br.edu.ifc.concordia.inf.conanimal.model.Partner;
@@ -34,6 +35,12 @@ public class PartnerBS extends HibernateBusiness {
 	
 	public List<Partner> listAllPartners(){
 		Criteria criteria = this.dao.newCriteria(Partner.class);
+		return this.dao.findByCriteria(criteria, Partner.class);
+	}
+	
+	public List<Partner> listNotHiddenPartners(){
+		Criteria criteria = this.dao.newCriteria(Partner.class);
+		criteria.add(Restrictions.or(Restrictions.eq("hidden", false), Restrictions.isNull("hidden")));
 		return this.dao.findByCriteria(criteria, Partner.class);
 	}
 }

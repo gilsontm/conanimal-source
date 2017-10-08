@@ -16,13 +16,13 @@ import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.boilerplate.NoCache;
 import br.com.caelum.vraptor.boilerplate.util.GeneralUtils;
 import br.com.caelum.vraptor.observer.upload.UploadedFile;
-import br.edu.ifc.concordia.inf.conanimal.UserSession;
 import br.edu.ifc.concordia.inf.conanimal.abstractions.AbstractController;
 import br.edu.ifc.concordia.inf.conanimal.business.ImageNewsBS;
 import br.edu.ifc.concordia.inf.conanimal.business.NewsBS;
-import br.edu.ifc.concordia.inf.conanimal.model.Animal;
+import br.edu.ifc.concordia.inf.conanimal.business.PartnerBS;
 import br.edu.ifc.concordia.inf.conanimal.model.ImageNews;
 import br.edu.ifc.concordia.inf.conanimal.model.News;
+import br.edu.ifc.concordia.inf.conanimal.model.Partner;
 import br.edu.ifc.concordia.inf.conanimal.model.User;
 import br.edu.ifc.concordia.inf.conanimal.properties.SystemConfigs;
 import br.edu.ifc.concordia.inf.permission.Permission;
@@ -33,19 +33,21 @@ public class NewsController extends AbstractController {
 	
 	@Inject private NewsBS bs;
 	@Inject private ImageNewsBS image_news_bs;
-	@Inject private UserSession user_session;
+	@Inject private PartnerBS partner_bs;
 	
 	@Get(value="/news")
 	@NoCache
 	public void newsPanel() {
-		User user = user_session.getUser();
+		User user = this.userSession.getUser();
 		if (user != null) {
 			this.result.include("user", user);
 			this.result.include("adminAccessLevel", UserRoles.ADMIN.getAccessLevel());
 		}
-		List<News> news = bs.listAllNews();
+		List<News> news = this.bs.listNotHiddenNews();
 		Collections.reverse(news);
 		this.result.include("news", news);
+		
+		this.result.include("partners", this.partner_bs.listNotHiddenPartners());
 	}
 	
 	@Post(value="/registerNews")
@@ -55,13 +57,13 @@ public class NewsController extends AbstractController {
 			UploadedFile image2, UploadedFile image3) throws IOException {
 		if (!GeneralUtils.isEmpty(title) && !GeneralUtils.isEmpty(description)) {
 			if (title.length() > 50) {
-				this.result.forwardTo(UserController.class).adminPanel(2, "danger", "O título não pode exceder 50 caracteres.");
+				this.result.redirectTo(UserController.class).adminPanel(2, "danger", "O título não pode exceder 50 caracteres.");
 			} else if (description.length() > 255) {
-				this.result.forwardTo(UserController.class).adminPanel(2, "danger", "A descrição não pode exceder 255 caracteres.");
+				this.result.redirectTo(UserController.class).adminPanel(2, "danger", "A descrição não pode exceder 255 caracteres.");
 			}
 			News news = this.bs.registerNews(this.userSession.getUser(), title, description);
 			if (news == null) {
-				this.result.forwardTo(UserController.class).adminPanel(2, "danger", "Houve um erro durante o registro. Tente novamente.");
+				this.result.redirectTo(UserController.class).adminPanel(2, "danger", "Houve um erro durante o registro. Tente novamente.");
 			} else {
 				if (image1 != null) {
 					String image1FileName = "news-" + news.getId() + "-image1" + image1.getFileName();
@@ -90,7 +92,7 @@ public class NewsController extends AbstractController {
 				this.result.redirectTo(UserController.class).adminPanel(2, "success", "Notícia cadastrada com sucesso.");
 			}
 		} else {
-			this.result.forwardTo(UserController.class).adminPanel(2, "danger", "Alguns campos não foram preenchidos. Tente novamente.");
+			this.result.redirectTo(UserController.class).adminPanel(2, "danger", "Alguns campos não foram preenchidos. Tente novamente.");
 		}
 	}
 	
@@ -124,13 +126,13 @@ public class NewsController extends AbstractController {
 	@Post(value="/viewNews{id}")
 	@NoCache
 	@Permission(UserRoles.ADMIN)
-	public void updateAnimal(Long id, String title, String description, Boolean hidden) {
+	public void updateNews(Long id, String title, String description, Boolean hidden) {
 		if (id == null) {
 			this.result.notFound();
 		} else if (title.length() > 50) {
-			this.result.redirectTo(UserController.class).adminPanel(2, "danger", "O título não pode exceder 50 caracteres.");
+			this.result.redirectTo(this).viewNews(id, 1, "danger", "O título não pode exceder 50 caracteres.");
 		} else if (description.length() > 255) {
-			this.result.redirectTo(UserController.class).adminPanel(2, "danger", "A descrição não pode exceder 255 caracteres.");
+			this.result.redirectTo(this).viewNews(id, 1, "danger", "A descrição não pode exceder 255 caracteres.");
 		} else {
 			News news = this.bs.exists(id, News.class);
 			if (news == null) {
@@ -138,9 +140,9 @@ public class NewsController extends AbstractController {
 			} else {
 				News updated_news = this.bs.updateNews(news, title, description, hidden);
 				if (updated_news == null) {
-					this.result.forwardTo(this).viewNews(news.getId(), 1, "danger", "Houve um erro e as informações não foram atualizadas. Tente novamente.");
+					this.result.redirectTo(this).viewNews(news.getId(), 1, "danger", "Houve um erro e as informações não foram atualizadas. Tente novamente.");
 				} else {
-					this.result.forwardTo(this).viewNews(updated_news.getId(), 1, "success", "As informações foram atualizadas com sucesso.");
+					this.result.redirectTo(this).viewNews(updated_news.getId(), 1, "success", "As informações foram atualizadas com sucesso.");
 				}
 			}
 		}
@@ -158,7 +160,7 @@ public class NewsController extends AbstractController {
 				this.result.notFound();
 			} else {
 				if (image1 == null && image2 == null && image3 == null) {
-					this.result.forwardTo(this).viewNews(id, 2, "danger", "Nenhum arquivo foi selecionado. Tente novamente.");
+					this.result.redirectTo(this).viewNews(id, 2, "danger", "Nenhum arquivo foi selecionado. Tente novamente.");
 				} else {
 					List<ImageNews> listImages = this.image_news_bs.listImagesFromNews(news);
 					if (image1 != null) {
@@ -194,7 +196,7 @@ public class NewsController extends AbstractController {
 						out3.close();
 						this.image_news_bs.registerImageNews(news, image3File.getAbsolutePath(), image3.getContentType());
 					}
-					this.result.forwardTo(this).viewNews(id, 2, "success", "As informações foram atualizadas com sucesso.");
+					this.result.redirectTo(this).viewNews(id, 2, "success", "As informações foram atualizadas com sucesso.");
 				}
 				
 			}

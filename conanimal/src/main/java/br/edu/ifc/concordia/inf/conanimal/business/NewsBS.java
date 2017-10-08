@@ -44,7 +44,7 @@ public class NewsBS extends HibernateBusiness {
 	
 	public List<News> listNotHiddenNews() {
 		Criteria criteria = this.dao.newCriteria(News.class);
-		criteria.add(Restrictions.eq("hidden", false));
+		criteria.add(Restrictions.or(Restrictions.eq("hidden", false), Restrictions.isNull("hidden")));
 		return this.dao.findByCriteria(criteria, News.class);
 	}
 }

@@ -7,8 +7,8 @@
             <h6><a class="nav-link my-0 py-1" href="<c:url value='/'/>"> Home</a></h6>
             <h6><a class="nav-link my-0 py-1" href="<c:url value='/'/>"> Animais para adoção</a></h6>
             <h6><a class="nav-link my-0 py-1" href="<c:url value='/news'/>"> Notícias </a></h6>
-            <h6><a class="nav-link my-0 py-1" href="<c:url value='/'/>"> Estatuto </a></h6>
-            <h6><a class="nav-link my-0 py-1" href="<c:url value='/'/>"> Legislação </a></h6>
+            <h6><a class="nav-link my-0 py-1" href="<c:url value='/statute'/>"> Estatuto </a></h6>
+            <h6><a class="nav-link my-0 py-1" href="<c:url value='/legislation'/>"> Legislação </a></h6>
             <h6><a class="nav-link my-0 py-1" href="<c:url value='/'/>"> Prestação de contas </a></h6>
             <h6><a class="nav-link my-0 py-1" href="<c:url value='/'/>"> Quero ajudar </a></h6>
         </nav>

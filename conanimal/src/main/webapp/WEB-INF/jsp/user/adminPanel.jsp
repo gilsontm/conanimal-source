@@ -304,15 +304,20 @@
                             <ul class="list-group mt-0 mb-4">
                                 <li class="list-group-item standard-color-blue text-white"> Parceiros cadastrados</li>
                                 <c:forEach items="${partners}" var="eachPartner">
-                                	<c:if test="${!eachPartner.getHidden()}">
-                                		<li class="list-group-item d-flex justify-content-between">
-		                                    ${eachPartner.getName()}
-		                                    <button type="button" class="btn btn-sm btn-danger hide-partner-button" data-toggle="modal" data-target="#hide-partner-modal" data-id="${eachPartner.getId()}" data-name="${eachPartner.getName()}">
-		                                        Remover
-		                                    </button>
-		                                </li>
-                                	</c:if>
+                               		<li class="list-group-item d-flex justify-content-between">
+	                                    ${eachPartner.getName()}
+	                                    <form method="POST" action="<c:url value='/hidePartner${eachPartner.getId()}'/>">
+	                                    	<button type="submit" class="btn btn-sm btn-danger">
+	                                        	Remover
+	                                    	</button>
+	                                    </form>
+	                                </li>
                                 </c:forEach>
+                                <c:if test="${partners.size() == 0}"> 
+                                	<li class="list-group-item d-flex justify-content-between">
+                                		Nenhum parceiro cadastrado.
+                                	</li>
+                                </c:if>
                             </ul>
 
                             <!-- Formulário para cadastrar novo parceiro -->
@@ -441,87 +446,102 @@
                         <div class="my-5">
                             <h3> Alterar arquivos PDF do estatuto </h3>
                             <hr>
+                            <c:if test="${formNumber == 7}">
+                            	<div class="alert alert-${status}">
+                            		${message}
+                            	</div>
+                            </c:if>
                             <!-- Lista de arquivos atuais -->
                             <ul class="list-group mt-0 mb-4">
                                 <li class="list-group-item standard-color-blue text-white"> Arquivos cadastrados </li>
-                                <li class="list-group-item d-flex justify-content-between">
-                                    Nome do arquivo
-                                    <button type="button" class="close" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between">
-                                    Nome do arquivo
-                                    <button type="button" class="close" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between">
-                                    Nome do arquivo
-                                    <button type="button" class="close" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </li>
+                                <c:forEach items="${statuteFiles}" var="eachFile">
+                               		<li class="list-group-item d-flex justify-content-between">
+	                                    ${eachFile.getFileName()}
+	                                    <form method="POST" action="<c:url value='/hideStatute${eachFile.getId()}'/>">
+	                                    	<button type="submit" class="btn btn-sm btn-danger">
+	                                        	Remover
+	                                    	</button>
+	                                    </form>
+	                                </li>
+                                </c:forEach>
+                                <c:if test="${statuteFiles.size() == 0}"> 
+                                	<li class="list-group-item d-flex justify-content-between">
+                                		Nenhum arquivo cadastrado.
+                                	</li>
+                                </c:if>
                             </ul>
-
-
+                            
                             <h5> Cadastrar novo arquivo PDF </h5>
                             <hr>
                             <!-- Cadastrar novo arquivo -->
-                            <form>
+                            <form method="POST" action="<c:url value='/registerStatuteFile'/>" enctype="multipart/form-data">
                                 <div class="form-group row">
                                     <label for="statute_file_name_input" class="col-3 col-form-label"> Nome* </label>
                                     <div class="col-9">
-                                        <input type="text" id="statute_file_name_input" class="form-control" maxlength="50" placeholder="Digite um nome para o arquivo">
+                                        <input type="text" id="statute_file_name_input" name="name" class="form-control" maxlength="50" placeholder="Digite um nome para o arquivo">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="statute_file_input" class="col-form-label col-3"> Arquivo PDF* </label>
                                     <div class="col-9">
                                         <label class="custom-file">
-										    <input type="file" class="custom-file-input" name="">
+										    <input type="file" class="custom-file-input" name="file">
 										    <span class="custom-file-control" data-content="Selecionar arquivo..."></span>
 										</label>
                                     </div>
                                 </div>
-                                <button type="submit" id="statute_file_submit_button" class="btn btn-block btn-danger mt-4"> Adicionar arquivo e atualizar informações </button>
+                                <button type="submit" id="statute_file_submit_button" class="btn btn-block btn-danger mt-4"> Adicionar arquivo </button>
                             </form>
                         </div>
                         <!-- Alterar arquivos PDF da legislação -->
                         <div class="my-5">
                             <h3> Alterar arquivos PDF da legislação </h3>
                             <hr>
+                            <c:if test="${formNumber == 8}">
+                            	<div class="alert alert-${status}">
+                            		${message}
+                            	</div>
+                            </c:if>
                             <!-- Lista de arquivos atuais -->
                             <ul class="list-group mt-0 mb-4">
-                                <li class="list-group-item standard-color-blue text-white"> Arquivos cadastrados </li>
-                                <li class="list-group-item d-flex justify-content-between">
-                                    Nome do arquivo
-                                    <button type="button" class="close" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </li>
+                                <li class="list-group-item standard-color-blue text-white"> Arquivos cadastrados</li>
+                                <c:forEach items="${legislationFiles}" var="eachFile">
+                               		<li class="list-group-item d-flex justify-content-between">
+	                                    ${eachFile.getFileName()}
+	                                    <form method="POST" action="<c:url value='/hideLegislation${eachFile.getId()}'/>">
+	                                    	<button type="submit" class="btn btn-sm btn-danger">
+	                                        	Remover
+	                                    	</button>
+	                                    </form>
+	                                </li>
+                                </c:forEach>
+                                <c:if test="${legislationFiles.size() == 0}"> 
+                                	<li class="list-group-item d-flex justify-content-between">
+                                		Nenhum arquivo cadastrado.
+                                	</li>
+                                </c:if>
                             </ul>
 
                             <h5> Cadastrar novo arquivo PDF </h5>
                             <hr>
                             <!-- Cadastrar novo arquivo -->
-                            <form>
+                            <form method="POST" action="<c:url value='/registerLegislationFile'/>" enctype="multipart/form-data">
                                 <div class="form-group row">
                                     <label for="legislation_file_name_input" class="col-3 col-form-label"> Nome* </label>
                                     <div class="col-9">
-                                        <input type="text" id="legislation_file_name_input" class="form-control" maxlength="50" placeholder="Digite um nome para o arquivo">
+                                        <input type="text" id="legislation_file_name_input" name="name" class="form-control" maxlength="50" placeholder="Digite um nome para o arquivo">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="legislation_file_input" class="col-form-label col-3"> Arquivo PDF* </label>
                                     <div class="col-9">
                                         <label class="custom-file">
-										    <input type="file" class="custom-file-input" name="">
+										    <input type="file" class="custom-file-input" name="file">
 										    <span class="custom-file-control" data-content="Selecionar arquivo..."></span>
 										</label>
                                     </div>
                                 </div>
-                                <button type="submit" id="legislation_file_submit_button" class="btn btn-block btn-danger mt-4"> Adicionar arquivo e atualizar informações </button>
+                                <button type="submit" id="legislation_file_submit_button" class="btn btn-block btn-danger mt-4"> Adicionar arquivo </button>
                             </form>
                         </div>
                         <!-- Alterar slogan -->
@@ -703,30 +723,4 @@
         </div>
     </div>
     
-<div class="modal fade" id="hide-partner-modal" tabindex="-1" role="dialog" aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				 <h5 class="modal-title"> Desvilcular parceiro </h5>
-				 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				   	<span aria-hidden="true">&times;</span>
-				 </button>
-			</div>
-			
-			<div id="hide-partner-set"> <!-- to be fixed -->
-				<c:set var="url" value="/hidePartner"/>
-			</div>
-			<form id="hide-partner-form" method="POST" action="<c:url value='${url}'/>">
-				<div class="modal-body">
-			  		<p>Tem certeza que deseja desvincular o parceiro <strong id="partner-name-field"> </strong>? </p>
-			    </div>
-				<div class="modal-footer">
-				  	<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-				  	<button type="submit" class="btn btn-danger">Save changes</button>
-				</div>
-			</form>  
-		</div>
-	</div>
-</div>
-
 <c:import url="/includes/footers.jsp"/>

@@ -1,7 +1,5 @@
 package br.edu.ifc.concordia.inf.conanimal.controller;
 
-import java.util.List;
-
 import javax.inject.Inject;
 
 import br.com.caelum.vraptor.Controller;
@@ -12,10 +10,13 @@ import br.com.caelum.vraptor.boilerplate.util.GeneralUtils;
 import br.edu.ifc.concordia.inf.conanimal.IndexController;
 import br.edu.ifc.concordia.inf.conanimal.abstractions.AbstractController;
 import br.edu.ifc.concordia.inf.conanimal.business.AnimalBS;
+import br.edu.ifc.concordia.inf.conanimal.business.LegislationFileBS;
 import br.edu.ifc.concordia.inf.conanimal.business.NewsBS;
 import br.edu.ifc.concordia.inf.conanimal.business.PartnerBS;
+import br.edu.ifc.concordia.inf.conanimal.business.StatuteFileBS;
 import br.edu.ifc.concordia.inf.conanimal.business.UserBS;
 import br.edu.ifc.concordia.inf.conanimal.model.Animal;
+import br.edu.ifc.concordia.inf.conanimal.model.LegislationFile;
 import br.edu.ifc.concordia.inf.conanimal.model.News;
 import br.edu.ifc.concordia.inf.conanimal.model.Partner;
 import br.edu.ifc.concordia.inf.conanimal.model.User;
@@ -29,6 +30,8 @@ public class UserController extends AbstractController {
 	@Inject private AnimalBS animal_bs;
 	@Inject private NewsBS news_bs;
 	@Inject private PartnerBS partner_bs;
+	@Inject private LegislationFileBS legislation_bs;
+	@Inject private StatuteFileBS statute_bs;
 	
 	@Get(value="/login")
 	@NoCache
@@ -180,14 +183,12 @@ public class UserController extends AbstractController {
 	@NoCache
 	@Permission(UserRoles.ADMIN)
 	public void adminPanel(Integer formNumber, String status, String message) {
-		List<User> users = this.bs.listAllUsers();
-		List<Animal> animals = animal_bs.listAllAnimals();
-		List<News> news = news_bs.listAllNews();
-		List<Partner> partners = partner_bs.listAllPartners();
-		this.result.include("users", users);
-		this.result.include("animals", animals);
-		this.result.include("news", news);
-		this.result.include("partners", partners);
+		this.result.include("users", this.bs.listAllUsers());
+		this.result.include("animals", this.animal_bs.listAllAnimals());
+		this.result.include("news", this.news_bs.listAllNews());
+		this.result.include("partners", this.partner_bs.listNotHiddenPartners());
+		this.result.include("legislationFiles", this.legislation_bs.listNotHiddenFiles());
+		this.result.include("statuteFiles", this.statute_bs.listNotHiddenFiles());
 		this.result.include("user", this.userSession.getUser());
 		this.result.include("adminAccessLevel", UserRoles.ADMIN.getAccessLevel());
 		this.result.include("formNumber", formNumber);

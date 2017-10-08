@@ -19,8 +19,8 @@
         <div class="col-6 offset-2">
             <nav class="nav">
                 <a href="<c:url value='/'/>" class="text-white nav-link"> Home </a>
-                <a href="" class="text-white nav-link border-top-0 border-bottom-0 border-right-0 table-bordered"> Estatuto </a>
-                <a href="" class="text-white nav-link border-top-0 border-bottom-0 border-right-0 table-bordered"> Legislação </a>
+                <a href="<c:url value='/statute'/>" class="text-white nav-link border-top-0 border-bottom-0 border-right-0 table-bordered"> Estatuto </a>
+                <a href="<c:url value='/legislation'/>" class="text-white nav-link border-top-0 border-bottom-0 border-right-0 table-bordered"> Legislação </a>
                 <a href="<c:url value='/'/>" class="text-white nav-link border-top-0 border-bottom-0 border-right-0 table-bordered"> Animais para adoção </a>
             </nav>
         </div>

@@ -27,12 +27,5 @@ $(function(){
 			displayImageModal(source);
 		}
 	});
-	
-	$('.hide-partner-button').click(function(e){
-		var id = $(e.target).attr("data-id");
-		var name = $(e.target).attr("data-name");
-		$("#hide-partner-set").html("<c:set var='url' value='/hidePartner" + id + "'/>"); // to be fixed
-		$("#partner-name-field").html(name);
-	});
 })
 
