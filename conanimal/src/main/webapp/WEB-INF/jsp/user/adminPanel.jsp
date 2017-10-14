@@ -30,7 +30,7 @@
                             		${message}
                             	</div>
                             </c:if>
-                            <form method="POST" action="<c:url value='/registerAnimal'/>" enctype="multipart/form-data">
+                            <form method="POST" action="<c:url value='/animal/register'/>" enctype="multipart/form-data">
                                 <div class="form-group row">
                                     <label for="animals_title_input" class="col-3 col-form-label"> Título* </label>
                                     <div class="col-9">
@@ -90,7 +90,7 @@
                             		${message}
                             	</div>
                             </c:if>
-                            <form method="POST" action="<c:url value='/registerNews'/>" enctype="multipart/form-data">
+                            <form method="POST" action="<c:url value='/news/register'/>" enctype="multipart/form-data">
                                 <div class="form-group row">
                                     <label for="news_title_input" class="col-3 col-form-label"> Título* </label>
                                     <div class="col-9">
@@ -134,160 +134,33 @@
                         </div>
                         <!-- Cadastrar nova prestação de contas -->
                         <div class="my-5">
-                            <h3> Cadastrar nova prestação de contas</h3>
+                            <h3> Cadastrar prestação de contas</h3>
                             <hr>
-                            <form>
+                            <c:if test="${formNumber == 3}">
+                            	<div class="alert alert-${status}">
+                            		${message}
+                            	</div>
+                            </c:if>
+                            <form method="POST" action="<c:url value='/report/register'/>" enctype="multipart/form-data">
                                 <div class="form-group row">
                                     <label for="accountability_title_input" class="col-3 col-form-label"> Título* </label>
                                     <div class="col-9">
-                                        <input type="text" id="accountability_title_input" class="form-control" maxlength="100" placeholder="Título da prestação de contas">
+                                        <input type="text" id="accountability_title_input" name="title" class="form-control" maxlength="100" placeholder="Título da prestação de contas">
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label for="account_file_1_input" class="col-3 col-form-label"> Arquivo 1* </label>
-                                    <div class="col-9">
-                                        <label class="custom-file">
-										    <input type="file" class="custom-file-input" name="">
-										    <span class="custom-file-control" data-content="Selecionar arquivo..."></span>
-										</label>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="account_file_2_input" class="col-3 col-form-label"> Arquivo 2 </label>
-                                    <div class="col-9">
-                                        <label class="custom-file">
-										    <input type="file" class="custom-file-input" name="">
-										    <span class="custom-file-control" data-content="Selecionar arquivo..."></span>
-										</label>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="account_file_3_input" class="col-3 col-form-label"> Arquivo 3 </label>
-                                    <div class="col-9">
-                                        <label class="custom-file">
-										    <input type="file" class="custom-file-input" name="">
-										    <span class="custom-file-control" data-content="Selecionar arquivo..."></span>
-										</label>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="account_file_4_input" class="col-3 col-form-label"> Arquivo 4 </label>
-                                    <div class="col-9">
-                                        <label class="custom-file">
-										    <input type="file" class="custom-file-input" name="">
-										    <span class="custom-file-control" data-content="Selecionar arquivo..."></span>
-										</label>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="account_file_5_input" class="col-3 col-form-label"> Arquivo 5 </label>
-                                    <div class="col-9">
-                                        <label class="custom-file">
-										    <input type="file" class="custom-file-input" name="">
-										    <span class="custom-file-control" data-content="Selecionar arquivo..."></span>
-										</label>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="account_file_6_input" class="col-3 col-form-label"> Arquivo 6 </label>
-                                    <div class="col-9">
-                                        <label class="custom-file">
-										    <input type="file" class="custom-file-input" name="">
-										    <span class="custom-file-control" data-content="Selecionar arquivo..."></span>
-										</label>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="account_file_7_input" class="col-3 col-form-label"> Arquivo 7 </label>
-                                    <div class="col-9">
-                                        <label class="custom-file">
-										    <input type="file" class="custom-file-input" name="">
-										    <span class="custom-file-control" data-content="Selecionar arquivo..."></span>
-										</label>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="account_file_8_input" class="col-3 col-form-label"> Arquivo 8 </label>
-                                    <div class="col-9">
-                                        <label class="custom-file">
-										    <input type="file" class="custom-file-input" name="">
-										    <span class="custom-file-control" data-content="Selecionar arquivo..."></span>
-										</label>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="account_file_9_input" class="col-3 col-form-label"> Arquivo 9 </label>
-                                    <div class="col-9">
-                                        <label class="custom-file">
-										    <input type="file" class="custom-file-input" name="">
-										    <span class="custom-file-control" data-content="Selecionar arquivo..."></span>
-										</label>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="account_file_10_input" class="col-3 col-form-label"> Arquivo 10 </label>
-                                    <div class="col-9">
-                                        <label class="custom-file">
-										    <input type="file" class="custom-file-input" name="">
-										    <span class="custom-file-control" data-content="Selecionar arquivo..."></span>
-										</label>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="account_file_11_input" class="col-3 col-form-label"> Arquivo 11 </label>
-                                    <div class="col-9">
-                                        <label class="custom-file">
-										    <input type="file" class="custom-file-input" name="">
-										    <span class="custom-file-control" data-content="Selecionar arquivo..."></span>
-										</label>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="account_file_12_input" class="col-3 col-form-label"> Arquivo 12 </label>
-                                    <div class="col-9">
-                                        <label class="custom-file">
-										    <input type="file" class="custom-file-input" name="">
-										    <span class="custom-file-control" data-content="Selecionar arquivo..."></span>
-										</label>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="account_file_13_input" class="col-3 col-form-label"> Arquivo 13 </label>
-                                    <div class="col-9">
-                                        <label class="custom-file">
-										    <input type="file" class="custom-file-input" name="">
-										    <span class="custom-file-control" data-content="Selecionar arquivo..."></span>
-										</label>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="account_file_14_input" class="col-3 col-form-label"> Arquivo 14 </label>
-                                    <div class="col-9">
-                                        <label class="custom-file">
-										    <input type="file" class="custom-file-input" name="">
-										    <span class="custom-file-control" data-content="Selecionar arquivo..."></span>
-										</label>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="account_file_15_input" class="col-3 col-form-label"> Arquivo 15 </label>
-                                    <div class="col-9">
-                                        <label class="custom-file">
-										    <input type="file" class="custom-file-input" name="">
-										    <span class="custom-file-control" data-content="Selecionar arquivo..."></span>
-										</label>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="account_file_16_input" class="col-3 col-form-label"> Arquivo 16 </label>
-                                    <div class="col-9">
-                                        <label class="custom-file">
-										    <input type="file" class="custom-file-input" name="">
-										    <span class="custom-file-control" data-content="Selecionar arquivo..."></span>
-										</label>
-                                    </div>
-                                </div>
-
+                                <h5 class="align-items-center"> Arquivos  <button class="btn btn-sm btn-danger float-right" id="add_file_button"> Adicionar arquivo </button> </h5>
+		                        <hr>
+		                        <div id="report_file_container">
+	                                <div class="form-group row">
+	                                    <label class="col-3 col-form-label"> Arquivo 1* </label>
+	                                    <div class="col-9">
+	                                        <label class="custom-file">
+											    <input type="file" class="custom-file-input" name="files">
+											    <span class="custom-file-control" data-content="Selecionar arquivo..."></span>
+											</label>
+	                                    </div>
+	                                </div>
+                               	</div>
                                 <button type="submit" id="accountability_submit_button" class="btn btn-block btn-danger mt-4"> Cadastrar prestação de contas </button>
                             </form>
                         </div>
@@ -306,7 +179,7 @@
                                 <c:forEach items="${partners}" var="eachPartner">
                                		<li class="list-group-item d-flex justify-content-between">
 	                                    ${eachPartner.getName()}
-	                                    <form method="POST" action="<c:url value='/hidePartner${eachPartner.getId()}'/>">
+	                                    <form method="POST" action="<c:url value='/partner/${eachPartner.getId()}/hide'/>">
 	                                    	<button type="submit" class="btn btn-sm btn-danger">
 	                                        	Remover
 	                                    	</button>
@@ -323,7 +196,7 @@
                             <!-- Formulário para cadastrar novo parceiro -->
                             <h5> Cadastrar novo parceiro </h5>
                             <hr>
-                            <form method="POST" action="<c:url value='/registerPartner'/>" enctype="multipart/form-data">
+                            <form method="POST" action="<c:url value='/partner/register'/>" enctype="multipart/form-data">
                                 <div class="form-group row">
                                     <label for="partner_name_input" class="col-3 col-form-label"> Nome* </label>
                                     <div class="col-9">
@@ -457,7 +330,7 @@
                                 <c:forEach items="${statuteFiles}" var="eachFile">
                                		<li class="list-group-item d-flex justify-content-between">
 	                                    ${eachFile.getFileName()}
-	                                    <form method="POST" action="<c:url value='/hideStatute${eachFile.getId()}'/>">
+	                                    <form method="POST" action="<c:url value='/statute/${eachFile.getId()}/hide'/>">
 	                                    	<button type="submit" class="btn btn-sm btn-danger">
 	                                        	Remover
 	                                    	</button>
@@ -474,7 +347,7 @@
                             <h5> Cadastrar novo arquivo PDF </h5>
                             <hr>
                             <!-- Cadastrar novo arquivo -->
-                            <form method="POST" action="<c:url value='/registerStatuteFile'/>" enctype="multipart/form-data">
+                            <form method="POST" action="<c:url value='/statute/registerFile'/>" enctype="multipart/form-data">
                                 <div class="form-group row">
                                     <label for="statute_file_name_input" class="col-3 col-form-label"> Nome* </label>
                                     <div class="col-9">
@@ -508,7 +381,7 @@
                                 <c:forEach items="${legislationFiles}" var="eachFile">
                                		<li class="list-group-item d-flex justify-content-between">
 	                                    ${eachFile.getFileName()}
-	                                    <form method="POST" action="<c:url value='/hideLegislation${eachFile.getId()}'/>">
+	                                    <form method="POST" action="<c:url value='/legislation/${eachFile.getId()}/hide'/>">
 	                                    	<button type="submit" class="btn btn-sm btn-danger">
 	                                        	Remover
 	                                    	</button>
@@ -525,7 +398,7 @@
                             <h5> Cadastrar novo arquivo PDF </h5>
                             <hr>
                             <!-- Cadastrar novo arquivo -->
-                            <form method="POST" action="<c:url value='/registerLegislationFile'/>" enctype="multipart/form-data">
+                            <form method="POST" action="<c:url value='/legislation/registerFile'/>" enctype="multipart/form-data">
                                 <div class="form-group row">
                                     <label for="legislation_file_name_input" class="col-3 col-form-label"> Nome* </label>
                                     <div class="col-9">
@@ -536,7 +409,7 @@
                                     <label for="legislation_file_input" class="col-form-label col-3"> Arquivo PDF* </label>
                                     <div class="col-9">
                                         <label class="custom-file">
-										    <input type="file" class="custom-file-input" name="file">
+										    <input type="file" id="legislation_file_input" class="custom-file-input" name="file">
 										    <span class="custom-file-control" data-content="Selecionar arquivo..."></span>
 										</label>
                                     </div>
@@ -572,7 +445,7 @@
                                 <ul class="list-group">
                                 	<c:forEach items="${users}" var="eachUser">
                                 		<c:if test="${eachUser.getAccess() >= adminAccessLevel}"> 
-                                			<a href="<c:url value='/viewUser${eachUser.getId()}'/>" class="list-group-item list-group-item-action d-flex justify-content-between">
+                                			<a href="<c:url value='/user/${eachUser.getId()}/view'/>" class="list-group-item list-group-item-action d-flex justify-content-between">
                                 				${eachUser.getName()}
                                 				<span class="badge badge-danger">${eachUser.getIsLegalPerson() ? "Pessoa Jurídica" : "Pessoa Física"}</span>
                                 			</a>
@@ -588,7 +461,7 @@
                                 <ul class="list-group">
                                 	<c:forEach items="${users}" var="eachUser">
                                 		<c:if test="${eachUser.getActive()}"> 
-                                			<a href="<c:url value='/viewUser${eachUser.getId()}'/>" class="list-group-item list-group-item-action d-flex justify-content-between">
+                                			<a href="<c:url value='/user/${eachUser.getId()}/view'/>" class="list-group-item list-group-item-action d-flex justify-content-between">
                                 				${eachUser.getName()}
                                 				<span class="badge badge-danger">${eachUser.getIsLegalPerson() ? "Pessoa Jurídica" : "Pessoa Física"}</span>
                                 			</a>
@@ -603,7 +476,7 @@
                                 <ul class="list-group">
                                     <c:forEach items="${users}" var="eachUser">
                                 		<c:if test="${not eachUser.getActive()}"> 
-                                			<a href="<c:url value='/viewUser${eachUser.getId()}'/>" class="list-group-item list-group-item-action d-flex justify-content-between">
+                                			<a href="<c:url value='/user/${eachUser.getId()}/view'/>" class="list-group-item list-group-item-action d-flex justify-content-between">
                                 				${eachUser.getName()}
                                 				<span class="badge badge-danger">${eachUser.getIsLegalPerson() ? "Pessoa Jurídica" : "Pessoa Física"}</span>
                                 			</a>
@@ -623,7 +496,7 @@
                                 <ul class="list-group">
                                 	<c:forEach items="${animals}" var="eachAnimal">
                                 		<c:if test="${not eachAnimal.getAdopted() and not eachAnimal.getHidden()}">
-                                			<a href="<c:url value='/viewAnimal${eachAnimal.getId()}'/>" class="list-group-item list-group-item-action d-flex justify-content-between">
+                                			<a href="<c:url value='/animal/${eachAnimal.getId()}/view'/>" class="list-group-item list-group-item-action d-flex justify-content-between">
                                					${eachAnimal.getTitle()}                       			
                                				</a>
                                 		</c:if>
@@ -637,7 +510,7 @@
                                 <ul class="list-group">
                                     <c:forEach items="${animals}" var="eachAnimal">
                                			<c:if test="${eachAnimal.getAdopted()}">
-                                			<a href="<c:url value='/viewAnimal${eachAnimal.getId()}'/>" class="list-group-item list-group-item-action d-flex justify-content-between">
+                                			<a href="<c:url value='/animal/${eachAnimal.getId()}/view'/>" class="list-group-item list-group-item-action d-flex justify-content-between">
                                					${eachAnimal.getTitle()}                       			
                                				</a>
                                 		</c:if>
@@ -651,7 +524,7 @@
                                 <ul class="list-group">
                                 	<c:forEach items="${animals}" var="eachAnimal">
                                			<c:if test="${eachAnimal.getHidden()}">
-                                			<a href="<c:url value='/viewAnimal${eachAnimal.getId()}'/>" class="list-group-item list-group-item-action d-flex justify-content-between">
+                                			<a href="<c:url value='/animal/${eachAnimal.getId()}/view'/>" class="list-group-item list-group-item-action d-flex justify-content-between">
                                					${eachAnimal.getTitle()}                       			
                                				</a>
                                 		</c:if>
@@ -670,7 +543,7 @@
                                 <ul class="list-group">
                                 	<c:forEach items="${news}" var="eachNews">
                                			<c:if test="${!eachNews.getHidden()}">
-                                			<a href="<c:url value='/viewNews${eachNews.getId()}'/>" class="list-group-item list-group-item-action d-flex justify-content-between">
+                                			<a href="<c:url value='/news/${eachNews.getId()}/view'/>" class="list-group-item list-group-item-action d-flex justify-content-between">
                                					${eachNews.getTitle()}  <small> ${eachNews.getRegisterDate()} </small>                    			
                                				</a>
                                 		</c:if>
@@ -684,7 +557,7 @@
                                 <ul class="list-group">
                                 	<c:forEach items="${news}" var="eachNews">
                                			<c:if test="${eachNews.getHidden()}">
-                                			<a href="<c:url value='/viewNews${eachNews.getId()}'/>" class="list-group-item list-group-item-action d-flex justify-content-between">
+                                			<a href="<c:url value='/news/${eachNews.getId()}/view'/>" class="list-group-item list-group-item-action d-flex justify-content-between">
                                					${eachNews.getTitle()}  <small> ${eachNews.getRegisterDate()} </small>                    			
                                				</a>
                                 		</c:if>

@@ -7,11 +7,11 @@
 	<meta charset="UTF-8" />
 	<title>Con Animal</title>
 	
-	<link rel="stylesheet" type="text/css" href="<c:url value='css/tether.min.css'/>"/>
-	<link rel="stylesheet" type="text/css" href="<c:url value='bootstrap/css/bootstrap.min.css'/>"/>
-	<link rel="stylesheet" type="text/css" href="<c:url value='css/index.css'/>"/>
+	<link rel="stylesheet" type="text/css" href="<c:url value='/css/tether.min.css'/>"/>
+	<link rel="stylesheet" type="text/css" href="<c:url value='/bootstrap/css/bootstrap.min.css'/>"/>
+	<link rel="stylesheet" type="text/css" href="<c:url value='/css/index.css'/>"/>
 	
-	<link rel="icon" href="<c:url value='images/icon.png'/>"/> 
+	<link rel="icon" href="<c:url value='/images/icon.png'/>"/> 
 </head> 
 <body>
 	<div class="container-fluid standard-color-blue mb-4 py-1 row mx-0">
@@ -34,9 +34,9 @@
 		                    Olá, ${user.getName()}
 		                </button>
 		                <div class="dropdown-menu dropdown-menu-right">
-		                    <a class="dropdown-item" href="<c:url value='/profile'/>">Perfil</a>
+		                    <a class="dropdown-item" href="<c:url value='/user/profile'/>">Perfil</a>
 		                    <c:if test="${user.getAccess() >= adminAccessLevel}">
-		                    	<a class="dropdown-item" href="<c:url value='/adminPanel'/>">Painel de administrador</a>
+		                    	<a class="dropdown-item" href="<c:url value='/user/adminPanel'/>">Painel de administrador</a>
 		                    </c:if>
 		                    <div class="dropdown-divider"></div>
 		                    <a class="dropdown-item" href="<c:url value='/logout'/>">Sair</a>

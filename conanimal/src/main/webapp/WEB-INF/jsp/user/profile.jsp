@@ -19,7 +19,7 @@
                         		${message}
                         	</div>
                         </c:if>
-                        <form method="POST" action="<c:url value='/profile'/>" class="w-100 px-4 py-3">
+                        <form method="POST" action="<c:url value='/user/profile'/>" class="w-100 px-4 py-3">
                             <div class="form-group row">
                                 <label for="name_input" class="col-3 col-form-label">${user.getIsLegalPerson() ? "Nome da empresa" : "Nome"}</label>
                                 <div class="col-9">
@@ -148,7 +148,7 @@
                            		${message}
                            	</div>
                            </c:if>
-                           <form method="POST" action="<c:url value='/changePassword'/>" class="w-100 px-4 py-3">
+                           <form method="POST" action="<c:url value='/user/changePassword'/>" class="w-100 px-4 py-3">
                                <div class="form-group row">
                                    <label for="old_password_input" class="col-form-label col-3"> Senha atual </label>
                                    <div class="col-9">
@@ -203,7 +203,7 @@
 		         		<span aria-hidden="true">&times;</span>
 		        	</button>
 		      	</div>
-		      	<form method="POST" action="<c:url value='/deactivateAccount'/>">
+		      	<form method="POST" action="<c:url value='/user/deactivateAccount'/>">
 			      	<div class="modal-body">
 			        	<p class="px-2"><strong>Atenção:</strong> ao desativar sua conta, você não poderá mais acessá-la.</p>
 			        	<hr>

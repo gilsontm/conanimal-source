@@ -161,7 +161,7 @@
 			         		<span aria-hidden="true">&times;</span>
 			        	</button>
 			      	</div>
-			      	<form method="POST" action="<c:url value='/toggleUserAccess${currentUser.getId()}'/>">
+			      	<form method="POST" action="<c:url value='/user/${currentUser.getId()}/toggleAccess'/>">
 				      	<div class="modal-body">
 				        	<p class="px-2">Tem certeza que deseja modificar o nível de acesso do usuário <strong>'${currentUser.getName()}'</strong>?</p>
 				        	<hr>
@@ -187,7 +187,7 @@
 			         		<span aria-hidden="true">&times;</span>
 			        	</button>
 			      	</div>
-			      	<form method="POST" action="<c:url value='/toggleUserStatus${currentUser.getId()}'/>">
+			      	<form method="POST" action="<c:url value='/user/${currentUser.getId()}/toggleStatus'/>">
 				      	<div class="modal-body">
 				        	<p class="px-2">Tem certeza que deseja ${currentUser.getActive() ? 'desativar' : 'ativar'} a conta do usuário <strong>'${currentUser.getName()}'</strong>?</p>
 				        	<hr>

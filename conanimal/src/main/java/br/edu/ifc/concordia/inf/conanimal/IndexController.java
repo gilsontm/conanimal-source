@@ -34,7 +34,7 @@ public class IndexController extends AbstractController {
 			this.result.include("user", user);
 			this.result.include("adminAccessLevel", UserRoles.ADMIN.getAccessLevel());
 		}
-		List<Animal> animals = animal_bs.listAllAnimals();
+		List<Animal> animals = animal_bs.listNotHiddenAnimals();
 		Collections.reverse(animals);
 		this.result.include("animals", animals);
 		

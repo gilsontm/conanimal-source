@@ -1,6 +1,7 @@
 package br.edu.ifc.concordia.inf.conanimal.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -19,10 +20,10 @@ import br.com.caelum.vraptor.boilerplate.util.GeneralUtils;
 import br.com.caelum.vraptor.observer.download.Download;
 import br.com.caelum.vraptor.observer.download.DownloadBuilder;
 import br.com.caelum.vraptor.observer.upload.UploadedFile;
+import br.com.caelum.vraptor.view.Results;
 import br.edu.ifc.concordia.inf.conanimal.abstractions.AbstractController;
 import br.edu.ifc.concordia.inf.conanimal.business.PartnerBS;
 import br.edu.ifc.concordia.inf.conanimal.business.StatuteFileBS;
-import br.edu.ifc.concordia.inf.conanimal.model.LegislationFile;
 import br.edu.ifc.concordia.inf.conanimal.model.StatuteFile;
 import br.edu.ifc.concordia.inf.conanimal.model.User;
 import br.edu.ifc.concordia.inf.conanimal.properties.SystemConfigs;
@@ -35,7 +36,7 @@ public class StatuteFileController extends AbstractController {
 	@Inject StatuteFileBS bs;
 	@Inject PartnerBS partner_bs;
 	
-	@Post(value="/registerStatuteFile")
+	@Post(value="/statute/registerFile")
 	@NoCache
 	@Permission(UserRoles.ADMIN)
 	public void registerStatuteFile(String name, UploadedFile file) throws IOException {
@@ -70,7 +71,7 @@ public class StatuteFileController extends AbstractController {
 		this.result.include("partners", this.partner_bs.listNotHiddenPartners());
 	}
 	
-	@Post(value="/hideStatute{id}")
+	@Post(value="/statute/{id}/hide")
 	@NoCache
 	@Permission(UserRoles.ADMIN)
 	public void hideFile(Long id) {
@@ -83,7 +84,7 @@ public class StatuteFileController extends AbstractController {
 		}
 	}
 	
-	@Get(value="/downloadStatute")
+	@Get(value="/statute/download")
 	@NoCache
 	public Download download() {
 		List<StatuteFile> filesList = this.bs.listNotHiddenFiles();
@@ -96,6 +97,29 @@ public class StatuteFileController extends AbstractController {
 		} else {
 			this.result.redirectTo(this).statute();
 			return null;
+		}
+	}
+	
+	@Get(value="/statute/{id}/view")
+	@NoCache
+	public void viewFiles(Long id) {
+		try {
+			StatuteFile statuteFile = this.bs.exists(id, StatuteFile.class);
+			if (statuteFile == null) {
+				this.result.notFound();
+			} else {
+				File file = new File(statuteFile.getFilePath());
+				FileInputStream in = new FileInputStream(file);
+				this.response.setContentType("application/pdf");
+				this.response.addHeader("Content-Disposition", "inline");
+				IOUtils.copy(in, this.response.getOutputStream());
+				this.response.getOutputStream().close();
+				in.close();
+				this.result.nothing();
+			}
+		} catch (Throwable ex) {
+			LOGGER.error(ex);
+			this.result.use(Results.status()).badRequest(ex.getMessage());
 		}
 	}
 }

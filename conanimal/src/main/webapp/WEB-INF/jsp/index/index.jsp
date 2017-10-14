@@ -18,25 +18,23 @@
             <c:choose>
             	<c:when test="${animals.size() > 0}"> 
             		<c:forEach items="${animals}" var="eachAnimal">
-						<c:if test="${not eachAnimal.getAdopted() and not eachAnimal.getHidden()}">
-							<div class="card border-top-0">
-								<div class="card-block row">
-									<div class="col-3">
-										<div class="img-wrapper border-0">
-											<img src="<c:url value='/animal/${eachAnimal.getId()}/image'/>" class="img-fluid" alt="">
-										</div>
-				                   </div>
-				                   <div class="m-0 pt-1 col-9">
-				                       <h6> ${eachAnimal.getTitle()} </h6>
-				                       <hr>
-				                       <p class="text-justify"> ${eachAnimal.getDescription()} </p>
-				                       <p class="float-right p-0 m-0"> Cadastrado em: ${eachAnimal.getRegisterDate()} </p>
-				                       <br>
-				                       <a class="float-right" href="<c:url value='/viewAnimal${eachAnimal.getId()}'/>"> Mais informações </a>
-				                   </div>
-				               </div>
-				           </div>
-				   		</c:if>
+						<div class="card border-top-0">
+							<div class="card-block row">
+								<div class="col-3">
+									<div class="img-wrapper border-0">
+										<img src="<c:url value='/animal/${eachAnimal.getId()}/image'/>" class="img-fluid" alt="">
+									</div>
+			                   </div>
+			                   <div class="m-0 pt-1 col-9">
+			                       <h6> ${eachAnimal.getTitle()} </h6>
+			                       <hr>
+			                       <p class="text-justify"> ${eachAnimal.getDescription()} </p>
+			                       <p class="float-right p-0 m-0"> Cadastrado em: ${eachAnimal.getRegisterDate()} </p>
+			                       <br>
+			                       <a class="float-right" href="<c:url value='/animal/${eachAnimal.getId()}/view'/>"> Mais informações </a>
+			                   </div>
+			               </div>
+			           </div>
 		           </c:forEach>
             	</c:when>
             	<c:otherwise> 
@@ -63,10 +61,10 @@
         			<c:forEach var="i" begin="0" end="4"> 
 		        		<c:if test="${news.size() > i}">
 		        			<span class="badge badge-danger">${fn:substring(news.get(i).getRegisterDate(),0, 10)}</span> <br>
-		            		<a href="<c:url value='/viewNews${news.get(i).getId()}'/>">
+		            		<a href="<c:url value='/news/${news.get(i).getId()}/view'/>">
 		            			<c:choose>
-			            			<c:when test="${news.get(i).getTitle().length() > 22}"> 
-			            				${fn:substring(news.get(i).getTitle(), 0, 21)} ...
+			            			<c:when test="${news.get(i).getTitle().length() > 18}"> 
+			            				${fn:substring(news.get(i).getTitle(), 0, 17)}...
 			            			</c:when>
 			            			<c:otherwise>
 			            				${news.get(i).getTitle()}

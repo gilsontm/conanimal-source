@@ -22,7 +22,6 @@ import br.edu.ifc.concordia.inf.conanimal.business.NewsBS;
 import br.edu.ifc.concordia.inf.conanimal.business.PartnerBS;
 import br.edu.ifc.concordia.inf.conanimal.model.ImageNews;
 import br.edu.ifc.concordia.inf.conanimal.model.News;
-import br.edu.ifc.concordia.inf.conanimal.model.Partner;
 import br.edu.ifc.concordia.inf.conanimal.model.User;
 import br.edu.ifc.concordia.inf.conanimal.properties.SystemConfigs;
 import br.edu.ifc.concordia.inf.permission.Permission;
@@ -50,7 +49,7 @@ public class NewsController extends AbstractController {
 		this.result.include("partners", this.partner_bs.listNotHiddenPartners());
 	}
 	
-	@Post(value="/registerNews")
+	@Post(value="/news/register")
 	@NoCache
 	@Permission(UserRoles.ADMIN)
 	public void registerNews(String title, String description, UploadedFile image1,
@@ -96,7 +95,7 @@ public class NewsController extends AbstractController {
 		}
 	}
 	
-	@Get(value="/viewNews{id}")
+	@Get(value="/news/{id}/view")
 	@NoCache
 	public void viewNews(Long id, Integer formNumber, String status, String message) {
 		if (id == null) {
@@ -123,7 +122,7 @@ public class NewsController extends AbstractController {
 		}
 	}
 	
-	@Post(value="/viewNews{id}")
+	@Post(value="/news/{id}/view")
 	@NoCache
 	@Permission(UserRoles.ADMIN)
 	public void updateNews(Long id, String title, String description, Boolean hidden) {
@@ -148,7 +147,7 @@ public class NewsController extends AbstractController {
 		}
 	}
 	
-	@Post(value="/updateNewsImages{id}")
+	@Post(value="/news/{id}/updateImages")
 	@NoCache
 	@Permission(UserRoles.ADMIN)
 	public void updateNewsImages(Long id, UploadedFile image1, UploadedFile image2, UploadedFile image3) throws IOException {

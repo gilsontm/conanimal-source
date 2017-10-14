@@ -15,10 +15,6 @@ import br.edu.ifc.concordia.inf.conanimal.business.NewsBS;
 import br.edu.ifc.concordia.inf.conanimal.business.PartnerBS;
 import br.edu.ifc.concordia.inf.conanimal.business.StatuteFileBS;
 import br.edu.ifc.concordia.inf.conanimal.business.UserBS;
-import br.edu.ifc.concordia.inf.conanimal.model.Animal;
-import br.edu.ifc.concordia.inf.conanimal.model.LegislationFile;
-import br.edu.ifc.concordia.inf.conanimal.model.News;
-import br.edu.ifc.concordia.inf.conanimal.model.Partner;
 import br.edu.ifc.concordia.inf.conanimal.model.User;
 import br.edu.ifc.concordia.inf.permission.Permission;
 import br.edu.ifc.concordia.inf.permission.UserRoles;
@@ -102,7 +98,7 @@ public class UserController extends AbstractController {
 		}
 	}
 	
-	@Get(value="/profile")
+	@Get(value="/user/profile")
 	@Permission
 	@NoCache
 	public void profile(Integer formNumber, String status, String message) {
@@ -114,7 +110,7 @@ public class UserController extends AbstractController {
 		this.result.include("message", message);
 	}
 	
-	@Post(value="/profile")
+	@Post(value="/user/profile")
 	@Permission
 	@NoCache
 	public void updateProfile(String user_name, String password, String profession,
@@ -137,7 +133,7 @@ public class UserController extends AbstractController {
 		}
 	}
 	
-	@Post(value="/changePassword")
+	@Post(value="/user/changePassword")
 	@Permission
 	@NoCache
 	public void changePassword(String password, String new_password, String confirm_new_password) {
@@ -159,7 +155,7 @@ public class UserController extends AbstractController {
 		}
 	}
 	
-	@Post(value="/deactivateAccount")
+	@Post(value="/user/deactivateAccount")
 	@Permission
 	@NoCache
 	public void deactivateOwnAccount(String password) {
@@ -179,7 +175,7 @@ public class UserController extends AbstractController {
 		}
 	}
 	
-	@Get(value="/adminPanel")
+	@Get(value="/user/adminPanel")
 	@NoCache
 	@Permission(UserRoles.ADMIN)
 	public void adminPanel(Integer formNumber, String status, String message) {
@@ -196,7 +192,7 @@ public class UserController extends AbstractController {
 		this.result.include("message", message);
 	}
 	
-	@Get(value="/viewUser{id}")
+	@Get(value="/user/{id}/view")
 	@NoCache
 	@Permission(UserRoles.ADMIN)
 	public void viewUserProfile(Long id, String status, String message) {
@@ -221,7 +217,7 @@ public class UserController extends AbstractController {
 		}
 	}
 	
-	@Post(value="/toggleUserAccess{id}")
+	@Post(value="/user/{id}/toggleAccess")
 	@NoCache
 	@Permission(UserRoles.ADMIN)
 	public void toggleUserAccess(Long id, String password) {
@@ -249,7 +245,7 @@ public class UserController extends AbstractController {
 		}
 	}
 	
-	@Post(value="/toggleUserStatus{id}")
+	@Post(value="/user/{id}/toggleStatus")
 	@NoCache
 	@Permission(UserRoles.ADMIN)
 	public void toggleUserStatus(Long id, String password) {
@@ -276,27 +272,4 @@ public class UserController extends AbstractController {
 			this.result.redirectTo(this).viewUserProfile(id, "danger", "Senha inválida. Tente novamente");
 		}
 	}
-	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

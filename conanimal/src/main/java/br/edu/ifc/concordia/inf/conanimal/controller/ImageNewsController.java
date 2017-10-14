@@ -15,7 +15,6 @@ import br.com.caelum.vraptor.view.Results;
 import br.edu.ifc.concordia.inf.conanimal.abstractions.AbstractController;
 import br.edu.ifc.concordia.inf.conanimal.business.ImageNewsBS;
 import br.edu.ifc.concordia.inf.conanimal.business.NewsBS;
-import br.edu.ifc.concordia.inf.conanimal.model.ImageAnimal;
 import br.edu.ifc.concordia.inf.conanimal.model.ImageNews;
 import br.edu.ifc.concordia.inf.conanimal.model.News;
 

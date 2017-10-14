@@ -21,7 +21,6 @@ import br.com.caelum.vraptor.view.Results;
 import br.edu.ifc.concordia.inf.conanimal.abstractions.AbstractController;
 import br.edu.ifc.concordia.inf.conanimal.business.AnimalBS;
 import br.edu.ifc.concordia.inf.conanimal.business.ImageAnimalBS;
-import br.edu.ifc.concordia.inf.conanimal.business.UserBS;
 import br.edu.ifc.concordia.inf.conanimal.model.Animal;
 import br.edu.ifc.concordia.inf.conanimal.model.ImageAnimal;
 import br.edu.ifc.concordia.inf.conanimal.properties.SystemConfigs;
@@ -35,7 +34,7 @@ public class AnimalController extends AbstractController {
 	@Inject private ImageAnimalBS image_animal_bs;
 	@Inject private HttpServletResponse response;
 	
-	@Post(value="/registerAnimal")
+	@Post(value="/animal/register")
 	@NoCache
 	@Permission(UserRoles.ADMIN)
 	public void registerAnimal(String title, String description, UploadedFile image1, UploadedFile image2, UploadedFile image3, UploadedFile image4) throws IOException {
@@ -111,7 +110,7 @@ public class AnimalController extends AbstractController {
 		}
 	}
 	
-	@Get(value="/viewAnimal{id}")
+	@Get(value="/animal/{id}/view")
 	@NoCache
 	public void viewAnimal(Long id, Integer formNumber, String status, String message) {
 		if (id == null) {
@@ -138,7 +137,7 @@ public class AnimalController extends AbstractController {
 		}
 	}
 	
-	@Post(value="/viewAnimal{id}")
+	@Post(value="/animal/{id}/view")
 	@NoCache
 	@Permission(UserRoles.ADMIN)
 	public void updateAnimal(Long id, String title, String description, Boolean adopted, Boolean hidden) {
@@ -163,7 +162,7 @@ public class AnimalController extends AbstractController {
 		}
 	}
 	
-	@Post(value="/updateMainImage{id}")
+	@Post(value="/animal/{id}/updateMainImage")
 	@NoCache
 	@Permission(UserRoles.ADMIN)
 	public void updateMainImage(Long id, UploadedFile image) throws IOException {
@@ -189,7 +188,7 @@ public class AnimalController extends AbstractController {
 		}
 	}
 	
-	@Post(value="/updateSecondaryImages{id}")
+	@Post(value="/animal/{id}/updateImages")
 	@NoCache
 	@Permission(UserRoles.ADMIN)
 	public void updateSecondaryImages(Long id, UploadedFile image2, UploadedFile image3, UploadedFile image4) throws IOException {

@@ -7,6 +7,7 @@ import java.util.List;
 import javax.enterprise.context.RequestScoped;
 
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
 
 import br.com.caelum.vraptor.boilerplate.HibernateBusiness;
 import br.edu.ifc.concordia.inf.conanimal.model.Animal;
@@ -46,6 +47,13 @@ public class AnimalBS extends HibernateBusiness {
 	}
 	public List<Animal> listAllAnimals(){
 		Criteria criteria = this.dao.newCriteria(Animal.class);
+		return this.dao.findByCriteria(criteria, Animal.class);
+	}
+	
+	public List<Animal> listNotHiddenAnimals(){
+		Criteria criteria = this.dao.newCriteria(Animal.class);
+		criteria.add(Restrictions.or(Restrictions.eq("adopted", false), Restrictions.isNull("adopted")));
+		criteria.add(Restrictions.or(Restrictions.eq("hidden", false), Restrictions.isNull("hidden")));
 		return this.dao.findByCriteria(criteria, Animal.class);
 	}
 	

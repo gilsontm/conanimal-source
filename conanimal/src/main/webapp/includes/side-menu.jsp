@@ -9,8 +9,10 @@
             <h6><a class="nav-link my-0 py-1" href="<c:url value='/news'/>"> Notícias </a></h6>
             <h6><a class="nav-link my-0 py-1" href="<c:url value='/statute'/>"> Estatuto </a></h6>
             <h6><a class="nav-link my-0 py-1" href="<c:url value='/legislation'/>"> Legislação </a></h6>
-            <h6><a class="nav-link my-0 py-1" href="<c:url value='/'/>"> Prestação de contas </a></h6>
-            <h6><a class="nav-link my-0 py-1" href="<c:url value='/'/>"> Quero ajudar </a></h6>
+            <h6><a class="nav-link my-0 py-1" href="<c:url value='/reports'/>"> Prestação de contas </a></h6>
+            <c:if test="${empty user}">
+            	<h6><a class="nav-link my-0 py-1" href="<c:url value='/register'/>"> Quero ajudar </a></h6>
+            </c:if>
         </nav>
     </div>
 </div>

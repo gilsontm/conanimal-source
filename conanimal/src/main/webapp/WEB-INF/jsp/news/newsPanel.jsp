@@ -20,12 +20,12 @@
 						<div class="card border-top-0">
 		                    <div class="card-block">
 		                        <div class="m-0 pt-1 pb-0">
-		                            <h5><a href="<c:url value='/viewNews${eachNews.getId()}'/>"> ${eachNews.getTitle()} </a></h5>
+		                            <h5><a href="<c:url value='/news/${eachNews.getId()}/view'/>"> ${eachNews.getTitle()} </a></h5>
 		                            <hr>
 		                            <p> ${eachNews.getDescription()} </p>
 		                            <p class="float-right p-0 m-0"> Postado em: ${eachNews.getRegisterDate()}</p>
 		                            <br>
-		                            <a class="float-right" href="<c:url value='/viewNews${eachNews.getId()}'/>"> Mais informações </a>
+		                            <a class="float-right" href="<c:url value='/news/${eachNews.getId()}/view'/>"> Mais informações </a>
 		                        </div>
 		                    </div>
 		                </div>

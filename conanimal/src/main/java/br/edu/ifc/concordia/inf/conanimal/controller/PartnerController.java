@@ -18,7 +18,6 @@ import br.com.caelum.vraptor.observer.upload.UploadedFile;
 import br.com.caelum.vraptor.view.Results;
 import br.edu.ifc.concordia.inf.conanimal.abstractions.AbstractController;
 import br.edu.ifc.concordia.inf.conanimal.business.PartnerBS;
-import br.edu.ifc.concordia.inf.conanimal.model.Animal;
 import br.edu.ifc.concordia.inf.conanimal.model.Partner;
 import br.edu.ifc.concordia.inf.conanimal.properties.SystemConfigs;
 import br.edu.ifc.concordia.inf.permission.Permission;
@@ -29,7 +28,7 @@ public class PartnerController extends AbstractController {
 	
 	@Inject PartnerBS bs;
 	
-	@Post(value="/registerPartner")
+	@Post(value="/partner/register")
 	@NoCache
 	@Permission(UserRoles.ADMIN)
 	public void registerPartner(String name, UploadedFile image) throws IOException {
@@ -46,12 +45,12 @@ public class PartnerController extends AbstractController {
 				IOUtils.copy(image.getFile(), out);
 				out.close();
 				this.bs.setPartnerImage(partner, imageFile.getAbsolutePath(), image.getContentType());
-				this.result.forwardTo(UserController.class).adminPanel(4, "success", "Parceiro cadastrado com sucesso");
+				this.result.forwardTo(UserController.class).adminPanel(4, "success", "Parceiro cadastrado com sucesso.");
 			}
 		}
 	}
 	
-	@Post(value="/hidePartner{id}")
+	@Post(value="/partner/{id}/hide")
 	@NoCache
 	@Permission(UserRoles.ADMIN)
 	public void hidePartner(Long id) {

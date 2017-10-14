@@ -5,7 +5,7 @@
     <!-- Logo e slogan -->
     <div class="col-3 mx-0 text-center d-flex align-items-center h-100">
     	<div class="pt-2">
-    		<img src="<c:url value='images/logo.png'/>" class="w-75 mx-auto mb-auto mt-2" alt="">
+    		<img src="<c:url value='/images/logo.png'/>" class="w-75 mx-auto mb-auto mt-2" alt="">
 	        <hr>
 	        <h4 class="font-weight-bold"> Porque o seu melhor amigo merece muito carinho! </h4>
     	</div>
@@ -22,13 +22,13 @@
             </ol>
             <div class="carousel-inner" role="listbox">
                 <div class="carousel-item active">
-                    <img class="d-block img-fluid w-100 h-100" src="<c:url value='images/carousel-example-1.jpg'/>" alt="">
+                    <img class="d-block img-fluid w-100 h-100" src="<c:url value='/images/carousel-example-1.jpg'/>" alt="">
                 </div>
                 <div class="carousel-item">
-                    <img class="d-block img-fluid w-100 h-100" src="<c:url value='images/carousel-example-2.jpg'/>" alt="">
+                    <img class="d-block img-fluid w-100 h-100" src="<c:url value='/images/carousel-example-2.jpg'/>" alt="">
                 </div>
                 <div class="carousel-item">
-                    <img class="d-block img-fluid w-100 h-100" src="<c:url value='images/carousel-example-3.jpg' />" alt="">
+                    <img class="d-block img-fluid w-100 h-100" src="<c:url value='/images/carousel-example-3.jpg' />" alt="">
                 </div>
             </div>
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">

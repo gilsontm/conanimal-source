@@ -21,7 +21,7 @@
                         	</div>
                         </c:if>
                        	<c:if test="${not empty user and user.getAccess() >= adminAccessLevel}">
-                            <form method="POST" action="<c:url value='/viewNews${currentNews.getId()}'/>" class="w-100 px-4 py-3">
+                            <form method="POST" action="<c:url value='/news/${currentNews.getId()}/view'/>" class="w-100 px-4 py-3">
                                 <div class="form-group row">
                                     <label for="news_title_input" class="col-3 col-form-label"> Título* </label>
                                     <div class="col-9">
@@ -35,7 +35,7 @@
                                 </div>
                                
                                 <div class="form-group row">
-                                    <label for="news_user_input" class="col-3 col-form-label"> <a href="<c:url value='/viewUser${currentNews.getUser().getId()}'/> "> Usuário* </a> </label>
+                                    <label for="news_user_input" class="col-3 col-form-label"> <a href="<c:url value='/user/${currentNews.getUser().getId()}/view'/> "> Usuário* </a> </label>
                                     <div class="col-9">
                                         <input type="text" id="news_user_input" class="form-control" value="${currentNews.getUser().getName()}" disabled>
                                     </div>
@@ -102,11 +102,11 @@
 			         		<span aria-hidden="true">&times;</span>
 			        	</button>
 			      	</div>
-			    <form method="POST" action="<c:url value='/updateNewsImages${currentNews.getId()}'/>"  enctype="multipart/form-data">
+			    <form method="POST" action="<c:url value='/news/${currentNews.getId()}/updateImages'/>"  enctype="multipart/form-data">
 			    	<div class="modal-body">
-			    		<div class="row pl-5"> 
+			    		<div class="row"> 
 			    			<div class="col-9 form-group row d-flex align-items-center">
-			    				<label for="news_image1_input" class="col-4 col-form-label"> Imagem 1 </label>
+			    				<label for="news_image1_input" class="col-4 col-form-label text-right"> Imagem 1 </label>
 		                   		<div class="col-8">
 									<label class="custom-file w-100">
 									    <input type="file" id="news_image1_input" class="custom-file-input" name="image1">
@@ -121,9 +121,9 @@
 			    			</div>
 			    		</div>
 			    		<hr>
-			    		<div class="row pl-5"> 
+			    		<div class="row"> 
 			    			<div class="col-9 form-group row d-flex align-items-center">
-			    				<label for="news_image2_input" class="col-4 col-form-label"> Imagem 2 </label>
+			    				<label for="news_image2_input" class="col-4 col-form-label text-right"> Imagem 2 </label>
 		                   		<div class="col-8">
 									<label class="custom-file w-100">
 									    <input type="file" id="news_image2_input" class="custom-file-input" name="image2">
@@ -138,9 +138,9 @@
 			    			</div>
 			    		</div>
 			    		<hr>
-			    		<div class="row pl-5"> 
+			    		<div class="row"> 
 			    			<div class="col-9 form-group row d-flex align-items-center">
-			    				<label for="news_image1_input" class="col-4 col-form-label"> Imagem 3 </label>
+			    				<label for="news_image1_input" class="col-4 col-form-label text-right"> Imagem 3 </label>
 		                   		<div class="col-8">
 									<label class="custom-file w-100">
 									    <input type="file" id="news_image3_input" class="custom-file-input" name="image3">

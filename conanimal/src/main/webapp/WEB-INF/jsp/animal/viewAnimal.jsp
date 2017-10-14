@@ -21,7 +21,7 @@
                         	</div>
                         </c:if>
                        	<c:if test="${not empty user and user.getAccess() >= adminAccessLevel}">
-                            <form method="POST" action="<c:url value='/viewAnimal${currentAnimal.getId()}'/>" class="w-100 px-4 py-3">
+                            <form method="POST" action="<c:url value='/animal/${currentAnimal.getId()}/view'/>" class="w-100 px-4 py-3">
                                 <div class="form-group row">
                                     <label for="animals_title_input" class="col-3 col-form-label"> Título* </label>
                                     <div class="col-9">
@@ -35,7 +35,7 @@
                                 </div>
                                
                                 <div class="form-group row">
-                                    <label for="animals_user_input" class="col-3 col-form-label"> <a href="<c:url value='/viewUser${currentAnimal.getUser().getId()}'/> "> Usuário* </a> </label>
+                                    <label for="animals_user_input" class="col-3 col-form-label"> <a href="<c:url value='/user/${currentAnimal.getUser().getId()}/view'/> "> Usuário* </a> </label>
                                     <div class="col-9">
                                         <input type="text" id="animals_user_input" class="form-control" value="${currentAnimal.getUser().getName()}" disabled>
                                     </div>
@@ -125,7 +125,7 @@
 		         		<span aria-hidden="true">&times;</span>
 		        	</button>
 		      	</div>
-		    <form method="POST" action="<c:url value='/updateMainImage${currentAnimal.getId()}'/>"  enctype="multipart/form-data">
+		    <form method="POST" action="<c:url value='/animal/${currentAnimal.getId()}/updateMainImage'/>"  enctype="multipart/form-data">
 		    	<div class="modal-body">
         			<div class="form-group row">
                     	<label for="animals_primary_image_input" class="col-3 col-form-label"> Imagem* </label>
@@ -155,11 +155,11 @@
 		         		<span aria-hidden="true">&times;</span>
 		        	</button>
 		      	</div>
-		    <form method="POST" action="<c:url value='/updateSecondaryImages${currentAnimal.getId()}'/>"  enctype="multipart/form-data">
+		    <form method="POST" action="<c:url value='/animal/${currentAnimal.getId()}/updateImages'/>"  enctype="multipart/form-data">
 		    	<div class="modal-body">
-		    		<div class="row pl-5"> 
+		    		<div class="row"> 
 		    			<div class="col-9 form-group row d-flex align-items-center">
-		    				<label for="animals_image2_input" class="col-4 col-form-label"> Imagem 2 </label>
+		    				<label for="animals_image2_input" class="col-4 col-form-label text-right"> Imagem 2 </label>
 	                   		<div class="col-8">
 								<label class="custom-file w-100">
 								    <input type="file" id="animals_image2_input"class="custom-file-input" name="image2">
@@ -174,9 +174,9 @@
 		    			</div>
 		    		</div>
 		    		<hr>
-		    		<div class="row pl-5"> 
+		    		<div class="row"> 
 		    			<div class="col-9 form-group row d-flex align-items-center">
-		    				<label for="animals_image3_input" class="col-4 col-form-label"> Imagem 3 </label>
+		    				<label for="animals_image3_input" class="col-4 col-form-label text-right"> Imagem 3 </label>
 	                   		<div class="col-8">
 								<label class="custom-file w-100">
 								    <input type="file" id="animals_image3_input" class="custom-file-input" name="image3">
@@ -191,9 +191,9 @@
 		    			</div>
 		    		</div>
 		    		<hr>
-		    		<div class="row pl-5"> 
+		    		<div class="row"> 
 		    			<div class="col-9 form-group row d-flex align-items-center">
-		    				<label for="animals_image4_input" class="col-4 col-form-label"> Imagem 4 </label>
+		    				<label for="animals_image4_input" class="col-4 col-form-label text-right"> Imagem 4 </label>
 	                   		<div class="col-8">
 								<label class="custom-file w-100">
 								    <input type="file" id="animals_image4_input" class="custom-file-input" name="image4">

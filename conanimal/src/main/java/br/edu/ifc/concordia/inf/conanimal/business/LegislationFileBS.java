@@ -9,7 +9,6 @@ import org.hibernate.criterion.Restrictions;
 
 import br.com.caelum.vraptor.boilerplate.HibernateBusiness;
 import br.edu.ifc.concordia.inf.conanimal.model.LegislationFile;
-import br.edu.ifc.concordia.inf.conanimal.model.Partner;
 import br.edu.ifc.concordia.inf.conanimal.model.User;
 
 @RequestScoped

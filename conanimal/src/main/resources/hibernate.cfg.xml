@@ -50,6 +50,8 @@
   		<mapping class="br.edu.ifc.concordia.inf.conanimal.model.Partner"/>
   		<mapping class="br.edu.ifc.concordia.inf.conanimal.model.LegislationFile"/>
   		<mapping class="br.edu.ifc.concordia.inf.conanimal.model.StatuteFile"/>
+  		<mapping class="br.edu.ifc.concordia.inf.conanimal.model.Report"/>
+  		<mapping class="br.edu.ifc.concordia.inf.conanimal.model.ReportFile"/>
   		
 	</session-factory>
 </hibernate-configuration>

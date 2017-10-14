@@ -8,8 +8,6 @@ import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 
 import br.com.caelum.vraptor.boilerplate.HibernateBusiness;
-import br.edu.ifc.concordia.inf.conanimal.model.Animal;
-import br.edu.ifc.concordia.inf.conanimal.model.ImageAnimal;
 import br.edu.ifc.concordia.inf.conanimal.model.ImageNews;
 import br.edu.ifc.concordia.inf.conanimal.model.News;
 
