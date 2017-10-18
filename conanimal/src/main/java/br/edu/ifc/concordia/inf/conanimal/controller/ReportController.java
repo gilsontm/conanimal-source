@@ -3,11 +3,13 @@ package br.edu.ifc.concordia.inf.conanimal.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.poi.util.IOUtils;
 
@@ -16,12 +18,15 @@ import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.boilerplate.NoCache;
 import br.com.caelum.vraptor.boilerplate.util.GeneralUtils;
+import br.com.caelum.vraptor.observer.download.Download;
+import br.com.caelum.vraptor.observer.download.DownloadBuilder;
 import br.com.caelum.vraptor.observer.upload.UploadedFile;
 import br.edu.ifc.concordia.inf.conanimal.abstractions.AbstractController;
 import br.edu.ifc.concordia.inf.conanimal.business.PartnerBS;
 import br.edu.ifc.concordia.inf.conanimal.business.ReportBS;
 import br.edu.ifc.concordia.inf.conanimal.business.ReportFileBS;
 import br.edu.ifc.concordia.inf.conanimal.model.Report;
+import br.edu.ifc.concordia.inf.conanimal.model.ReportFile;
 import br.edu.ifc.concordia.inf.conanimal.model.User;
 import br.edu.ifc.concordia.inf.conanimal.properties.SystemConfigs;
 import br.edu.ifc.concordia.inf.permission.Permission;
@@ -33,6 +38,7 @@ public class ReportController extends AbstractController {
 	@Inject ReportBS bs;
 	@Inject ReportFileBS report_file_bs;
 	@Inject PartnerBS partner_bs;
+	@Inject HttpServletRequest request;
 	
 	@Get(value="/reports")
 	@NoCache
@@ -60,28 +66,72 @@ public class ReportController extends AbstractController {
 	@Post(value="/report/register")
 	@NoCache
 	@Permission(UserRoles.ADMIN)
-	public void registerReport(String title, UploadedFile... files) throws IOException {
-		if (GeneralUtils.isEmpty(title) || files == null || !(files.length > 0) ) {
-			//Alguns campos não foram preenchidos. Tente novamente.
-			this.result.redirectTo(UserController.class).adminPanel(3, "danger", Integer.toString(files.length));
+	public void registerReport(String title, UploadedFile file1, UploadedFile file2, UploadedFile file3,
+			UploadedFile file4, UploadedFile file5, UploadedFile file6, UploadedFile file7, UploadedFile file8, 
+			UploadedFile file9, UploadedFile file10, UploadedFile file11, UploadedFile file12, UploadedFile file13,
+			UploadedFile file14, UploadedFile file15, UploadedFile file16) throws IOException {
+		if (GeneralUtils.isEmpty(title) || file1 == null) {
+			this.result.redirectTo(UserController.class).adminPanel(3, "danger", "Alguns campos não foram preenchidos. Tente novamente.");
 		} else {
 			Report report = this.bs.registerReport(title, this.userSession.getUser());
 			if (report == null) {
 				this.result.redirectTo(UserController.class).adminPanel(3, "danger", "Houve um erro durante o cadastro. Tente novamente.");
 			} else {
+				List<UploadedFile> listFiles = new ArrayList<UploadedFile>();
+				listFiles.add(file1);
+				listFiles.add(file2);
+				listFiles.add(file3);
+				listFiles.add(file4);
+				listFiles.add(file5);
+				listFiles.add(file6);
+				listFiles.add(file7);
+				listFiles.add(file8);
+				listFiles.add(file9);
+				listFiles.add(file10);
+				listFiles.add(file11);
+				listFiles.add(file12);
+				listFiles.add(file13);
+				listFiles.add(file14);
+				listFiles.add(file15);
+				listFiles.add(file16);
 				int fileCount = 1;
-				for (UploadedFile file : files) {
+				for (UploadedFile file : listFiles) {
 					if (file != null) {
-						String fileName = "report-" + report.getId() + "-pdf" + fileCount + ".pdf";
+						String fileName = "report-" + report.getId() + "-pdf-" + fileCount + ".pdf";
 						File pdfFile = new File(SystemConfigs.getConfig("sys.imagedir"), fileName);
 						FileOutputStream out = new FileOutputStream(pdfFile, false);
 						IOUtils.copy(file.getFile(), out);
 						out.close();
 						this.report_file_bs.registerReportFile(report, pdfFile.getAbsolutePath());
+						fileCount++;
 					}
 				}
-				
 				this.result.redirectTo(UserController.class).adminPanel(3, "success", "Prestação de contas cadastrada com sucesso.");
+			}
+		}
+	}
+	
+	@Get(value="/report/{id}/download")
+	@NoCache
+	public Download downloadReportFiles(Long id) {
+		Report report = this.bs.exists(id, Report.class);
+		if (report == null) {
+			this.result.notFound();
+			return null;
+		} else if (report.getHidden()){
+			this.result.notFound();
+			return null;
+		} else {
+			List<ReportFile> filesList = this.report_file_bs.listFilesFromReport(report);
+			if (filesList != null && filesList.size() > 0) {
+				List<Path> pathList = new ArrayList<Path>();
+				for (ReportFile file : filesList) {
+					pathList.add(new File(file.getFilePath()).toPath());
+				}
+				return DownloadBuilder.of(pathList).withFileName("prestacao-de-contas-" + report.getId() +"-conanimal.zip").build();
+			} else {
+				this.result.redirectTo(this).reportsPanel();
+				return null;
 			}
 		}
 	}

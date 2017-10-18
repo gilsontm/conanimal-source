@@ -34,7 +34,7 @@ $(function(){
 		if (next <= 16) {
 			$("#report_file_container").append('<div class="form-group row"><label class="col-3 col-form-label">' + 
 					'Arquivo ' + next +' </label> <div class="col-9"> <label class="custom-file"> <input type="file"' + 
-					'class="custom-file-input" name="files"> <span class="custom-file-control" data-content="' + 
+					'class="custom-file-input" name="file' + next + '"> <span class="custom-file-control" data-content="' + 
 					'Selecionar arquivo..."></span> </label> </div> </div>');
 			next ++;
 		}

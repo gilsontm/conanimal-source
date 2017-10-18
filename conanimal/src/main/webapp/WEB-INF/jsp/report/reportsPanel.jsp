@@ -25,16 +25,14 @@
 		                            	<button class="btn btn-sm btn-danger"> Download </button>
 		                            </form>
 		                            <hr>
-		                            <a class="btn btn-block standard-color-blue text-white my-1" href="#report_${reports.get(id).getId()}_collapse" data-toggle="collapse" aria-expanded="false" aria-controls="report_${reports.get(id).getId()}_collapse">
+		                            <a class="btn btn-block btn-primary text-white my-1" href="#report_${reports.get(id).getId()}_collapse" data-toggle="collapse" aria-expanded="false" aria-controls="report_${reports.get(id).getId()}_collapse">
 		                            	Anexos
 		                            </a>
 		                            <div class="collapse" id="report_${reports.get(id).getId()}_collapse">
 		                            	<c:forEach begin="1" end="${listReportFiles.get(id)}" var="fileId">
-		                            		<iframe>
-		                            			<div class="w-100 embed-responsive embed-responsive-1by1 my-3">
-	                    							<iframe class="embed-responsive-item" src="<c:url value='/report/${reports.get(id).getId()}/viewFile/${fileId}'/>"></iframe>
-	                    						</div>
-		                            		</iframe>
+	                            			<div class="w-100 embed-responsive embed-responsive-1by1 my-3">
+                    							<iframe class="embed-responsive-item" src="<c:url value='/report/${reports.get(id).getId()}/viewFile/${fileId}'/>"></iframe>
+                    						</div>
 		                            	</c:forEach>
 		                            </div>
 		                            <p class="float-right p-0 m-0"> Cadastrado em: ${reports.get(id).getRegisterDate()}</p>

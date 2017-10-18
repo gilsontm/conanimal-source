@@ -155,7 +155,7 @@
 	                                    <label class="col-3 col-form-label"> Arquivo 1* </label>
 	                                    <div class="col-9">
 	                                        <label class="custom-file">
-											    <input type="file" class="custom-file-input" name="files">
+											    <input type="file" class="custom-file-input" name="file1">
 											    <span class="custom-file-control" data-content="Selecionar arquivo..."></span>
 											</label>
 	                                    </div>
