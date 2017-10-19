@@ -204,6 +204,12 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
+                                    <label for="partner_url_input" class="col-3 col-form-label"> URL* </label>
+                                    <div class="col-9">
+                                        <input type="text" id="partner_url_input" name="url" class="form-control" placeholder="Digite o endereço do site">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
                                     <label for="partner_image_input" class="col-form-label col-3"> Logomarca* </label>
                                     <div class="col-9">
                                         <label class="custom-file">
@@ -219,50 +225,33 @@
                         <div class="my-5">
                             <h3> Alterar informações de contatos úteis </h3>
                             <hr>
-                            <form>
+                            <c:if test="${formNumber == 5}">
+                            	<div class="alert alert-${status}">
+                            		${message}
+                            	</div>
+                            </c:if>
+                            <form method="POST" action="<c:url value='/contact/update'/>">
                                 <div class="form-group row">
                                     <label for="contact_email_input" class="col-3 col-form-label"> Email* </label>
                                     <div class="col-9">
-                                        <input type="email" id="contact_email_input" class="form-control" value="conanimal@gmail.com">
+                                        <input type="email" id="contact_email_input" name="email" class="form-control" value="${emailContact.getUrl()}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="contact_facebook_input" class="col-3 col-form-label"> Facebook* </label>
                                     <div class="col-9">
-                                        <input type="text" id="contact_facebook_input" class="form-control" value="www.facebook.com/ongconanimal">
+                                        <input type="text" id="contact_facebook_input" name="facebook" class="form-control" value="${facebookContact.getUrl()}">
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label for="contact_link1_input" class="col-3 col-form-label"> Link útil 1 </label>
-                                    <div class="col-9">
-                                        <input type="text" id="contact_link1_input" class="form-control" value="www.uipa.org.br">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="contact_link2_input" class="col-3 col-form-label"> Link útil 2 </label>
-                                    <div class="col-9">
-                                        <input type="text" id="contact_link2_input" class="form-control" value="www.amparaanimal.org.br">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="contact_link3_input" class="col-3 col-form-label"> Link útil 3 </label>
-                                    <div class="col-9">
-                                        <input type="text" id="contact_link3_input" class="form-control" placeholder="Adicione um link">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="contact_link4_input" class="col-3 col-form-label"> Link útil 4 </label>
-                                    <div class="col-9">
-                                        <input type="text" id="contact_link4_input" class="form-control" placeholder="Adicione um link">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="contact_link5_input" class="col-3 col-form-label"> Link útil 5 </label>
-                                    <div class="col-9">
-                                        <input type="text" id="contact_link5_input" class="form-control" placeholder="Adicione um link">
-                                    </div>
-                                </div>
-
+                                <c:forEach var="id" begin="1" end="5">
+	                                <div class="form-group row">
+	                                    <label for="contact_link${id}_input" class="col-3 col-form-label"> Link útil ${id} </label>
+	                                    <div class="col-9">
+	                                        <input type="text" id="contact_link${id}_input" name="link${id}" class="form-control" place="Digite o url do site" value="${contacts.size() > id - 1 ? contacts.get(id - 1).getUrl() : ''}">                                
+	                                    </div>
+	                                </div>
+                                </c:forEach>
+                                
                                 <button type="submit" id="contact_submit_button" class="btn btn-block btn-danger mt-4"> Atualizar informações </button>
                             </form>
                         </div>
@@ -270,44 +259,46 @@
                         <div class="my-5">
                             <h3> Alterar imagens da página inicial </h3>
                             <hr>
+                            <c:if test="${formNumber == 6}">
+                            	<div class="alert alert-${status}">
+                            		${message}
+                            	</div>
+                            </c:if>
                             <!-- Lista das imagens atuais -->
                             <ul class="list-group mt-0 mb-4">
                                 <li class="list-group-item standard-color-blue text-white"> Imagens cadastradas</li>
-                                <li class="list-group-item d-flex justify-content-between">
-                                    Nome da imagem
-                                    <button type="button" class="close" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between">
-                                    Nome da imagem
-                                    <button type="button" class="close" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between">
-                                    Nome da imagem
-                                    <button type="button" class="close" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </li>
+                                <c:forEach items="${imagesMainPage}" var="eachImage">
+                               		<li class="list-group-item d-flex justify-content-between">
+	                                    ${eachImage.getImageName()}
+	                                    <form method="POST" action="<c:url value='/imageMainPage/${eachImage.getId()}/hide'/>">
+	                                    	<button type="submit" class="btn btn-sm btn-danger">
+	                                        	Remover
+	                                    	</button>
+	                                    </form>
+	                                </li>
+                                </c:forEach>
+                                <c:if test="${imagesMainPage.size() == 0}"> 
+                                	<li class="list-group-item d-flex justify-content-between">
+                                		Nenhuma imagem cadastrada.
+                                	</li>
+                                </c:if>
                             </ul>
-
+                            
+							<!-- Cadastrar nova imagem para a página inicial -->
                             <h5> Cadastrar nova imagem </h5>
                             <hr>
-                            <!-- Cadastrar nova imagem para a página inicial -->
-                            <form>
+                            <form method="POST" action="<c:url value='/imageMainPage/registerImage'/>" enctype="multipart/form-data">
                                 <div class="form-group row">
                                     <label for="main_image_name_input" class="col-3 col-form-label"> Nome* </label>
                                     <div class="col-9">
-                                        <input type="text" id="main_image_name_input" class="form-control" placeholder="Digite um nome para a imagem">
+                                        <input type="text" id="main_image_name_input" name="name" class="form-control" placeholder="Digite um nome para a imagem">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="main_image_input" class="col-form-label col-3"> Imagem* </label>
                                     <div class="col-9">
                                         <label class="custom-file">
-										    <input type="file" class="custom-file-input" name="">
+										    <input type="file" class="custom-file-input" name="image">
 										    <span class="custom-file-control" data-content="Selecionar arquivo..."></span>
 										</label>
                                     </div>
@@ -421,15 +412,43 @@
                         <div class="mt-5">
                             <h3> Alterar slogan da página principal </h3>
                             <hr>
-                            <form>
+                            <c:if test="${formNumber == 9}">
+                            	<div class="alert alert-${status}">
+                            		${message}
+                            	</div>
+                            </c:if>
+                            <form method="POST" action="<c:url value='/contact/slogan/update'/>">
                                 <div class="form-group row">
                                     <label for="slogan_text_input" class="col-form-label col-3"> Slogan* </label>
                                     <div class="col-9">
-                                        <input type="text" id="slogan_text_input" class="form-control" maxlength="55" value="Porque o seu melhor amigo merece muito carinho!">
+                                        <input type="text" id="slogan_text_input" name="slogan" class="form-control" maxlength="55" value="${sloganContact.getUrl()}">
                                     </div>
                                 </div>
 
                                 <button type="submit" id="slogan_submit_input" class="btn btn-block btn-danger mt-4"> Alterar slogan </button>
+                            </form>
+                        </div>
+                        
+                        <div class="mt-5">
+                            <h3> Atualizar logomarca da página </h3>
+                            <hr>
+                            <c:if test="${formNumber == 10}">
+                            	<div class="alert alert-${status}">
+                            		${message}
+                            	</div>
+                            </c:if>
+                            <form method="POST" action="<c:url value='/imageMainPage/updateLogo'/>" enctype="multipart/form-data">
+                                <div class="form-group row">
+                                    <label for="logo_file_input" class="col-form-label col-3"> Logomarca* </label>
+                                    <div class="col-9">
+                                        <label class="custom-file">
+										    <input type="file" id="logo_file_input" name="image" class="custom-file-input" name="file">
+										    <span class="custom-file-control" data-content="Selecionar arquivo..."></span>
+										</label>
+                                    </div>
+                                </div>
+
+                                <button type="submit" id="slogan_submit_input" class="btn btn-block btn-danger mt-4"> Alterar logomarca </button>
                             </form>
                         </div>
                     </div>
@@ -574,9 +593,13 @@
                             </a>
                             <div class="collapse" id="accountability_collapse">
                                 <ul class="list-group">
-                                    <a href="visualizar-prestacao-de-conta.html" class="list-group-item list-group-item-action d-flex justify-content-between"> Título da prestação de contas <small> DD/MM/AAAA </small> </a>
-                                    <a href="visualizar-prestacao-de-conta.html" class="list-group-item list-group-item-action d-flex justify-content-between"> Título da prestação de contas <small> DD/MM/AAAA </small> </a>
-                                    <a href="visualizar-prestacao-de-conta.html" class="list-group-item list-group-item-action d-flex justify-content-between"> Título da prestação de contas <small> DD/MM/AAAA </small> </a>
+                                	<c:forEach items="${reports}" var="eachReport">
+                               			<c:if test="${not eachReport.getHidden()}">
+                                			<a href="<c:url value='/report/${eachReport.getId()}/view'/>" class="list-group-item list-group-item-action d-flex justify-content-between">
+                               					${eachReport.getTitle()}  <small> ${eachReport.getRegisterDate()} </small>                    			
+                               				</a>
+                                		</c:if>
+                                	</c:forEach>
                                 </ul>
                             </div>
                             <a class="btn btn-block standard-color-blue text-white my-1" href="#hidden_accountability_collapse" data-toggle="collapse" aria-expanded="false" aria-controls="hidden_accountability_collapse">
@@ -584,9 +607,13 @@
                             </a>
                             <div class="collapse" id="hidden_accountability_collapse">
                                 <ul class="list-group">
-                                    <a href="visualizar-prestacao-de-conta.html" class="list-group-item list-group-item-action d-flex justify-content-between"> Título da prestação de contas <small> DD/MM/AAAA </small> </a>
-                                    <a href="visualizar-prestacao-de-conta.html" class="list-group-item list-group-item-action d-flex justify-content-between"> Título da prestação de contas <small> DD/MM/AAAA </small> </a>
-                                    <a href="visualizar-prestacao-de-conta.html" class="list-group-item list-group-item-action d-flex justify-content-between"> Título da prestação de contas <small> DD/MM/AAAA </small> </a>
+                                    <c:forEach items="${reports}" var="eachReport">
+                               			<c:if test="${eachReport.getHidden()}">
+                                			<a href="<c:url value='/report/${eachReport.getId()}/view'/>" class="list-group-item list-group-item-action d-flex justify-content-between">
+                               					${eachReport.getTitle()}  <small> ${eachReport.getRegisterDate()} </small>                    			
+                               				</a>
+                                		</c:if>
+                                	</c:forEach>
                                 </ul>
                             </div>
                         </div>

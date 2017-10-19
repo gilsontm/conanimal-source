@@ -14,10 +14,11 @@ import br.edu.ifc.concordia.inf.conanimal.model.User;
 @RequestScoped
 public class PartnerBS extends HibernateBusiness {
 	
-	public Partner registerPartner(User user, String name) {
+	public Partner registerPartner(User user, String name, String url) {
 		Partner partner = new Partner();
 		partner.setUser(user);
 		partner.setName(name);
+		partner.setUrl(url);
 		this.dao.persist(partner);
 		return partner;
 	}

@@ -23,6 +23,8 @@ import br.com.caelum.vraptor.boilerplate.HibernateDAO;
 import br.com.caelum.vraptor.boilerplate.factory.SessionFactoryProducer;
 import br.com.caelum.vraptor.boilerplate.factory.SessionManager;
 import br.com.caelum.vraptor.boilerplate.util.CryptManager;
+import br.edu.ifc.concordia.inf.conanimal.model.Contact;
+import br.edu.ifc.concordia.inf.conanimal.model.ImageMainPage;
 import br.edu.ifc.concordia.inf.conanimal.model.User;
 import br.edu.ifc.concordia.inf.conanimal.properties.SystemConfigs;
 import br.edu.ifc.concordia.inf.permission.UserRoles;
@@ -50,16 +52,59 @@ public class ApplicationSetup {
 		SessionManager mngr = new SessionManager(factoryProducer.getInstance());
 		HibernateDAO dao = new HibernateDAO(mngr);
 		
-		Criteria criteria = dao.newCriteria(User.class);
-		criteria.add(Restrictions.eq("email", "admin@admin"));
-		User user = (User) criteria.uniqueResult();
-		if (user == null){
+		Criteria userCriteria = dao.newCriteria(User.class);
+		userCriteria.add(Restrictions.eq("email", "admin@admin"));
+		User user = (User) userCriteria.uniqueResult();
+		if (user == null) {
 			user = new User();
 			user.setName("Administrador Padrão");
 			user.setEmail("admin@admin");
 			user.setPassword(CryptManager.passwordHash("admin"));
 			user.setAccess(UserRoles.SYS_ADMIN.getAccessLevel());
 			dao.persist(user);
+		}
+		
+		Criteria imageMainPageCriteria = dao.newCriteria(ImageMainPage.class);
+		imageMainPageCriteria.add(Restrictions.eq("id", (long) 1));
+		imageMainPageCriteria.add(Restrictions.eq("imageName", "Logomarca - Con Animal"));
+		ImageMainPage imageMainPage = (ImageMainPage) imageMainPageCriteria.uniqueResult();
+		if (imageMainPage == null) {
+			imageMainPage = new ImageMainPage();
+			imageMainPage.setImageName("Logomarca - Con Animal");
+			imageMainPage.setImageContentType("image/png");
+			imageMainPage.setImagePath(null);
+			imageMainPage.setHidden(true);
+			dao.persist(imageMainPage);
+		}
+		
+		Criteria contactCriteria = dao.newCriteria(Contact.class);
+		contactCriteria.add(Restrictions.eq("type", "Email"));
+		Contact emailContact = (Contact) contactCriteria.uniqueResult();
+		if (emailContact == null) {
+			emailContact = new Contact();
+			emailContact.setUrl("conanimal@gmail.com");
+			emailContact.setType("Email");
+			dao.persist(emailContact);
+		}
+		
+		contactCriteria = dao.newCriteria(Contact.class);
+		contactCriteria.add(Restrictions.eq("type", "Facebook"));
+		Contact facebookContact = (Contact) contactCriteria.uniqueResult();
+		if (facebookContact == null) {
+			facebookContact = new Contact();
+			facebookContact.setUrl("www.facebook.com/ongconanimal");
+			facebookContact.setType("Facebook");
+			dao.persist(facebookContact);
+		}
+		
+		contactCriteria = dao.newCriteria(Contact.class);
+		contactCriteria.add(Restrictions.eq("type", "Slogan"));
+		Contact sloganContact = (Contact) contactCriteria.uniqueResult();
+		if (sloganContact == null) {
+			sloganContact = new Contact();
+			sloganContact.setUrl("Porque o seu melhor amigo merece muito carinho!");
+			sloganContact.setType("Slogan");
+			dao.persist(sloganContact);
 		}
 		
 		LOG.info("Overwriting SSL context to ignore invalid certificates...");

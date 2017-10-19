@@ -10,9 +10,12 @@ import br.com.caelum.vraptor.boilerplate.util.GeneralUtils;
 import br.edu.ifc.concordia.inf.conanimal.IndexController;
 import br.edu.ifc.concordia.inf.conanimal.abstractions.AbstractController;
 import br.edu.ifc.concordia.inf.conanimal.business.AnimalBS;
+import br.edu.ifc.concordia.inf.conanimal.business.ContactBS;
+import br.edu.ifc.concordia.inf.conanimal.business.ImageMainPageBS;
 import br.edu.ifc.concordia.inf.conanimal.business.LegislationFileBS;
 import br.edu.ifc.concordia.inf.conanimal.business.NewsBS;
 import br.edu.ifc.concordia.inf.conanimal.business.PartnerBS;
+import br.edu.ifc.concordia.inf.conanimal.business.ReportBS;
 import br.edu.ifc.concordia.inf.conanimal.business.StatuteFileBS;
 import br.edu.ifc.concordia.inf.conanimal.business.UserBS;
 import br.edu.ifc.concordia.inf.conanimal.model.User;
@@ -28,6 +31,9 @@ public class UserController extends AbstractController {
 	@Inject private PartnerBS partner_bs;
 	@Inject private LegislationFileBS legislation_bs;
 	@Inject private StatuteFileBS statute_bs;
+	@Inject private ReportBS report_bs;
+	@Inject private ImageMainPageBS image_main_page_bs;
+	@Inject private ContactBS contact_bs;
 	
 	@Get(value="/login")
 	@NoCache
@@ -185,6 +191,13 @@ public class UserController extends AbstractController {
 		this.result.include("partners", this.partner_bs.listNotHiddenPartners());
 		this.result.include("legislationFiles", this.legislation_bs.listNotHiddenFiles());
 		this.result.include("statuteFiles", this.statute_bs.listNotHiddenFiles());
+		this.result.include("reports", this.report_bs.listAllReports());
+		this.result.include("imagesMainPage", this.image_main_page_bs.listNotHiddenImages());
+		this.result.include("contacts", this.contact_bs.listLinkTypeContacts());
+		this.result.include("sloganContact", this.contact_bs.getSloganContact());
+		this.result.include("emailContact", this.contact_bs.getEmailContact());
+		this.result.include("facebookContact", this.contact_bs.getFacebookContact());
+		
 		this.result.include("user", this.userSession.getUser());
 		this.result.include("adminAccessLevel", UserRoles.ADMIN.getAccessLevel());
 		this.result.include("formNumber", formNumber);

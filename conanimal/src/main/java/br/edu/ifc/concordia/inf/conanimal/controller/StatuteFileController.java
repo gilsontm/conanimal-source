@@ -22,6 +22,8 @@ import br.com.caelum.vraptor.observer.download.DownloadBuilder;
 import br.com.caelum.vraptor.observer.upload.UploadedFile;
 import br.com.caelum.vraptor.view.Results;
 import br.edu.ifc.concordia.inf.conanimal.abstractions.AbstractController;
+import br.edu.ifc.concordia.inf.conanimal.business.ContactBS;
+import br.edu.ifc.concordia.inf.conanimal.business.ImageMainPageBS;
 import br.edu.ifc.concordia.inf.conanimal.business.PartnerBS;
 import br.edu.ifc.concordia.inf.conanimal.business.StatuteFileBS;
 import br.edu.ifc.concordia.inf.conanimal.model.StatuteFile;
@@ -33,8 +35,10 @@ import br.edu.ifc.concordia.inf.permission.UserRoles;
 @Controller
 public class StatuteFileController extends AbstractController {
 	
-	@Inject StatuteFileBS bs;
-	@Inject PartnerBS partner_bs;
+	@Inject private StatuteFileBS bs;
+	@Inject private PartnerBS partner_bs;
+	@Inject private ContactBS contact_bs;
+	@Inject private ImageMainPageBS image_main_page_bs;
 	
 	@Post(value="/statute/registerFile")
 	@NoCache
@@ -69,6 +73,10 @@ public class StatuteFileController extends AbstractController {
 		}
 		this.result.include("statuteFiles", this.bs.listNotHiddenFiles());
 		this.result.include("partners", this.partner_bs.listNotHiddenPartners());
+		this.result.include("sloganContact", this.contact_bs.getSloganContact());
+		this.result.include("emailContact", this.contact_bs.getEmailContact());
+		this.result.include("facebookContact", this.contact_bs.getFacebookContact());
+		this.result.include("logoImage", this.image_main_page_bs.getLogoImage());
 	}
 	
 	@Post(value="/statute/{id}/hide")

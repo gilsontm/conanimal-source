@@ -61,15 +61,8 @@
         			<c:forEach var="i" begin="0" end="4"> 
 		        		<c:if test="${news.size() > i}">
 		        			<span class="badge badge-danger">${fn:substring(news.get(i).getRegisterDate(),0, 10)}</span> <br>
-		            		<a href="<c:url value='/news/${news.get(i).getId()}/view'/>">
-		            			<c:choose>
-			            			<c:when test="${news.get(i).getTitle().length() > 18}"> 
-			            				${fn:substring(news.get(i).getTitle(), 0, 17)}...
-			            			</c:when>
-			            			<c:otherwise>
-			            				${news.get(i).getTitle()}
-			            			</c:otherwise>
-		            			</c:choose>
+		            		<a class="" href="<c:url value='/news/${news.get(i).getId()}/view'/>">
+		            			${news.get(i).getTitle().length() > 18 ? fn:substring(news.get(i).getTitle(), 0, 17).concat('...') : news.get(i).getTitle()}
 		            		</a>
 		            		<hr class="my-2">	
 		        		</c:if>
@@ -82,13 +75,26 @@
 		<div class="p-3 rounded-top standard-color-blue">
 	    	<h4 class="my-0 text-white"> Contatos úteis </h4>
 	    </div>
-	  	<div class="px-0 mb-5 card">
-	   	       	<div class="card-block mx-0 my-2">
-	         	<p><span class="badge badge-warning">Email</span> <br> conanimal@gmail.com </p>
-	         	<hr class="my-0">
-	         	<p><span class="badge badge-warning">Link</span> <br> www.uipa.org.br </p>
-	         	<hr class="my-0">
-	         	<p><span class="badge badge-warning">Link</span> <br> www.amparaanimal.org.br </p>
+	  	<div class="card px-0 mb-5">
+	  		<div class="card-block mx-0 my-2">
+	  			<p> <span class="badge badge-warning"> ${emailContact.getType()} </span> <br> ${emailContact.getUrl()} </p>
+	  			<hr class="my-0">
+	  			<a href="//${facebookContact.getUrl()}"> 
+					<span class="badge badge-warning"> ${facebookContact.getType()} </span>
+					<br> 
+					${facebookContact.getUrl().length() > 18 ? fn:substring(facebookContact.getUrl(), 0, 17).concat('...') : facebookContact.getUrl()}
+				</a>
+				<hr class="my-0">
+	  			<c:forEach items="${contacts}" var="eachContact">
+	  				<c:if test="${eachContact.getUrl().length() > 0}">
+  						<a href="//${eachContact.getUrl()}"> 
+  							<span class="badge badge-warning"> ${eachContact.getType()} </span>
+  							<br> 
+  							${eachContact.getUrl().length() > 18 ? fn:substring(eachContact.getUrl(), 0, 17).concat('...') : eachContact.getUrl()}
+  						</a>
+	         			<hr class="my-0">
+	         		</c:if>
+	  			</c:forEach>
 	       	</div>
 	   	</div>
    	</div>

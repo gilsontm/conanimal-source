@@ -17,6 +17,8 @@ import br.com.caelum.vraptor.boilerplate.NoCache;
 import br.com.caelum.vraptor.boilerplate.util.GeneralUtils;
 import br.com.caelum.vraptor.observer.upload.UploadedFile;
 import br.edu.ifc.concordia.inf.conanimal.abstractions.AbstractController;
+import br.edu.ifc.concordia.inf.conanimal.business.ContactBS;
+import br.edu.ifc.concordia.inf.conanimal.business.ImageMainPageBS;
 import br.edu.ifc.concordia.inf.conanimal.business.ImageNewsBS;
 import br.edu.ifc.concordia.inf.conanimal.business.NewsBS;
 import br.edu.ifc.concordia.inf.conanimal.business.PartnerBS;
@@ -33,6 +35,8 @@ public class NewsController extends AbstractController {
 	@Inject private NewsBS bs;
 	@Inject private ImageNewsBS image_news_bs;
 	@Inject private PartnerBS partner_bs;
+	@Inject private ContactBS contact_bs;
+	@Inject private ImageMainPageBS image_main_page_bs;
 	
 	@Get(value="/news")
 	@NoCache
@@ -47,6 +51,10 @@ public class NewsController extends AbstractController {
 		this.result.include("news", news);
 		
 		this.result.include("partners", this.partner_bs.listNotHiddenPartners());
+		this.result.include("sloganContact", this.contact_bs.getSloganContact());
+		this.result.include("emailContact", this.contact_bs.getEmailContact());
+		this.result.include("facebookContact", this.contact_bs.getFacebookContact());
+		this.result.include("logoImage", this.image_main_page_bs.getLogoImage());
 	}
 	
 	@Post(value="/news/register")

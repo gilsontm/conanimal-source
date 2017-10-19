@@ -25,9 +25,11 @@
 		                            	<button class="btn btn-sm btn-danger"> Download </button>
 		                            </form>
 		                            <hr>
-		                            <a class="btn btn-block btn-primary text-white my-1" href="#report_${reports.get(id).getId()}_collapse" data-toggle="collapse" aria-expanded="false" aria-controls="report_${reports.get(id).getId()}_collapse">
-		                            	Anexos
-		                            </a>
+		                            <p> Cadastrado em: ${reports.get(id).getRegisterDate()}</p>
+	                           		<a class="btn btn-danger text-white my-1" href="#report_${reports.get(id).getId()}_collapse" data-toggle="collapse" aria-expanded="false" aria-controls="report_${reports.get(id).getId()}_collapse">
+	                           			Anexos
+	                           		</a>
+
 		                            <div class="collapse" id="report_${reports.get(id).getId()}_collapse">
 		                            	<c:forEach begin="1" end="${listReportFiles.get(id)}" var="fileId">
 	                            			<div class="w-100 embed-responsive embed-responsive-1by1 my-3">
@@ -35,7 +37,7 @@
                     						</div>
 		                            	</c:forEach>
 		                            </div>
-		                            <p class="float-right p-0 m-0"> Cadastrado em: ${reports.get(id).getRegisterDate()}</p>
+		                            
 		                        </div>
 		                    </div>
 		                </div>

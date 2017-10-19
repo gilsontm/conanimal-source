@@ -9,7 +9,6 @@ import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
 
 import org.apache.poi.util.IOUtils;
 
@@ -22,6 +21,8 @@ import br.com.caelum.vraptor.observer.download.Download;
 import br.com.caelum.vraptor.observer.download.DownloadBuilder;
 import br.com.caelum.vraptor.observer.upload.UploadedFile;
 import br.edu.ifc.concordia.inf.conanimal.abstractions.AbstractController;
+import br.edu.ifc.concordia.inf.conanimal.business.ContactBS;
+import br.edu.ifc.concordia.inf.conanimal.business.ImageMainPageBS;
 import br.edu.ifc.concordia.inf.conanimal.business.PartnerBS;
 import br.edu.ifc.concordia.inf.conanimal.business.ReportBS;
 import br.edu.ifc.concordia.inf.conanimal.business.ReportFileBS;
@@ -35,10 +36,11 @@ import br.edu.ifc.concordia.inf.permission.UserRoles;
 @Controller
 public class ReportController extends AbstractController {
 
-	@Inject ReportBS bs;
-	@Inject ReportFileBS report_file_bs;
-	@Inject PartnerBS partner_bs;
-	@Inject HttpServletRequest request;
+	@Inject private ReportBS bs;
+	@Inject private ReportFileBS report_file_bs;
+	@Inject private PartnerBS partner_bs;
+	@Inject private ContactBS contact_bs;
+	@Inject private ImageMainPageBS image_main_page_bs;
 	
 	@Get(value="/reports")
 	@NoCache
@@ -60,6 +62,10 @@ public class ReportController extends AbstractController {
 		this.result.include("listReportFiles", listReportFiles);
 		
 		this.result.include("partners", this.partner_bs.listNotHiddenPartners());
+		this.result.include("sloganContact", this.contact_bs.getSloganContact());
+		this.result.include("emailContact", this.contact_bs.getEmailContact());
+		this.result.include("facebookContact", this.contact_bs.getFacebookContact());
+		this.result.include("logoImage", this.image_main_page_bs.getLogoImage());
 	}
 	
 	

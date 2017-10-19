@@ -31,11 +31,11 @@ public class PartnerController extends AbstractController {
 	@Post(value="/partner/register")
 	@NoCache
 	@Permission(UserRoles.ADMIN)
-	public void registerPartner(String name, UploadedFile image) throws IOException {
-		if (GeneralUtils.isEmpty(name) || image == null) {
+	public void registerPartner(String name, String url, UploadedFile image) throws IOException {
+		if (GeneralUtils.isEmpty(name) || GeneralUtils.isEmpty(url) || image == null) {
 			this.result.forwardTo(UserController.class).adminPanel(4, "danger", "Alguns campos não foram preenchidos. Tente novamente.");
 		} else {
-			Partner partner = bs.registerPartner(userSession.getUser(), name);
+			Partner partner = bs.registerPartner(userSession.getUser(), name, url);
 			if (partner == null) {
 				this.result.forwardTo(UserController.class).adminPanel(4, "danger", "Houve um erro durante o cadastro. Tente novamente.");
 			} else {

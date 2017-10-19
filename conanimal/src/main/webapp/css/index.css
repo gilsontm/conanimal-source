@@ -1,7 +1,6 @@
 
 .custom-file-control:lang(pt)::after {
   content: attr(data-content) !important;
-  
 }
 
 .custom-file-control:lang(pt)::before {
@@ -67,9 +66,9 @@ a.nav-link:hover {
 }
 
 .img-wrapper{
-    position:relative;
-    overflow:hidden;
-    padding-bottom:100%;
+    position: relative;
+    overflow: hidden;
+    padding-bottom: 100%;
 }
 .img-wrapper img{
       position: absolute;
@@ -79,5 +78,3 @@ a.nav-link:hover {
       left: 50%;
       transform: translateX(-50%) translateY(-50%);
 }
-
-

@@ -9,9 +9,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-@Entity(name="partners")
-@Table(name="partners")
-public class Partner implements Serializable {
+@Entity(name="imagesmainpage")
+@Table(name="imagesmainpage")
+public class ImageMainPage implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -22,8 +22,7 @@ public class Partner implements Serializable {
 	@ManyToOne
 	private User user;
 	
-	private String name;
-	private String url;
+	private String imageName;
 	private String imagePath;
 	private String imageContentType;
 	private Boolean hidden = false;
@@ -40,17 +39,11 @@ public class Partner implements Serializable {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	public String getName() {
-		return name;
+	public String getImageName() {
+		return imageName;
 	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getUrl() {
-		return url;
-	}
-	public void setUrl(String url) {
-		this.url = url;
+	public void setImageName(String imageName) {
+		this.imageName = imageName;
 	}
 	public String getImagePath() {
 		return imagePath;
