@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 
 <c:import url="/includes/headers.jsp"/>
 <c:import url="/includes/main-header.jsp"/>
@@ -22,7 +23,7 @@
 		                        <div class="m-0 pt-1 pb-0">
 		                            <h5><a href="<c:url value='/news/${eachNews.getId()}/view'/>"> ${eachNews.getTitle()} </a></h5>
 		                            <hr>
-		                            <p> ${eachNews.getDescription()} </p>
+		                            <p> ${eachNews.getDescription().length() > 250 ? fn:substring(eachNews.getDescription(), 0, 250).concat('...') : eachNews.getDescription()} </p>
 		                            <p class="float-right p-0 m-0"> Postado em: ${eachNews.getRegisterDate()}</p>
 		                            <br>
 		                            <a class="float-right" href="<c:url value='/news/${eachNews.getId()}/view'/>"> Mais informações </a>

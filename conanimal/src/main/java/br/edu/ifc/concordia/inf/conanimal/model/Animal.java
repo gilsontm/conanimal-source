@@ -2,6 +2,7 @@ package br.edu.ifc.concordia.inf.conanimal.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,7 +27,10 @@ public class Animal implements Serializable{
 	private String registerDate;
 	private String mainImage;
 	private String mainImageContentType;
+	
+	@Column(length=1000)
 	private String description;
+	
 	private Boolean adopted = false;
 	private Boolean hidden = false;
 	

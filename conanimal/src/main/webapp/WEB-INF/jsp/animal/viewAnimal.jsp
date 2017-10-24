@@ -30,8 +30,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="animals_description_input"> Descrição* </label>
-                                    <textarea id="animals_description_input" name="description" class="form-control" rows="5" maxlength="255" aria-describedby="animals_description_description" ${empty user ? "disabled" : ""}> ${currentAnimal.getDescription()}</textarea>    
-                                    <small id="animals_description_description"> Limite de 255 caracteres.</small>
+                                    <textarea id="animals_description_input" name="description" class="form-control" rows="5" maxlength="1000" aria-describedby="animals_description_description" ${empty user ? "disabled" : ""}> ${currentAnimal.getDescription()}</textarea>    
+                                    <small id="animals_description_description"> Limite de 1000 caracteres.</small>
                                 </div>
                                
                                 <div class="form-group row">

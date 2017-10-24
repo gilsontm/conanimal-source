@@ -104,7 +104,7 @@ public class ReportController extends AbstractController {
 				for (UploadedFile file : listFiles) {
 					if (file != null) {
 						String fileName = "report-" + report.getId() + "-pdf-" + fileCount + ".pdf";
-						File pdfFile = new File(SystemConfigs.getConfig("sys.imagedir"), fileName);
+						File pdfFile = new File(SystemConfigs.getConfig("sys.filedir"), fileName);
 						FileOutputStream out = new FileOutputStream(pdfFile, false);
 						IOUtils.copy(file.getFile(), out);
 						out.close();

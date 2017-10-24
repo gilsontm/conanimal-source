@@ -28,7 +28,7 @@
 			                   <div class="m-0 pt-1 col-9">
 			                       <h6> ${eachAnimal.getTitle()} </h6>
 			                       <hr>
-			                       <p class="text-justify"> ${eachAnimal.getDescription()} </p>
+			                       <p class="text-justify"> ${eachAnimal.getDescription().length() > 250 ? fn:substring(eachAnimal.getDescription(), 0, 250).concat('...') : eachAnimal.getDescription()} </p>
 			                       <p class="float-right p-0 m-0"> Cadastrado em: ${eachAnimal.getRegisterDate()} </p>
 			                       <br>
 			                       <a class="float-right" href="<c:url value='/animal/${eachAnimal.getId()}/view'/>"> Mais informações </a>

@@ -2,6 +2,7 @@ package br.edu.ifc.concordia.inf.conanimal.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,7 +25,10 @@ public class News implements Serializable{
 	
 	private String title;
 	private String registerDate;
+	
+	@Column(length=1000)
 	private String description;
+	
 	private Boolean hidden = false;
 	
 	public Long getId() {

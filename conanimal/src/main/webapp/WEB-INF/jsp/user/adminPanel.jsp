@@ -39,8 +39,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="animals_description_input"> Descrição* </label>
-                                    <textarea id="animals_description_input" name="description" class="form-control" rows="5" maxlength="255" aria-describedby="animals_description_description"> </textarea>
-                                    <small id="animals_description_description"> Limite de 255 caracteres.</small>
+                                    <textarea id="animals_description_input" name="description" class="form-control" rows="5" maxlength="1000" aria-describedby="animals_description_description"> </textarea>
+                                    <small id="animals_description_description"> Limite de 1000 caracteres.</small>
                                 </div>
                                 <div class="form-group row">
                                     <label for="animals_primary_image_input" class="col-3 col-form-label"> Imagem 1* </label>
@@ -99,8 +99,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="news_description_input"> Descrição* </label>
-                                    <textarea id="news_description_input" name="description" class="form-control" rows="5" maxlength="255" aria-describedby="news_description_description"> </textarea>
-                                    <small id="news_description_description"> Limite de 255 caracteres.</small>
+                                    <textarea id="news_description_input" name="description" class="form-control" rows="5" maxlength="1000" aria-describedby="news_description_description"> </textarea>
+                                    <small id="news_description_description"> Limite de 1000 caracteres.</small>
                                 </div>
                                 <div class="form-group row">
                                     <label for="news_image_1_input" class="col-3 col-form-label"> Imagem 1 </label>

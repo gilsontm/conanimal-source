@@ -54,7 +54,7 @@ public class LegislationFileController extends AbstractController {
 				this.result.redirectTo(UserController.class).adminPanel(8, "danger", "Houve um erro durante o cadastro. Tente novamente.");
 			} else {
 				String fileName = "legislation-" + legislationFile.getId() + "-pdf.pdf";
-				File pdfFile = new File(SystemConfigs.getConfig("sys.imagedir"), fileName);
+				File pdfFile = new File(SystemConfigs.getConfig("sys.filedir"), fileName);
 				FileOutputStream out = new FileOutputStream(pdfFile, false);
 				IOUtils.copy(file.getFile(), out);
 				out.close();
