@@ -139,7 +139,7 @@
 			
 						<div id="p_alert_box"></div>
 			
-                        <button type="submit" id="p_submit_button" class="btn btn-block btn-danger mt-4"> Cadastrar </button>
+                        <button type="button" id="p_submit_button" class="btn btn-block btn-danger mt-4"> Cadastrar </button>
                     </form>
                 </div>
                 
@@ -242,7 +242,7 @@
 			
 						<div id="c_alert_box"></div>
 						
-                        <button type="submit" id="c_submit_button" class="btn btn-block btn-danger mt-4"> Cadastrar </button>
+                        <button type="button" id="c_submit_button" class="btn btn-block btn-danger mt-4"> Cadastrar </button>
                     </form>
                 </div>
             </div>
