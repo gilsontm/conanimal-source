@@ -39,7 +39,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="animals_description_input"> Descrição* </label>
-                                    <textarea id="animals_description_input" name="description" class="form-control" rows="5" maxlength="1000" aria-describedby="animals_description_description"> </textarea>
+                                    <textarea id="animals_description_input" name="description" class="form-control" rows="5" maxlength="1000" aria-describedby="animals_description_description"></textarea>
                                     <small id="animals_description_description"> Limite de 1000 caracteres.</small>
                                 </div>
                                 <div class="form-group row">
@@ -99,7 +99,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="news_description_input"> Descrição* </label>
-                                    <textarea id="news_description_input" name="description" class="form-control" rows="5" maxlength="1000" aria-describedby="news_description_description"> </textarea>
+                                    <textarea id="news_description_input" name="description" class="form-control" rows="5" maxlength="1000" aria-describedby="news_description_description"></textarea>
                                     <small id="news_description_description"> Limite de 1000 caracteres.</small>
                                 </div>
                                 <div class="form-group row">
@@ -240,14 +240,14 @@
                                 <div class="form-group row">
                                     <label for="contact_facebook_input" class="col-3 col-form-label"> Facebook* </label>
                                     <div class="col-9">
-                                        <input type="text" id="contact_facebook_input" name="facebook" class="form-control" value="${facebookContact.getUrl()}">
+                                        <input type="url" id="contact_facebook_input" name="facebook" class="form-control" value="${facebookContact.getUrl()}">
                                     </div>
                                 </div>
                                 <c:forEach var="id" begin="1" end="5">
 	                                <div class="form-group row">
 	                                    <label for="contact_link${id}_input" class="col-3 col-form-label"> Link útil ${id} </label>
 	                                    <div class="col-9">
-	                                        <input type="text" id="contact_link${id}_input" name="link${id}" class="form-control" place="Digite o url do site" value="${contacts.size() > id - 1 ? contacts.get(id - 1).getUrl() : ''}">                                
+	                                        <input type="url" id="contact_link${id}_input" name="link${id}" class="form-control" placeholder="Digite o url do site" value="${contacts.size() > id - 1 ? contacts.get(id - 1).getUrl() : ''}">                                
 	                                    </div>
 	                                </div>
                                 </c:forEach>

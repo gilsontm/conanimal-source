@@ -41,8 +41,8 @@ public class AnimalController extends AbstractController {
 		if (!GeneralUtils.isEmpty(title) && !GeneralUtils.isEmpty(description) && (image1 != null))  {
 			if (title.length() > 50) {
 				this.result.redirectTo(UserController.class).adminPanel(1, "danger", "O título não pode exceder 50 caracteres.");
-			} else if (description.length() > 255) {
-				this.result.redirectTo(UserController.class).adminPanel(1, "danger", "A descrição não pode exceder 255 caracteres.");
+			} else if (description.length() > 1000) {
+				this.result.redirectTo(UserController.class).adminPanel(1, "danger", "A descrição não pode exceder 1000 caracteres.");
 			} else {
 				Animal animal = this.bs.registerAnimal(this.userSession.getUser(), title, description);
 				if (animal == null) {
@@ -145,8 +145,8 @@ public class AnimalController extends AbstractController {
 			this.result.notFound();
 		} else if (title.length() > 50) {
 			this.result.redirectTo(this).viewAnimal(id, 1, "danger", "O título não pode exceder 50 caracteres.");
-		} else if (description.length() > 255) {
-			this.result.redirectTo(this).viewAnimal(id, 1, "danger", "A descrição não pode exceder 255 caracteres.");
+		} else if (description.length() > 1000) {
+			this.result.redirectTo(this).viewAnimal(id, 1, "danger", "A descrição não pode exceder 1000 caracteres.");
 		} else {
 			Animal animal = this.bs.exists(id, Animal.class);
 			if (animal == null) {

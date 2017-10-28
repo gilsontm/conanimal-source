@@ -30,7 +30,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="news_description_input"> Descrição* </label>
-                                    <textarea id="news_description_input" name="description" class="form-control" rows="5" maxlength="1000" aria-describedby="news_description_description" ${empty user ? "disabled" : ""}> ${currentNews.getDescription()}</textarea>    
+                                    <textarea id="news_description_input" name="description" class="form-control" rows="5" maxlength="1000" aria-describedby="news_description_description" ${empty user ? "disabled" : ""}>${currentNews.getDescription()}</textarea>    
                                     <small id="news_description_description"> Limite de 1000 caracteres.</small>
                                 </div>
                                

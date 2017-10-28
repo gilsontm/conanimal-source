@@ -7,7 +7,7 @@
 	    <!-- Menu pessoa física/jurídica -->
     <c:if test="${not empty errorMessage}">
 		<div class="row">
-	     	<div class="col-6 offset-3">
+	     	<div class="col-4 offset-4">
 	     		<div class="alert alert-danger w-100 text-center">
 					${errorMessage}
 				</div>
@@ -65,13 +65,13 @@
                         </div>
                         <div class="form-group">
                             <label for="p_rg_input" class="form-control-label text-white"> RG </label>
-                            <input type="tel" id="p_rg_input" name="rg" class="form-control" placeholder="Registro geral" aria-describedby="p_rg_description">
+                            <input type="text" id="p_rg_input" name="rg" class="form-control" placeholder="Registro geral" aria-describedby="p_rg_description">
                             <div class="form-control-feedback"></div>
                             <small id="p_rg_description" class="form-text text-white"> Digite apenas números</small>
                         </div>
                         <div class="form-group">
                             <label for="p_cpf_input" class="form-control-label text-white"> CPF </label>
-                            <input type="tel" id="p_cpf_input" name="cpf" class="form-control" placeholder="Cadastro de pessoa física" aria-describedby="p_cpf_description">
+                            <input type="text" id="p_cpf_input" name="cpf" class="form-control" placeholder="CPF" aria-describedby="p_cpf_description">
                             <div class="form-control-feedback"></div>
                             <small id="p_cpf_description" class="form-text text-white"> Digite apenas números</small>
                         </div>
@@ -123,7 +123,7 @@
                         </div>
                         <div class="form-check">
                             <label class="form-check-label text-white">
-                                <input type="checkbox" id="p_name_publishing_checkbox" name="name_publishing" class="form-check-input"  checked>
+                                <input type="checkbox" id="p_name_publishing_checkbox" name="name_publishing" class="form-check-input" checked>
                                 Autorizo a divulgação do meu nome no quadro associativo.
 							</label>
 							<div class="form-control-feedback"></div>
@@ -158,7 +158,7 @@
                         </div>
                         <div class="form-group">
                             <label for="c_cnpj_input" class="form-control-label text-white"> CNPJ </label>
-                            <input type="tel" id="c_cnpj_input" name="cnpj" class="form-control" placeholder="Cadastro nacional de pessoa jurídica" aria-describedby="c_cnpj_description">
+                            <input type="text" id="c_cnpj_input" name="cnpj" class="form-control" placeholder="CNPJ" aria-describedby="c_cnpj_description">
                             <div class="form-control-feedback"></div>
                             <small id="c_cnpj_description" class="form-text text-white"> Digite apenas números </small>
                         </div>
@@ -186,13 +186,13 @@
                         </div>
                         <div class="form-group">
                             <label for="c_rg_input" class="form-control-label text-white"> RG do representante legal</label>
-                            <input type="tel" id="c_rg_input" name="rg" class="form-control" placeholder="Registro geral" aria-describedby="c_rg_description">
+                            <input type="text" id="c_rg_input" name="rg" class="form-control" placeholder="Registro geral" aria-describedby="c_rg_description">
                             <div class="form-control-feedback"></div>
                             <small id="c_rg_description" class="form-text text-white"> Digite apenas números </small>
                         </div>
                         <div class="form-group">
                             <label for="c_cpf_input" class="form-control-label text-white"> CPF do representante legal </label>
-                            <input type="tel" id="c_cpf_input" name="cpf" class="form-control" placeholder="Cadastro de pessoa física" aria-describedby="c_cpf_description">
+                            <input type="text" id="c_cpf_input" name="cpf" class="form-control" placeholder="CPF" aria-describedby="c_cpf_description">
                             <div class="form-control-feedback"></div>
                             <small id="c_cpf_description" class="form-text text-white"> Digite apenas números </small>
                         </div>

@@ -1,6 +1,7 @@
 package br.edu.ifc.concordia.inf.conanimal.controller;
 
 import javax.inject.Inject;
+import javax.mail.MessagingException;
 
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Get;
@@ -37,10 +38,10 @@ public class UserController extends AbstractController {
 	
 	@Get(value="/login")
 	@NoCache
-	public void login(String errorMessage) {
-		if (!GeneralUtils.isEmpty(errorMessage)){
-			this.result.include("errorMessage", errorMessage);
-		}
+	public void login(Integer formNumber, String status, String message) {
+		this.result.include("formNumber", formNumber);
+		this.result.include("status", status);
+		this.result.include("message", message);
 	}
 	
 	@Post(value="/login")
@@ -51,15 +52,15 @@ public class UserController extends AbstractController {
 			User user = this.bs.login(email, password);
 			
 			if (user == null){
-				this.result.redirectTo(this).login("Email e/ou senha inválido(s).");
+				this.result.redirectTo(this).login(1, "danger", "Email e/ou senha inválido(s).");
 			} else if (user.getActive()){
 				this.userSession.login(user);
 				this.result.redirectTo(IndexController.class).index();
 			} else {
-				this.result.redirectTo(this).login("Essa conta foi desativada.");
+				this.result.redirectTo(this).login(1, "danger", "Essa conta foi desativada.");
 			}
 		} else {
-			this.result.redirectTo(this).login("Email e/ou senha inválido(s).");
+			this.result.redirectTo(this).login(1, "danger", "Email e/ou senha inválido(s).");
 		}
 	}
 	
@@ -68,7 +69,7 @@ public class UserController extends AbstractController {
 	public void logout() {
 		this.userSession.logout();
 		this.result.redirectTo(IndexController.class).index();
-	}
+	} 
 	
 	@Get(value="/register")
 	@NoCache
@@ -142,12 +143,12 @@ public class UserController extends AbstractController {
 	@Post(value="/user/changePassword")
 	@Permission
 	@NoCache
-	public void changePassword(String password, String new_password, String confirm_new_password) {
-		if (password != null) {
-			User logged_user = this.bs.login(this.userSession.getUser().getEmail(), password);
+	public void changePassword(String old_password, String password, String confirm_password) {
+		if (old_password != null) {
+			User logged_user = this.bs.login(this.userSession.getUser().getEmail(), old_password);
 			if (logged_user != null) {
-				if (new_password != null && new_password.equals(confirm_new_password)) {
-					User updated_user = this.bs.changePassword(logged_user, new_password);
+				if (password != null && password.equals(confirm_password)) {
+					User updated_user = this.bs.changePassword(logged_user, password);
 					this.userSession.login(updated_user);
 					this.result.redirectTo(this).profile(2, "success", "Sua senha foi alterada com sucesso.");
 				} else {
@@ -174,7 +175,7 @@ public class UserController extends AbstractController {
 			} else {
 				this.bs.toggleUserActiveStatus(logged_user);
 				this.userSession.logout();
-				this.result.redirectTo(this).login("Sua conta foi desativada.");
+				this.result.redirectTo(this).login(1, "danger", "Sua conta foi desativada.");
 			}
 		} else {
 			this.result.redirectTo(this).profile(3, "danger", "Senha inválida. Tente novamente.");
@@ -283,6 +284,18 @@ public class UserController extends AbstractController {
 			}
 		} else {
 			this.result.redirectTo(this).viewUserProfile(id, "danger", "Senha inválida. Tente novamente");
+		}
+	}
+	
+	@Post(value="/recoverPassword")
+	@NoCache
+	public void recoverPassword(String email) throws MessagingException {
+		if (GeneralUtils.isEmpty(email)) {
+			this.result.redirectTo(this).login(2, "danger", "Email inválido, tente novamente.");
+		} else if (this.bs.recoverPassword(email)){
+			this.result.redirectTo(this).login(2, "success", "Verifique a caixa de entrada do seu email.");
+		} else {
+			this.result.redirectTo(this).login(2, "danger", "Email não cadastrado, tente novamente.");
 		}
 	}
 }

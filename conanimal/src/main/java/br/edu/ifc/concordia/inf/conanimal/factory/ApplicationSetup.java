@@ -53,13 +53,13 @@ public class ApplicationSetup {
 		HibernateDAO dao = new HibernateDAO(mngr);
 		
 		Criteria userCriteria = dao.newCriteria(User.class);
-		userCriteria.add(Restrictions.eq("email", "admin@admin"));
+		userCriteria.add(Restrictions.eq("email", "admin@admin.com"));
 		User user = (User) userCriteria.uniqueResult();
 		if (user == null) {
 			user = new User();
 			user.setName("Administrador Padrão");
-			user.setEmail("admin@admin");
-			user.setPassword(CryptManager.passwordHash("admin"));
+			user.setEmail("admin@admin.com");
+			user.setPassword(CryptManager.passwordHash("admin123"));
 			user.setAccess(UserRoles.SYS_ADMIN.getAccessLevel());
 			dao.persist(user);
 		}

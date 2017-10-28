@@ -8,7 +8,7 @@
 	<title>Con Animal</title>
 	
 	<link rel="stylesheet" type="text/css" href="<c:url value='/css/tether.min.css'/>"/>
-	<link rel="stylesheet" type="text/css" href="<c:url value='/bootstrap/css/bootstrap.min.css'/>"/>
+	<link rel="stylesheet" type="text/css" href="<c:url value='/css/bootstrap.min.css'/>"/>
 	<link rel="stylesheet" type="text/css" href="<c:url value='/css/index.css'/>"/>
 	
 	<link rel="icon" href="<c:url value='/images/icon.png'/>"/> 

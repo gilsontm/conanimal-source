@@ -3,8 +3,17 @@ package br.edu.ifc.concordia.inf.conanimal.business;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
+import java.util.Random;
 
 import javax.enterprise.context.RequestScoped;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
@@ -125,5 +134,59 @@ public class UserBS extends HibernateBusiness {
 		return user;
 	}
 	
+	public boolean recoverPassword(String email) throws MessagingException {
+		Criteria criteria = this.dao.newCriteria(User.class);
+		criteria.add(Restrictions.eq("email", email));
+		User user = (User) criteria.uniqueResult();
+		if(user == null) {
+			return false;
+		}
+		else {
+			try {
+				Properties properties = System.getProperties();
+				properties.put("mail.smtp.starttls.enable", "true");
+				properties.put("mail.smtp.host", "smtp.gmail.com");
+				properties.put("mail.smtp.user", "sistemaconanimal@gmail.com");
+				properties.put("mail.smtp.password", "sistemaCON");
+				properties.put("mail.smtp.port", "587");
+				properties.put("mail.smtp.auth", "true");
 	
+				// Get the default Session object.
+				Session session = Session.getDefaultInstance(properties);
+				
+				// Create a default MimeMessage object.
+				MimeMessage message = new MimeMessage(session);
+	
+				// Set From: header field of the header.
+				message.setFrom(new InternetAddress("sistemaconanimal@gmail.com"));
+	
+				// Set To: header field of the header.
+				message.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
+	
+				// Set Subject: header field
+				message.setSubject("Con Animal - Nova Senha");
+	
+				Random random = new Random();
+				String new_password = "";
+				while (new_password.length() < 8) {
+					new_password += random.nextInt(10);
+				}
+				
+				
+				user.setPassword(CryptManager.passwordHash(new_password));
+				this.dao.update(user);
+				message.setText("Sistema Con Animal - Sua nova senha: " + new_password);
+	
+				Transport t = session.getTransport("smtp");
+				t.connect("smtp.gmail.com", "sistemaconanimal@gmail.com", "sistemaCON");
+				t.sendMessage(message, message.getAllRecipients());
+				t.close();
+				return true;
+			} 
+			catch (AddressException mex) {
+				mex.printStackTrace();
+				return false;
+			}
+		}	
+	}
 }

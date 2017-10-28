@@ -65,8 +65,8 @@ public class NewsController extends AbstractController {
 		if (!GeneralUtils.isEmpty(title) && !GeneralUtils.isEmpty(description)) {
 			if (title.length() > 50) {
 				this.result.redirectTo(UserController.class).adminPanel(2, "danger", "O título não pode exceder 50 caracteres.");
-			} else if (description.length() > 255) {
-				this.result.redirectTo(UserController.class).adminPanel(2, "danger", "A descrição não pode exceder 255 caracteres.");
+			} else if (description.length() > 1000) {
+				this.result.redirectTo(UserController.class).adminPanel(2, "danger", "A descrição não pode exceder 1000 caracteres.");
 			}
 			News news = this.bs.registerNews(this.userSession.getUser(), title, description);
 			if (news == null) {
@@ -138,8 +138,8 @@ public class NewsController extends AbstractController {
 			this.result.notFound();
 		} else if (title.length() > 50) {
 			this.result.redirectTo(this).viewNews(id, 1, "danger", "O título não pode exceder 50 caracteres.");
-		} else if (description.length() > 255) {
-			this.result.redirectTo(this).viewNews(id, 1, "danger", "A descrição não pode exceder 255 caracteres.");
+		} else if (description.length() > 1000) {
+			this.result.redirectTo(this).viewNews(id, 1, "danger", "A descrição não pode exceder 1000 caracteres.");
 		} else {
 			News news = this.bs.exists(id, News.class);
 			if (news == null) {

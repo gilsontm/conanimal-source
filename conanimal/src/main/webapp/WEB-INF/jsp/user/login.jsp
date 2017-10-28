@@ -8,24 +8,24 @@
             <div class="col-4 offset-4">
                 <ul class="nav nav-tabs" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" data-toggle="tab" href="#login_tab" role="tab"> Login </a>
+                        <a class="nav-link ${formNumber != 2 ? 'active' : ''}" data-toggle="tab" href="#login_tab" role="tab"> Login </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#recover_password_tab" role="tab"> Recuperar senha </a>
+                        <a class="nav-link ${formNumber == 2 ? 'active' : ''}" data-toggle="tab" href="#recover_password_tab" role="tab"> Recuperar senha </a>
                     </li>
                 </ul>
             </div>
         </div>
         <div class="row mt-0">
             <div class="col-4 offset-4 tab-content">
-                <div class="tab-pane fade show active" id="login_tab">
+                <div class="tab-pane fade show ${formNumber != 2 ? 'active' : ''}" id="login_tab">
                     <div class="card standard-color-blue p-5 rounded">
-                    	<c:if test="${not empty errorMessage}">
-							<div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+                    	<c:if test="${formNumber == 1}">
+							<div class="alert alert-${status} alert-dismissible fade show text-center" role="alert">
 								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 									<span aria-hidden="true">&times;</span>
 								</button>
-								${errorMessage}
+								${message}
 							</div>
 						</c:if>
                         <form method="POST" action="<c:url value='/login'/>">
@@ -35,10 +35,18 @@
                         </form>
                     </div>
                 </div>
-                <div class="tab-pane fade show" id="recover_password_tab">
+                <div class="tab-pane fade show ${formNumber == 2 ? 'active' : ''}" id="recover_password_tab">
                     <div class="card standard-color-blue p-5 rounded">
-                        <form>
-                            <input type="email" id="recover_password_email_input" class="form-control my-2" placeholder="Email">
+                        <c:if test="${formNumber == 2}">
+							<div class="alert alert-${status} alert-dismissible fade show text-center" role="alert">
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+								${message}
+							</div>
+						</c:if>
+                        <form method="POST" action="<c:url value='/recoverPassword'/>">
+                            <input type="email" id="recover_password_email_input" name="email" class="form-control my-2" placeholder="Email">
                             <button type="submit" id="recover_password_submit_input" class="btn btn-block rounded btn-danger mt-3"> Enviar email de recuperação </button>
                         </form>
                     </div>

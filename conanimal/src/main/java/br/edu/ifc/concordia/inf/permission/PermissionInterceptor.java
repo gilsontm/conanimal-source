@@ -27,7 +27,7 @@ public class PermissionInterceptor {
 	@AroundCall
 	public void intercept(SimpleInterceptorStack stack) {
 		if (!this.userSession.isLogged()) {
-			this.result.redirectTo(UserController.class).login("Você precisa estar logado para acessar essa página.");
+			this.result.redirectTo(UserController.class).login(1, "danger", "Você precisa estar logado para acessar essa página.");
 		} else if (this.userSession.getUser().getAccess() >= UserRoles.SYS_ADMIN.getAccessLevel()) {
 			stack.next();
 		} else {
