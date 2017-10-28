@@ -114,7 +114,7 @@
                                 <label for="payment_input" class="col-7 col-form-label"> Quanto contribuirá mensalmente? </label>
                                 <div class="input-group col-5">
                                     <span class="input-group-addon">R$</span>
-                                    <input type="number" id="payment_input" name="payment" class="form-control" value="${user.getPayment()}">
+                                    <input type="number" min="0" id="payment_input" name="payment" class="form-control" value="${user.getPayment()}">
                                     <span class="input-group-addon">,00</span>
                                 </div>
                             </div>
