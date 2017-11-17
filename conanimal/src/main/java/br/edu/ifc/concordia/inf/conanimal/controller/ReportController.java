@@ -26,6 +26,7 @@ import br.edu.ifc.concordia.inf.conanimal.business.ImageMainPageBS;
 import br.edu.ifc.concordia.inf.conanimal.business.PartnerBS;
 import br.edu.ifc.concordia.inf.conanimal.business.ReportBS;
 import br.edu.ifc.concordia.inf.conanimal.business.ReportFileBS;
+import br.edu.ifc.concordia.inf.conanimal.model.ImageMainPage;
 import br.edu.ifc.concordia.inf.conanimal.model.Report;
 import br.edu.ifc.concordia.inf.conanimal.model.ReportFile;
 import br.edu.ifc.concordia.inf.conanimal.model.User;
@@ -60,6 +61,10 @@ public class ReportController extends AbstractController {
 			listReportFiles.add(this.report_file_bs.listFilesFromReport(report).size());
 		}
 		this.result.include("listReportFiles", listReportFiles);
+		
+		List<ImageMainPage> imagesMainPage = this.image_main_page_bs.listNotHiddenImages();
+		Collections.reverse(imagesMainPage);
+		this.result.include("imagesMainPage", imagesMainPage);
 		
 		this.result.include("partners", this.partner_bs.listNotHiddenPartners());
 		this.result.include("sloganContact", this.contact_bs.getSloganContact());

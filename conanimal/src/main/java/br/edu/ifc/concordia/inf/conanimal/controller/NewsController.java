@@ -22,6 +22,7 @@ import br.edu.ifc.concordia.inf.conanimal.business.ImageMainPageBS;
 import br.edu.ifc.concordia.inf.conanimal.business.ImageNewsBS;
 import br.edu.ifc.concordia.inf.conanimal.business.NewsBS;
 import br.edu.ifc.concordia.inf.conanimal.business.PartnerBS;
+import br.edu.ifc.concordia.inf.conanimal.model.ImageMainPage;
 import br.edu.ifc.concordia.inf.conanimal.model.ImageNews;
 import br.edu.ifc.concordia.inf.conanimal.model.News;
 import br.edu.ifc.concordia.inf.conanimal.model.User;
@@ -49,6 +50,10 @@ public class NewsController extends AbstractController {
 		List<News> news = this.bs.listNotHiddenNews();
 		Collections.reverse(news);
 		this.result.include("news", news);
+		
+		List<ImageMainPage> imagesMainPage = this.image_main_page_bs.listNotHiddenImages();
+		Collections.reverse(imagesMainPage);
+		this.result.include("imagesMainPage", imagesMainPage);
 		
 		this.result.include("partners", this.partner_bs.listNotHiddenPartners());
 		this.result.include("sloganContact", this.contact_bs.getSloganContact());

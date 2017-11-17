@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -26,6 +27,7 @@ import br.edu.ifc.concordia.inf.conanimal.business.ContactBS;
 import br.edu.ifc.concordia.inf.conanimal.business.ImageMainPageBS;
 import br.edu.ifc.concordia.inf.conanimal.business.PartnerBS;
 import br.edu.ifc.concordia.inf.conanimal.business.StatuteFileBS;
+import br.edu.ifc.concordia.inf.conanimal.model.ImageMainPage;
 import br.edu.ifc.concordia.inf.conanimal.model.StatuteFile;
 import br.edu.ifc.concordia.inf.conanimal.model.User;
 import br.edu.ifc.concordia.inf.conanimal.properties.SystemConfigs;
@@ -71,6 +73,11 @@ public class StatuteFileController extends AbstractController {
 			this.result.include("user", user);
 			this.result.include("adminAccessLevel", UserRoles.ADMIN.getAccessLevel());
 		}
+		
+		List<ImageMainPage> imagesMainPage = this.image_main_page_bs.listNotHiddenImages();
+		Collections.reverse(imagesMainPage);
+		this.result.include("imagesMainPage", imagesMainPage);
+		
 		this.result.include("statuteFiles", this.bs.listNotHiddenFiles());
 		this.result.include("partners", this.partner_bs.listNotHiddenPartners());
 		this.result.include("sloganContact", this.contact_bs.getSloganContact());
